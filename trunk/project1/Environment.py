@@ -11,6 +11,11 @@ class Environment:
 	m = 0
 	p = 0
 
+	# home cell,  initialized in __init__
+	HOME_X = 0
+	HOME_Y = 0
+
+	# number of clean cells
 	num_clean_cells = 0
 
 	# agent has (x, y) coordinates and 4 possible facing directions
@@ -23,6 +28,9 @@ class Environment:
 		self.m = m
 		self.p = p
 
+		self.HOME_X = 0 # leftmost,
+		self.HOME_Y = m-1 # bottom corner
+
 		self.num_clean_cells = n*m
 
 		# 0 = clean, 1 = dirt
@@ -33,14 +41,14 @@ class Environment:
 					self.world[row*n+col] = 1
 					self.num_clean_cells -= 1
 
-		self.agent_x = 0 # leftmost,
-		self.agent_y = m-1 # bottom corner
+		self.agent_x = self.HOME_X
+		self.agent_y = self.HOME_Y
 		self.agent_facing = Agent.NORTH # 0 = N, 1 = E, 2 = S, 3 = W
 	
 	def getPercept(self):
 		wall = self.__isWallAhead__()
 		dirt = self.world[self.agent_y*self.n+self.agent_x]
-		home = 1 if self.agent_x == 0 and self.agent_y == self.m-1 else 0
+		home = 1 if self.agent_x == self.HOME_X and self.agent_y == self.HOME_Y else 0
 		return [wall, dirt, home]
 
 	def __isWallAhead__(self):

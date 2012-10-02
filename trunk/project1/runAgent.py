@@ -46,12 +46,13 @@ if p < 0.0 or p > 1.0:
 environment = Environment(n, m, p)
 
 ## Main loop
+MAX_ACTIONS = 1000000 # prevent from running forever
 num_actions = 0
 running = True
-while (running):
+while (running and num_actions < MAX_ACTIONS):
 	# print current world
-	# print "Action " + str(num_actions)
-	# environment.printCurrentWorld()
+	#print "Action " + str(num_actions)
+	#environment.printCurrentWorld()
 
 	# set up percept
 	percept = environment.getPercept()
@@ -63,7 +64,10 @@ while (running):
 	running = environment.updateWorld(action)
 	num_actions += 1
 
+	# print num actions & num clean cells
+	num_clean_cells = environment.getNumCleanCells()
+	print str(num_actions) + ", " + str(num_clean_cells)
+
 ## Results
-num_clean_cells = environment.getNumCleanCells()
-print "Number of actions: " + str(num_actions)
-print "Number of clean cells: " + str(num_clean_cells) + "/" + str(n*m)
+#print "Number of actions: " + str(num_actions)
+#print "Number of clean cells: " + str(num_clean_cells) + "/" + str(n*m)
