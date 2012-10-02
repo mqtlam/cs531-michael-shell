@@ -51,8 +51,8 @@ num_actions = 0
 running = True
 while (running and num_actions < MAX_ACTIONS):
 	# print current world
-	#print "Action " + str(num_actions)
-	#environment.printCurrentWorld()
+	print "Action " + str(num_actions)
+	environment.printCurrentWorld()
 
 	# set up percept
 	percept = environment.getPercept()
