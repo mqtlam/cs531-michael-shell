@@ -2,11 +2,13 @@
 from Agent import *
 
 class ModelBasedAgent(Agent):
+	"""Deterministic model-based reflex agent with a small amount of memory."""
+	state = 0
+
 	def __init__(self):
-		pass
+		self.state = 0
 	
 	def takeStep(self, percept):
 		[wall, dirt, home] = percept
-		# implement
-		return Agent.OFF	
+		return Agent.OFF
 

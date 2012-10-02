@@ -39,7 +39,7 @@ class Environment:
 	
 	def getPercept(self):
 		wall = self.__isWallAhead__()
-		dirt = self.world[self.agent_x*self.n+self.agent_y]
+		dirt = self.world[self.agent_y*self.n+self.agent_x]
 		home = 1 if self.agent_x == 0 and self.agent_y == self.m-1 else 0
 		return [wall, dirt, home]
 
@@ -66,22 +66,55 @@ class Environment:
 				self.agent_y -= 1
 			if self.agent_facing == Agent.EAST:
 				self.agent_x += 1
-			if agent_facing == Agent.SOUTH:
+			if self.agent_facing == Agent.SOUTH:
 				self.agent_y += 1
-			if agent_facing == Agent.WEST:
+			if self.agent_facing == Agent.WEST:
 				self.agent_x -= 1
 		if action == Agent.RIGHT:
 			self.agent_facing = (self.agent_facing + 1) % 4
 		if action == Agent.LEFT:
 			self.agent_facing = (self.agent_facing - 1) % 4
 		if action == Agent.SUCK:
-			if self.world[self.agent_x*self.n+self.agent_y] != 0:
-				self.world[self.agent_x*self.n+self.agent_y] = 0
+			if self.world[self.agent_y*self.n+self.agent_x] != 0:
+				self.world[self.agent_y*self.n+self.agent_x] = 0
 				self.num_clean_cells += 1
 		if action == Agent.OFF:
 			return False
-
-		return True
+		else:	
+			return True
 
 	def getNumCleanCells(self):
 		return self.num_clean_cells
+
+	def printCurrentWorld(self):
+		w = self.world
+		m = self.m
+		n = self.n
+		x = self.agent_x
+		y = self.agent_y
+		f = self.agent_facing
+
+		for row in range(0, m):
+			print "+--"*n + "+"
+
+			string = ""
+			for col in range(0, n):
+				if w[row*n+col] == 1:
+					string += "|."
+				else:
+					string += "| "
+				if row == y and col == x:
+					if f == Agent.NORTH:
+						string += "N"
+					if f == Agent.EAST:
+						string += "E"
+					if f == Agent.SOUTH:
+						string += "S"
+					if f == Agent.WEST:
+						string += "W"
+				else:
+					string += " "
+			print string + "|"
+
+		print "+--"*n + "+"
+		print
