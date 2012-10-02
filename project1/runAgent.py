@@ -49,6 +49,10 @@ environment = Environment(n, m, p)
 num_actions = 0
 running = True
 while (running):
+	# print current world
+	# print "Action " + str(num_actions)
+	# environment.printCurrentWorld()
+
 	# set up percept
 	percept = environment.getPercept()
 
