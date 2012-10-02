@@ -5,7 +5,7 @@ class MemorylessAgent(Agent):
 	def __init__(self):
 		pass
 
-	def takestep(self, percept):
+	def takeStep(self, percept):
 		[wall, dirt, home] = percept
 		# implement
 		return Agent.OFF	
