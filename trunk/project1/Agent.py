@@ -17,4 +17,4 @@ class Agent:
 
 	def takeStep(self, percept):
 		[wall, dirt, home] = percept
-		raise NoImplementedError("Implement by extending this class")
+		raise NotImplementedError("Implement by extending this class")
