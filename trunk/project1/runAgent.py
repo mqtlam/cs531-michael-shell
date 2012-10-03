@@ -48,26 +48,29 @@ environment = Environment(n, m, p)
 ## Main loop
 MAX_ACTIONS = 1000000 # prevent from running forever
 num_actions = 0
+num_clean_cells = []
 running = True
 while (running and num_actions < MAX_ACTIONS):
-	# print current world
-	print "Action " + str(num_actions)
-	environment.printCurrentWorld()
+    # print current world
+    #print "Action " + str(num_actions)
+    environment.printCurrentWorld()
 
-	# set up percept
-	percept = environment.getPercept()
+    # set up percept
+    percept = environment.getPercept()
 
-	# agent performs a step
-	action = agent.takeStep(percept)
+    # agent performs a step
+    action = agent.takeStep(percept)
+    print "---Action %d---" % action
 
-	# update environment and counters 
-	running = environment.updateWorld(action)
-	num_actions += 1
+    # update environment and counters
+    running = environment.updateWorld(action)
+    num_actions += 1
 
-	# print num actions & num clean cells
-	num_clean_cells = environment.getNumCleanCells()
-	print str(num_actions) + ", " + str(num_clean_cells)
+    # print num actions & num clean cells
+    num_clean_cells.append(environment.getNumCleanCells())
+    print "* " + str(num_actions) + ", " + str(num_clean_cells[num_actions-1])
 
 ## Results
 #print "Number of actions: " + str(num_actions)
 #print "Number of clean cells: " + str(num_clean_cells) + "/" + str(n*m)
+environment.performance(num_clean_cells, 1)
