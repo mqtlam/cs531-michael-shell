@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from Agent import *
 import random
+import numpy
+import pylab
 
 class Environment:
 	"""The Environment class manages the vacuum world and agent position/orientation."""
@@ -44,7 +46,7 @@ class Environment:
 		self.agent_x = self.HOME_X
 		self.agent_y = self.HOME_Y
 		self.agent_facing = Agent.NORTH # 0 = N, 1 = E, 2 = S, 3 = W
-	
+
 	def getPercept(self):
 		wall = self.__isWallAhead__()
 		dirt = self.world[self.agent_y*self.n+self.agent_x]
@@ -88,7 +90,7 @@ class Environment:
 				self.num_clean_cells += 1
 		if action == Agent.OFF:
 			return False
-		else:	
+		else:
 			return True
 
 	def getNumCleanCells(self):
@@ -126,3 +128,10 @@ class Environment:
 
 		print "+--"*n + "+"
 		print
+
+    	def performance(self,num_clean_cells, draw):
+            	print "Mean performance comparing to ideal case: %f" % numpy.mean([x*1.0 / y for x,y in zip(num_clean_cells, range(1,len(num_clean_cells)+1))])
+        	if draw == 1:
+            		pylab.plot(range(1,len(num_clean_cells)+1), num_clean_cells)
+            		pylab.show()
+
