@@ -52,10 +52,3 @@ In plain language, state 0 represents a series of reflex actions for sucking and
 
 Therefore, we have also verified that the state diagram is equivalent to the algorithm.
 
-\subsection{Results and Performance}
-
-For any $n>0$, $m>0$ and $0\le p \le1$, the agent is able to completely clean the room and shut off itself properly. The algorithm assumes the home cell is always the bottom-left corner of the world and the world is always a rectangular nxm array of cells with walls only at the boundarie of the rectangle. If the home cell is somewhere else, then it may miss cells to the west and south of its starting location. If the world is not rectangular, then it may make a premature assumption that the world is clean or it may navigate incorrectly such that it misses some cells.
-
-For $n=10$, $m=10$ and $p=1.0$ as in the default case, the agent took 230 steps.
-
-
