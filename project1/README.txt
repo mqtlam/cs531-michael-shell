@@ -15,6 +15,7 @@ To run a simulation: ./runAgent.py 1|2|3 [n m p]
 			n = columns, m = rows
 		probability of dirt p (default 1.0 = 100%)
 
+To run 50 trials of the randomized reflex agent: ./run50Trials.sh
 
 II. REQUIREMENTS
 
