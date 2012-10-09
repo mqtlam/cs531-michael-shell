@@ -16,11 +16,15 @@ To run a simulation: ./runAgent.py 1|2|3 [n m p]
 		probability of dirt p (default 1.0 = 100%)
 
 To run 50 trials of the randomized reflex agent: ./run50Trials.sh
+It may not be a good idea to run the program "as is" without 
+commenting out lines of code in runAgent.py where the 
+popup screen of the performance is shown.
 
 II. REQUIREMENTS
 
+- Linux (we coded using Linux)
 - Python
-- Python libraries (for plotting performance):
+- Python libraries (only for plotting performance):
 	- numpy
 	- pylab (from matplotlib)
 

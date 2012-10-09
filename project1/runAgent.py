@@ -52,7 +52,6 @@ num_clean_cells = []
 running = True
 while (running and num_actions < MAX_ACTIONS):
     # print current world
-    #print "Action " + str(num_actions)
     environment.printCurrentWorld()
 
     # set up percept
@@ -74,6 +73,4 @@ while (running and num_actions < MAX_ACTIONS):
         running = 0
 
 ## Results
-#print "Number of actions: " + str(num_actions)
-#print "Number of clean cells: " + str(num_clean_cells) + "/" + str(n*m)
 environment.performance(num_clean_cells, 1)
