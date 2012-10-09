@@ -70,6 +70,9 @@ while (running and num_actions < MAX_ACTIONS):
     num_clean_cells.append(environment.getNumCleanCells())
     print "* " + str(num_actions) + ", " + str(num_clean_cells[num_actions-1])
 
+    if num_clean_cells[num_actions-1] >= int(n*m*0.90):
+        running = 0
+
 ## Results
 #print "Number of actions: " + str(num_actions)
 #print "Number of clean cells: " + str(num_clean_cells) + "/" + str(n*m)

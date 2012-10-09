@@ -133,5 +133,9 @@ class Environment:
             	print "Mean performance comparing to ideal case: %f" % numpy.mean([x*1.0 / y for x,y in zip(num_clean_cells, range(1,len(num_clean_cells)+1))])
         	if draw == 1:
             		pylab.plot(range(1,len(num_clean_cells)+1), num_clean_cells)
+                    	pylab.xlabel('number of actions')
+                    	pylab.ylabel('number of clean cells')
+                    	pylab.title('performance curve')
+                    	pylab.grid(True)
             		pylab.show()
 
