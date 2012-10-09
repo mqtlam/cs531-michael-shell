@@ -1,12 +1,14 @@
 \section{Deterministic Model-Based Agent}
 
+Since the deterministic model-based reflex agent has some memory to store state information, we exploit this property to design a better agent that can 1) suck up dirt at every square (which fails for the memoryless reflex agent) and 2) get home properly (which fails for the randomized reflex agent).
+
 \subsection{Design and Algorithm}
 
-The requirements of the deterministic model-based reflex agent other than its definition is that it can represent state with only 3 bits of memory, which implies up to 8 states\footnote{Without loss of generality, we can use one state variable STATE that takes on integers $[0, 7]$ instead of three explicit state bits STATE1, STATE2 and STATE3 because $0 = 000, 1 = 001, 2 = 010, ..., 7 = 111$.}.
+The requirements of the deterministic model-based reflex agent other than its definition is that it can represent state with only 3 bits of memory, which implies up to 8 states\footnote{Without loss of generality, we can use one state variable STATE that takes on integers $[0, 7]$ instead of three explicit state bits STATE1, STATE2 and STATE3 because $0 = 000, 1 = 001, 2 = 010, ..., 7 = 111$.}. We want the agent to suck every dirt as our first goal. Since the agent has memory, we are able to perform two ``consecutive'' actions by taking advantage of state information. This will allow the agent to steer into the middle of the world in contrast to the simple memoryless reflex agent, which could only suck dirt near the boundaries of the world.
 
-We want the agent to suck every dirt. Since the agent has memory, we are able to perform two ``consecutive'' actions by taking advantage of state information. This will allow the agent to steer into the middle of the world in contrast to the simple memoryless reflex agent, which could only suck dirt near the boundaries of the world.
+In addition, we can incorporate a method for the agent to return home after it has cleaned every cell by using state information. We will show that in our design, only one state in addition to the percept is sufficient to steer home.
 
-Therefore, we devised an algorithm that can sweep across the entire room and suck every dirt in 8 states or less. We came up with the following algorithm that sweeps all dirt and returns home in at most 7 states:
+We came up with the following algorithm that sweeps all dirt and returns home in at most 7 states:
 
 \begin{enumerate}
 	\item Begin at the home cell.
@@ -18,7 +20,7 @@ Therefore, we devised an algorithm that can sweep across the entire room and suc
 	\item Traverse the world boundary until it comes home.
 \end{enumerate}
 
-To visualize the process, the algorithm does the sweep pattern across the room in figure \ref{fig:motion}.
+To visualize the process, the algorithm performs the sweep pattern across the room in figure \ref{fig:motion}.
 
 \begin{figure}[!t]
 	\centering
@@ -27,9 +29,11 @@ To visualize the process, the algorithm does the sweep pattern across the room i
 	\label{fig:motion}
 \end{figure}
 
+This is optimal in the sense that it cleans every cell systematically and in minimal steps.
+
 \subsection{Diagram and Rules}
 
-We can construct the algorithm using 7 states by illustrating the state diagram in figure \ref{fig:states}.
+We can construct the algorithm using 7 states by illustrating the state machine in figure \ref{fig:states}.
 
 \begin{figure}[!t]
 	\centering
