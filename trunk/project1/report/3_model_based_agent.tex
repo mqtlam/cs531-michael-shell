@@ -4,9 +4,9 @@
 
 The requirements of the deterministic model-based reflex agent other than its definition is that it can represent state with only 3 bits of memory, which implies up to 8 states\footnote{Without loss of generality, we can use one state variable STATE that takes on integers $[0, 7]$ instead of three explicit state bits STATE1, STATE2 and STATE3 because $0 = 000, 1 = 001, 2 = 010, ..., 7 = 111$.}.
 
-We want the agent to suck up every dirt. Since the agent has memory, we are able to perform two ``consecutive'' actions by taking advantage of state information. This will allow the agent to steer into the middle of the world in contrast to the simple memoryless reflex agent.
+We want the agent to suck every dirt. Since the agent has memory, we are able to perform two ``consecutive'' actions by taking advantage of state information. This will allow the agent to steer into the middle of the world in contrast to the simple memoryless reflex agent, which could only suck dirt near the boundaries of the world.
 
-Therefore, we devise an algorithm that can sweep across the entire room and suck up every dirt in 8 states or less. We came up with the following algorithm that sweeps all dirt and returns home in at most 7 states:
+Therefore, we devised an algorithm that can sweep across the entire room and suck every dirt in 8 states or less. We came up with the following algorithm that sweeps all dirt and returns home in at most 7 states:
 
 \begin{enumerate}
 	\item Begin at the home cell.
@@ -18,15 +18,25 @@ Therefore, we devise an algorithm that can sweep across the entire room and suck
 	\item Traverse the world boundary until it comes home.
 \end{enumerate}
 
-To visualize the process, the algorithm does the following sweep pattern across the room:
+To visualize the process, the algorithm does the sweep pattern across the room in figure \ref{fig:motion}.
 
-[Picture]
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=.30]{img/3-motion.png}
+	\caption{The deterministic model-based reflex agent starts at the bottom-left corner and sweeps north, east, south, east, etc. as shown in the figure.}
+	\label{fig:motion}
+\end{figure}
 
 \subsection{Diagram and Rules}
 
-We claim that we can construct the algorithm using 7 states by illustrating the following state diagram:
+We can construct the algorithm using 7 states by illustrating the state diagram in figure \ref{fig:states}.
 
-[Diagram]
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=.30]{img/3-statediag.png}
+	\caption{State machine of the model-based reflex agent.}
+	\label{fig:states}
+\end{figure}
 
 The following is a formal list of if-then rules used to construct the diagram. It is also coded into the agent as the program:
 
