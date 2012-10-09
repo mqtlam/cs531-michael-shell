@@ -2,13 +2,30 @@
 
 Since the deterministic model-based reflex agent has some memory to store state information, we exploit this property to design a better agent that can 1) suck up dirt at every square (which fails for the memoryless reflex agent) and 2) get home properly (which fails for the randomized reflex agent).
 
-\subsection{Design and Algorithm}
+\subsection{Design Considerations}
 
 The requirements of the deterministic model-based reflex agent other than its definition is that it can represent state with only 3 bits of memory, which implies up to 8 states\footnote{Without loss of generality, we can use one state variable STATE that takes on integers $[0, 7]$ instead of three explicit state bits STATE1, STATE2 and STATE3 because $0 = 000, 1 = 001, 2 = 010, ..., 7 = 111$.}. We want the agent to suck every dirt as our first goal. Since the agent has memory, we are able to perform two ``consecutive'' actions by taking advantage of state information. This will allow the agent to steer into the middle of the world in contrast to the simple memoryless reflex agent, which could only suck dirt near the boundaries of the world.
 
-In addition, we can incorporate a method for the agent to return home after it has cleaned every cell by using state information. We will show that in our design, only one state in addition to the percept is sufficient to steer home.
+In addition, our second goal is to incorporate a method for the agent to return home after it has cleaned every cell. We can use state information to represent the state ``done cleaning.'' In fact, we will show that in our design, only one state in addition to the percept is sufficient to steer home.
 
-We came up with the following algorithm that sweeps all dirt and returns home in at most 7 states:
+Therefore, we designed an algorithm to clean every cell and return home systematically since our agent is deterministic and has memory. We designed the algorithm so that our agent performs the sweeping pattern across the room as in figure \ref{fig:motion}.
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=.30]{img/3-motion.png}
+	\caption{The deterministic model-based reflex agent starts at the bottom-left corner and sweeps north, east, south, east, etc. as shown in the figure.}
+	\label{fig:motion}
+\end{figure}
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=.30]{img/3-motionend.png}
+	\caption{Once the agent is done cleaning, it moves to state 6, which is just a series of reflex actions similar to the memoryless agent. In the case when the agent is done cleaning at the top-right corner (left figure), it moves south and then west back to the home cell along the world boundaries. In the case when the agent is done cleaning at the bottom-right corner (right figure), it moves west back to the home cell along the world boundary.}
+\end{figure}
+
+\subsection{Algorithm and Rules}
+
+Our agent performs the following algorithm: 
 
 \begin{enumerate}
 	\item Begin at the home cell.
@@ -20,20 +37,7 @@ We came up with the following algorithm that sweeps all dirt and returns home in
 	\item Traverse the world boundary until it comes home.
 \end{enumerate}
 
-To visualize the process, the algorithm performs the sweep pattern across the room in figure \ref{fig:motion}.
-
-\begin{figure}[!t]
-	\centering
-	\includegraphics[scale=.30]{img/3-motion.png}
-	\caption{The deterministic model-based reflex agent starts at the bottom-left corner and sweeps north, east, south, east, etc. as shown in the figure.}
-	\label{fig:motion}
-\end{figure}
-
-This is optimal in the sense that it cleans every cell systematically and in minimal steps.
-
-\subsection{Diagram and Rules}
-
-We can construct the algorithm using 7 states by illustrating the state machine in figure \ref{fig:states}.
+We can construct the algorithm by using 7 states. We illustrate the state machine in figure \ref{fig:states}.
 
 \begin{figure}[!t]
 	\centering
@@ -42,7 +46,9 @@ We can construct the algorithm using 7 states by illustrating the state machine 
 	\label{fig:states}
 \end{figure}
 
-The following is a formal list of if-then rules used to construct the diagram. It is also coded into the agent as the program:
+In plain language and referencing figure \ref{fig:states}, state 0 represents a series of reflex actions for sucking and moving north. When the agent hits the top boundary of the world, states 1-2 assist the agent in moving east one square to prepare sucking and moving south. State 3 (symmetric to state 0) represents a series of reflex actions for sucking and moving south. When the agent hits the bottom boundary of the world, states 4-5 (symmetric to states 1-2) assist the agent in moving east one square to prepare sucking and moving north. The cycle repeats until the agent can no longer move east, as detected in states 1 and 4. If that is the case, then the agent moves to state 6, which is a series of reflex actions to navigate the agent around the edges of the map until it reaches home.
+
+An alternative representation is the following formal list of if-then rules, which is equivalent to the state diagram. It is also coded into the agent as the program:
 
 \begin{verbatim}
 if STATE=0 and DIRT then SUCK
@@ -62,7 +68,4 @@ if STATE=6 and NOT WALL then FORWARD
 if STATE=6 and WALL then RIGHT
 \end{verbatim}
 
-In plain language, state 0 represents a series of reflex actions for sucking and moving north. When the agent hits the top boundary of the world, states 1-2 assist the agent in moving east one square to prepare sucking and moving south. State 3 (symmetric to state 0) represents a series of reflex actions for sucking and moving south. When the agent hits the bottom boundary of the world, states 4-5 (symmetric to states 1-2) assist the agent in moving east one square to prepare sucking and moving north. The cycle repeats until the agent can no longer move east, as detected in states 1 and 4. If that is the case, then the agent moves to state 6, which is a series of reflex actions to navigate the agent around the edges of the map until it reaches home.
-
-Therefore, we have also verified that the state diagram is equivalent to the algorithm.
-
+Therefore, we have also verified that the state diagram is equivalent to the algorithm. The algorithm is correct by construction of the state machine.
