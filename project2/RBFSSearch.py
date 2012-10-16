@@ -14,8 +14,8 @@ class RBFSSearch:
 		self.numExpandedNodes = 0
 		self.heuristicType = 0
 
-	def runRBFS(self, problem, heuristicType = 0):
-		"""Returns a solution or failure."""
+	def run(self, problem, heuristicType = 0):
+		"""Runs the RBFS algorithm on a problem and heuristic, and returns a solution or failure."""
 		self.heuristicType = heuristicType
 		heuristic = problem.heuristic(problem.initialState, self.heuristicType)
 		[result, fvalue] = self.RBFS(problem, self.makeNode(problem.initialState, heuristic), self.INFINITY)
