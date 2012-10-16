@@ -21,6 +21,7 @@ class RBFSSearch:
 		h = self.heuristic.h(problem.initialState)
 
 		[result, fvalue] = self.RBFS(problem, self.makeNode(problem.initialState, h), self.INFINITY)
+
 		print "Num Expansions: ", self.numExpandedNodes
 		return result
 
