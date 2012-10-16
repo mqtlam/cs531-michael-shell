@@ -3,14 +3,21 @@
 from RBFSSearch import *
 from Problem import *
 from SearchNode import *
+from time import clock, time
 
 # Run a sample instance of RBFS Search on a problem
-initialState = ([2,0,1,3], [], []) 
-goalState = ([3,2,1,0], [], []) 
+initialState = ["2013","",""] 
+goalState = ["3210","",""]
 problem = Problem(initialState, goalState)
 
 rbfs = RBFSSearch()
+startTime = time()
+startClock = clock()
 result = rbfs.runRBFS(problem, 1)
+endClock = clock()
+endTime = time()
 print "\nDone with RBFS"
+print "Time: ", endTime - startTime
+print "Clock: ", endClock - startClock
 for r in result:
 	print r.state
