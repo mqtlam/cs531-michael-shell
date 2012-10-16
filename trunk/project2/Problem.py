@@ -2,15 +2,15 @@
 
 class Problem:
 	"""Problem represents a problem formulation of the Towers of Corvallis Problem. 
-	   A state is represented as a list of lists where the outer three-element list 
-	   represents the pegs and the inner lists represent the disks on the corresponding pegs.
-	   A disk is labeled as an integer. Left-to-right of a peg list corresponds to top-to-bottom on a peg."""
+	   A state is represented as a list of strings where the three-element list 
+	   represents the pegs and the strings represent the disks on the corresponding pegs.
+	   A disk is labeled as an integer. Left-to-right string corresponds to top-to-bottom on the peg."""
 	# Initial state
-	initialState = ([], [], []) 
+	initialState = ["","",""] 
 
 	# Goal state
-	# e.g. [[9,8,7,6,5,4,3,2,1,0],[],[]]
-	goalState = ([], [], [])
+	# e.g. ["9876543210","",""]
+	goalState = ["","",""] 
 
 	def __init__(self, initialState, goalState):
 		self.initialState = initialState
@@ -36,12 +36,16 @@ class Problem:
 
 	def result(self, state, action):
 		"""Compute and return the new state given a current state and action."""
-		newState = (list(state[0]), list(state[1]), list(state[2])) # new lists, not same pointers!
-		tmp = newState[int(action[0])].pop(0)
-		newState[int(action[1])].insert(0, tmp)
+		newState = list(state)
+
+		fromPeg = int(action[0])
+		toPeg = int(action[1])
+
+		[tmp, newState[fromPeg]] = [newState[fromPeg][0], newState[fromPeg][1:]]
+		newState[toPeg] = tmp + newState[toPeg]
+		
 		return newState
 
-	# TODO: make more efficient?
 	def goalTest(self, state):
 		"""Returns true if the given state matches the goal state."""
 		for curr, goal in zip(state, self.goalState):
