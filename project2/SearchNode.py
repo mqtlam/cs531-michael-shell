@@ -14,9 +14,19 @@ class SearchNode:
 	# cost g(n) of the path from the initial state to the node, as indicated by parent pointers
 	pathCost = 0
 
-	def __init__(self, state, parent, action, pathCost):
+	# evaluation function value for this node: f(n) = g(n) + h(n)
+	f = 0
+
+	# heuristic function value for this node h(n)
+	h = 0
+
+	def __init__(self, state, parent, action, pathCost, h):
 		self.state = state
 		self.parent = parent
 		self.action = action
 		self.pathCost = pathCost
+		self.h = h
+		self.updateFValue()
 	
+	def updateFValue(self):
+		self.f = self.pathCost + self.h
