@@ -60,25 +60,3 @@ class Problem:
 	def stepCost(self, state, action):
 		"""Returns the step cost given the state x action."""
 		return 1 
-
-	def heuristic(self, state, heuristicType):
-		"""Evaluates a heuristic function. Specify type of heuristic to use."""
-		if heuristicType == 1:
-			return self.heuristicFunction1(state)
-		elif heuristicType == 2:
-			return self.heuristicFunction2(state)
-		else:
-			return 0
-
-	def heuristicFunction1(self, state):
-		"""Returns the heuristic function value evaluated at current state."""
-		value = 0
-		for curr, goal in zip(state, self.goalState):
-			for a, b in zip(curr, goal):
-				if a == b:
-					value += 1	
-		return value
-
-	def heuristicFunction2(self, state):
-		"""Returns the heuristic function value evaluated at current state."""
-		return 0

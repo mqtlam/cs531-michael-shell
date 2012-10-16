@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from Problem import *
 from SearchNode import *
+from Heuristic import *
 
 class RBFSSearch:
 	"""RBFSSearch performs RBFS search."""
@@ -8,17 +9,18 @@ class RBFSSearch:
 	NMAX = 1000000
 	
 	numExpandedNodes = 0
-	heuristicType = 0
+	heuristic = None
 
 	def __init__(self):
 		self.numExpandedNodes = 0
-		self.heuristicType = 0
+		self.heuristic = None
 
 	def run(self, problem, heuristicType = 0):
 		"""Runs the RBFS algorithm on a problem and heuristic, and returns a solution or failure."""
-		self.heuristicType = heuristicType
-		heuristic = problem.heuristic(problem.initialState, self.heuristicType)
-		[result, fvalue] = self.RBFS(problem, self.makeNode(problem.initialState, heuristic), self.INFINITY)
+		self.heuristic = Heuristic(heuristicType, problem.goalState)
+		h = self.heuristic.h(problem.initialState)
+
+		[result, fvalue] = self.RBFS(problem, self.makeNode(problem.initialState, h), self.INFINITY)
 		print "Num Expansions: ", self.numExpandedNodes
 		return result
 
@@ -28,8 +30,8 @@ class RBFSSearch:
 			return [self.solution(node), 0]
 		successors = []
 		for action in problem.actions(node.state):
-			heuristic = problem.heuristic(node.state, self.heuristicType)
-			successors.append(self.childNode(problem, node, action, heuristic))
+			h = self.heuristic.h(node.state)
+			successors.append(self.childNode(problem, node, action, h))
 		if not successors:
 			return [False, self.INFINITY]
 		for s in successors:
