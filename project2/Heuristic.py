@@ -21,13 +21,13 @@ class Heuristic:
 
 	def heuristicFunction1(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
-		value = 0
-		for curr, goal in zip(state, self.goalState):
-			for a, b in zip(curr, goal):
-				if a == b:
-					value += 1	
-		return value
+		return 0
 
 	def heuristicFunction2(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
-		return 0
+		value = len(self.goalState[0])
+		testState = "x"*(value-len(state[0])) + state[0]
+		for a, b in zip(testState, self.goalState[0]):
+			if a == b:
+				value -= 1	
+		return value
