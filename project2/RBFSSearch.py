@@ -30,7 +30,7 @@ class RBFSSearch:
 	def RBFS(self, problem, node, fLimit):
 		"""Returns a solution, or failure and a new f-cost limit."""
 		if self.exceedsNMAX():
-			return [self.solution(node), 0]
+			return [[], 0]
 		if problem.goalTest(node.state):
 			return [self.solution(node), 0]
 		successors = []
