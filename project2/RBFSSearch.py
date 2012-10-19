@@ -6,7 +6,7 @@ from Heuristic import *
 class RBFSSearch:
 	"""RBFSSearch performs RBFS search."""
 	INFINITY = float("inf")
-	NMAX = 1000000
+	NMAX = 42000000
 	
 	numExpandedNodes = 0
 	heuristic = None
@@ -22,11 +22,15 @@ class RBFSSearch:
 
 		[result, fvalue] = self.RBFS(problem, self.makeNode(problem.initialState, h), self.INFINITY)
 
+		if self.exceedsNMAX():
+			print "Terminated after NMAX expansions."
 		print "Num Expansions: ", self.numExpandedNodes
 		return result
 
 	def RBFS(self, problem, node, fLimit):
 		"""Returns a solution, or failure and a new f-cost limit."""
+		if self.exceedsNMAX():
+			return [self.solution(node), 0]
 		if problem.goalTest(node.state):
 			return [self.solution(node), 0]
 		successors = []
@@ -47,7 +51,7 @@ class RBFSSearch:
 
 	def makeNode(self, initialState, heuristic):
 		"""Constructs a node, used for the initial state."""
-		self.numExpandedNodes += 1
+		self.updateNMAX()
 		return SearchNode(initialState, None, None, 0, heuristic)
 	
 	def solution(self, node):
@@ -62,7 +66,7 @@ class RBFSSearch:
 
 	def childNode(self, problem, parent, action, heuristic):
 		"""Construct a child node."""
-		self.numExpandedNodes += 1
+		self.updateNMAX()
 		state = problem.result(parent.state, action)
 		pathCost = parent.pathCost + problem.stepCost(parent.state, action)
 		return SearchNode(state, parent, action, pathCost, heuristic)
@@ -77,3 +81,10 @@ class RBFSSearch:
 		else:
 			lst = sorted(lst, key=lambda s: s.f)
 			return [lst[0], lst[1]]
+	
+	def updateNMAX(self):
+		self.numExpandedNodes += 1
+	
+	def exceedsNMAX(self):
+		return self.numExpandedNodes >= self.NMAX
+

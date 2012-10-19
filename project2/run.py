@@ -51,9 +51,9 @@ goalState = [goalState,"",""]
 problem = Problem(initialState, goalState)
 
 ### Run Problem
-startClock = clock()
+startClock = time()
 result = alg.run(problem, heuristicType)
-endClock = clock()
+endClock = time()
 
 print "\nAlgorithm done."
 print "Clock: ", endClock - startClock
