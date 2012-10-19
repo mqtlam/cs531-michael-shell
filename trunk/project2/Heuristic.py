@@ -12,10 +12,12 @@ class Heuristic:
 
 	def h(self, state):
 		"""Evaluates a heuristic function. Specify type of heuristic to use."""
-		if self.heuristicType == 1: # Admissible
+		if self.heuristicType == 1:
 			return self.heuristicFunction1(state)
-		elif self.heuristicType == 2: # Non-admissible
+		elif self.heuristicType == 2:
 			return self.heuristicFunction2(state)
+		elif self.heuristicType == 3:
+			return self.heuristicFunction3(state)
 		else:
 			return 0 # no heuristic
 
@@ -30,4 +32,18 @@ class Heuristic:
 		for a, b in zip(testState, self.goalState[0]):
 			if a == b:
 				value -= 1	
+		return value
+
+	def heuristicFunction3(self, state):
+		"""Returns the heuristic function value evaluated at current state."""
+		value = 2*len(self.goalState[0])
+		testState = state[0]
+		streak = True 
+		for a, b in zip(reversed(testState), reversed(self.goalState[0])):
+			if a == b:
+				value -= 1
+				if streak:
+					value -= 1
+			elif streak:
+				streak = False
 		return value
