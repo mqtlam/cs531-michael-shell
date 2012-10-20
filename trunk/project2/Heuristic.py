@@ -3,8 +3,8 @@
 class Heuristic:
 	"""Heuristic is a class that stores a heuristic function for a particular Problem instance.
 	   This class contains the two heuristics: admissible and non-admissible."""
-	goalState = ["","",""] 
-	heuristicType = 0
+    #goalState = ["","",""]
+    #heuristicType = 0
 
 	def __init__(self, heuristicType, goalState):
 		self.heuristicType = heuristicType
@@ -23,7 +23,7 @@ class Heuristic:
 
 	def heuristicFunction1(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
-		return 0
+		return state.numDisksInPeg(0)
 
 	def heuristicFunction2(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
@@ -31,14 +31,14 @@ class Heuristic:
 		testState = "x"*(value-len(state[0])) + state[0]
 		for a, b in zip(testState, self.goalState[0]):
 			if a == b:
-				value -= 1	
+				value -= 1
 		return value
 
 	def heuristicFunction3(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
 		value = 2*len(self.goalState[0])
 		testState = state[0]
-		streak = True 
+		streak = True
 		for a, b in zip(reversed(testState), reversed(self.goalState[0])):
 			if a == b:
 				value -= 1
