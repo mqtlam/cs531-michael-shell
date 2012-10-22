@@ -37,7 +37,7 @@ else:
 
 # set heuristic
 heuristicType = arg2
-if heuristicType not in [0, 1, 2, 3]:
+if heuristicType not in [0, 1, 2, 3, 4]:
 	printUsage()
 	exit(3)
 
