@@ -1,0 +1,50 @@
+\title{CS531 Programming Assignment 2: Towers of Corvallis}
+\author{
+        Michael Lam, Xu Hu \\
+        EECS, Oregon State University\\
+        %\email{}
+        %\and
+}
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,%
+    citecolor=green,%
+    filecolor=magenta,%
+    linkcolor=red,%
+    urlcolor=cyan
+}
+
+%\underset{x}{\operatorname{argmax}}
+%\underset{x}{\operatorname{argmin}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In this assignment we design and implement 2 different informed search algorithms to solve the Towers of Corvallis, which is a variation of Towers of Hanoi. 
+\end{abstract}
+
+% -------------------------------------------------
+\section{Introduction}
+
+
+\input{1_Astar}
+\input{2_RBFS}
+\input{Experiments}
+
+\section{Discussion}
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
+This is never printed
