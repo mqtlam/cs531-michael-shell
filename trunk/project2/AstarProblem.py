@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Heuristic import *
+#from Heuristic import *
 import copy
 import sys
 
