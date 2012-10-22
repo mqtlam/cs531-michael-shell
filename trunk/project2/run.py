@@ -27,8 +27,7 @@ arg3 = sys.argv[3]
 # set algorithm
 alg = None
 if arg1 == 1:
-    #raise NotImplementedError("A* TODO")
-    alg = AstarSearch()
+	alg = AstarSearch()
 elif arg1 == 2:
 	alg = RBFSSearch()
 else:
@@ -37,10 +36,9 @@ else:
 
 # set heuristic
 heuristicType = arg2
-if heuristicType not in [0, 1, 2, 3, 4]:
+if heuristicType not in [0, 1, 2, 3, 4, 5]:
 	printUsage()
 	exit(3)
-
 
 if arg1 == 1:
     initialState = State()

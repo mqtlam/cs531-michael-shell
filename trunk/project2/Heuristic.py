@@ -20,6 +20,8 @@ class Heuristic:
 			return self.heuristicFunction3(state)
 		elif self.heuristicType == 4:
 			return self.heuristicFunction4(state)
+		elif self.heuristicType == 5:
+			return self.heuristicFunction5(state)
 		else:
 			return 0 # no heuristic
 
@@ -49,6 +51,7 @@ class Heuristic:
 			elif streak:
 				streak = False
 		return value
+
 	def heuristicFunction4(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
         	h = 0
@@ -56,4 +59,14 @@ class Heuristic:
             		h = h + abs(self.goalState[0][i]-s)
         	h = h + state.numDisksInPeg(1)
         	h = h + state.numDisksInPeg(2)
+		return h
+
+	def heuristicFunction5(self, state):
+		"""Returns the heuristic function value evaluated at current state."""
+        	h = 0
+		goalStateReversed = list(reversed(self.goalState[0]))
+        	for i,s in enumerate(reversed(state[0])):
+            		h = h + abs(int(goalStateReversed[i])-int(s))
+        	h = h + len(state[1])
+        	h = h + len(state[2])
 		return h
