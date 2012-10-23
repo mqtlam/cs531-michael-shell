@@ -7,7 +7,7 @@
 %\label{fig:celltypes}
 %\end{figure}
 
-We implement the A* search algorithm for finding the paths between initial states to a given goal state in the problem of Tower of Corvallis. It summarized as follow:
+We implement the A* search algorithm for finding the paths between initial states to a given goal state in the problem of Tower of Corvallis. It is summarized in figure \ref{alg1}.
 
 \begin{algorithm}[H]
 \caption{A* Search}
@@ -36,5 +36,5 @@ We implement the A* search algorithm for finding the paths between initial state
 \end{algorithmic}
 \end{algorithm}
 
-Here, for implementing the frontier, we use the priority queue, which is actually a heap data structure. We use a callback function $f(state) = g(state) + h(state)$ as the priority, the $g(state)$ is the length of the path and $h(state)$ is the heuristic for estimating the distance between current state to goal state. We will analyze several admissble and non-admissble heuristics in section \ref{sec:exp}.
+For implementing the frontier, we use the priority queue, which is actually a heap data structure. We use a callback function $f(state) = g(state) + h(state)$ as the priority, where $g(state)$ is the length of the path and $h(state)$ is the heuristic for estimating the distance between the current state to the goal state. We will analyze several admissble and non-admissble heuristics in section \ref{sec:exp}.
 
