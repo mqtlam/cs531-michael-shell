@@ -37,7 +37,7 @@ We observed that the length of a path is the steps moving from initial state to 
 \[
 h(s) = (\sum_i |pegs(1,i)-i| ) + numberDisks(pegs(2)) + numberDisks(pegs(3))
 \]
-The intuition is for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the place it should be, where $i$ is its current location on the peg. For example, if the $9th$ disk on the bottom, it has to take $9-0$ steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from current location to peg $1$ in at least $1$ step. This is in fact an admissible heuristic. We are not going to prove it here. A simple justification is given as follow. For any disk on peg $1$, before it reaches to its ideal position, there should be $|k-i|$ disks put underneath it, and for every such disk, takes at least $1$ step. 
+The intuition is that for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the place it should be, where $i$ is its current location on the peg. For example, if the $9th$ disk is on the bottom, it has to take $9-0$ steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from the current location to peg $1$ in at least $1$ step. This is in fact an admissible heuristic. A simple justification is given as follows: for any disk on peg $1$, before it reaches its ideal position, there should be $|k-i|$ disks put underneath it, and for every such disk, it takes at least $1$ step. 
 
 \subsection{Results}
 
