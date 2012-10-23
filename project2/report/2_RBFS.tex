@@ -4,28 +4,37 @@ Recursive best-first search or RBFS works by storing an f-limit for each node. T
 
 The advantage of RBFS over A* is that RBFS uses less memory. Whereas A* stores all of its explored nodes, RBFS will only keep relevant nodes in memory. However, the disadvantage of RBFS over A* is that RBFS could expand more nodes than A* due to redundancy. Since RBFS does not store all nodes explored, it can re-expand the same nodes and thereby increasing computation time.
 
-The following is the pseudocode:
+The pseudocode is listed in figure \ref{alg2}.
 
-\begin{verbatim}
-
-RBFS(state, f-limit)
-    if state is the goal state 
-        return solution
-    successors := all children of state
-    if successors is empty
-        return failure
-    else
-        for each s in successors
-            s.f := max(s.g + s.h, state f)
-        loop do
-            best := lowest f-value node in successors
-            if best.f > f-limit
-                return failure, best.f
-            alternative := second best f-value of any node in successors
-            result, best.f := RBFS(best, min(f-limit, alternative))
-            if result is not failure
-                return result
-\end{verbatim}
+\begin{algorithm}
+\caption{RBFS Search}
+\label{alg2}
+\begin{algorithmic}
+\STATE function RBFS(state, f-limit):
+\IF{state is goal state}
+	\RETURN solution
+\ENDIF
+\STATE successor = all children of state
+\IF{successors is empty}
+	\RETURN failure
+\ELSE
+	\FOR{s in successors}
+		\STATE s.$f$ = $max$(s.$g$ + s.$h$, state.$f$)
+	\ENDFOR
+	\WHILE{\TRUE}
+		\STATE best = lowest f-value node in successors
+		\IF{best.$f$ $>$ f-limit}
+			\RETURN failure, best.$f$
+		\ENDIF
+		\STATE alternative = second best f-value of any node in successors
+		\STATE result, best.$f$ = RBFS(best, $min$(f-limit, alternative))
+		\IF{result is not failure}
+			\RETURN result
+		\ENDIF
+	\ENDWHILE
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
 
 %\begin{table}[h]
 %    \centering

@@ -84,9 +84,9 @@ if arg1 == 2:
     problem = Problem(initialState, goalState)
 
     ### Run Problem
-    startClock = time()
-    result = alg.run(problem, heuristicType)
-    endClock = time()
+    startClock = clock()
+    (result,numNodes) = alg.run(problem, heuristicType)
+    endClock = clock()
 
     print "\nAlgorithm done."
     print "Clock: ", endClock - startClock

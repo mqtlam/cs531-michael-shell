@@ -25,7 +25,7 @@ class RBFSSearch:
 		if self.exceedsNMAX():
 			print "Terminated after NMAX expansions."
 		print "Num Expansions: ", self.numExpandedNodes
-		return result
+		return [result, self.numExpandedNodes]
 
 	def RBFS(self, problem, node, fLimit):
 		"""Returns a solution, or failure and a new f-cost limit."""

@@ -90,16 +90,6 @@ for nd in range(4,11):
                 dairy.write("CPU time Total: " + str(alg.timeOnTotal) + "\n\n")
                 dairy.write("Number of nodes explored: %d" % numNodes + "\n\n")
 
-                #print result
-                #for it,r in enumerate(result):
-                #    print 'step %d' % it
-                #    for i in range(3):
-                #        print r[i]
-                #print 'Total number of steps: %d' % len(result)
-                #ans = raw_input("Do you want to show steps (Y/N)? ")
-                #if ans.lower()[0] == 'y':
-                #    print result
-
             if arg1 == 2:
                 # set initial state
                 initialState = [si, "", ""]
@@ -117,13 +107,8 @@ for nd in range(4,11):
 
                 ### Run Problem
                 #startClock = time()
-                result = alg.run(problem, heuristicType)
+                (result,numNodes) = alg.run(problem, heuristicType)
                 #endClock = time()
-
-                #print "\nAlgorithm done."
-                #print "Clock: ", endClock - startClock
-                #for r in result:
-                #    print r.state
 
                 print "Algorithm done."
                 if result == False:

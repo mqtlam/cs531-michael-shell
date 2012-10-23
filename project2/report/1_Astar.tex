@@ -17,12 +17,12 @@ We implement the A* search algorithm for finding the paths between initial state
 \STATE frontier = [initialPath]
 \WHILE{number(explored) $<$ NMAX}
 \IF{frontier == $\emptyset$}
-    \STATE \RETURN FALSE
+    \RETURN FALSE
 \ENDIF
 \STATE path = frontier.pop()
 \STATE state = path[0]
 \IF{state == goalState}
-    \STATE \RETURN path
+    \RETURN path
 \ENDIF
 \FOR{action in state.validActions()}
     \FOR{newState in action.results()}
