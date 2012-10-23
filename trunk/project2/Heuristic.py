@@ -22,6 +22,12 @@ class Heuristic:
 			return self.heuristicFunction4(state)
 		elif self.heuristicType == 5:
 			return self.heuristicFunction5(state)
+		elif self.heuristicType == 6:
+			return self.heuristicFunction6(state)
+		elif self.heuristicType == 7:
+			return self.heuristicFunction7(state)
+		elif self.heuristicType == 8:
+			return self.heuristicFunction8(state)
 		else:
 			return 0 # no heuristic
 
@@ -69,4 +75,30 @@ class Heuristic:
             		h = h + abs(int(goalStateReversed[i])-int(s))
         	h = h + len(state[1])
         	h = h + len(state[2])
+		return h
+
+	def heuristicFunction6(self, state):
+		"""Returns the heuristic function value evaluated at current state."""
+        	h = 0
+        	for i,s in enumerate(state.pegs[0]):
+            		h = h + abs(self.goalState[0][i]-s)*2
+        	h = h + state.numDisksInPeg(1)*2
+        	h = h + state.numDisksInPeg(2)*2
+		return h
+	def heuristicFunction7(self, state):
+		"""Returns the heuristic function value evaluated at current state."""
+        	h = 0
+        	for i,s in enumerate(state.pegs[0]):
+            		h = h + abs(self.goalState[0][i]-s)*2
+        	h = h + state.numDisksInPeg(1)
+        	h = h + state.numDisksInPeg(2)
+		return h
+	def heuristicFunction8(self, state):
+		"""Returns the heuristic function value evaluated at current state."""
+        	h = 0
+		goalStateReversed = list(reversed(self.goalState[0]))
+        	for i,s in enumerate(reversed(state[0])):
+            		h = h + abs(int(goalStateReversed[i])-int(s))*2
+        	h = h + len(state[1])*2
+        	h = h + len(state[2])*2
 		return h
