@@ -1,13 +1,6 @@
 \section{A* Search}\label{sec:astar}
 
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[scale=.35]{img/celltype.pdf}
-%\caption{We use different shapes to represent different cell types. We can see that it is not possible to step into a triangle cell in the memoryless deterministic reflex agent case, because an agent cannot take 2 different actions in circle cells, but which is necessary to get into the center.}
-%\label{fig:celltypes}
-%\end{figure}
-
-We implement the A* search algorithm for finding the paths between initial states to a given goal state in the problem of Tower of Corvallis. It is summarized in figure \ref{alg1}.
+We implement the A* search algorithm for finding the paths between initial states to a given goal state in the problem of Tower of Corvallis. It is summarized in algorithm \ref{alg1}.
 
 \begin{algorithm}[H]
 \caption{A* Search}
@@ -21,6 +14,7 @@ We implement the A* search algorithm for finding the paths between initial state
 \ENDIF
 \STATE path = frontier.pop()
 \STATE state = path[0]
+\STATE exploredSet.add(state)
 \IF{state == goalState}
     \RETURN path
 \ENDIF
