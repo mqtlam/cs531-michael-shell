@@ -28,7 +28,7 @@ if heuristicType not in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
 	printUsage()
 	exit(3)
 
-dairy = open('./log/AstarHeur6.txt', 'w')
+dairy = open('./log/RBFSHeur5.txt', 'w')
 solen = []
 numNodesExp = []
 cpuHeu = []
@@ -90,6 +90,16 @@ for nd in range(4,11):
                 dairy.write("CPU time Total: " + str(alg.timeOnTotal) + "\n\n")
                 dairy.write("Number of nodes explored: %d" % numNodes + "\n\n")
 
+                #print result
+                #for it,r in enumerate(result):
+                #    print 'step %d' % it
+                #    for i in range(3):
+                #        print r[i]
+                #print 'Total number of steps: %d' % len(result)
+                #ans = raw_input("Do you want to show steps (Y/N)? ")
+                #if ans.lower()[0] == 'y':
+                #    print result
+
             if arg1 == 2:
                 # set initial state
                 initialState = [si, "", ""]
@@ -107,8 +117,13 @@ for nd in range(4,11):
 
                 ### Run Problem
                 #startClock = time()
-                (result,numNodes) = alg.run(problem, heuristicType)
+                result = alg.run(problem, heuristicType)
                 #endClock = time()
+
+                #print "\nAlgorithm done."
+                #print "Clock: ", endClock - startClock
+                #for r in result:
+                #    print r.state
 
                 print "Algorithm done."
                 if result == False:
@@ -134,13 +149,13 @@ for nd in range(4,11):
                 dairy.write("Number of nodes explored: %d" % alg.numExpandedNodes + "\n\n")
 
 #figures
-x_nodes = []
-for i in range(4,11):
-    x_nodes = x_nodes + [i]*20
-pylab.plot(x_nodes, numNodesExp, 'bo')
-
-pylab.xlabel('number of disks')
-pylab.ylabel('number of expanded nodes')
-pylab.title('performance curve')
-pylab.grid(True)
-pylab.show()
+#x_nodes = []
+#for i in range(4,11):
+#    x_nodes = x_nodes + [i]*20
+#pylab.plot(range(1,len(num_clean_cells)+1), num_clean_cells)
+#
+#pylab.xlabel('number of actions')
+#pylab.ylabel('number of clean cells')
+#pylab.title('performance curve')
+#pylab.grid(True)
+#pylab.show()
