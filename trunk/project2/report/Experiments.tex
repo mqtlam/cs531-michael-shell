@@ -41,16 +41,26 @@ The intuition is that for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to
 
 \subsection{Results}
 
+\begin{figure}[!t]
+\centering
+\includegraphics[scale=.35]{img/subplot.png}
+\caption{Plots for the number of nodes searched against the problem size for each algorithm and heuristic.}
+\label{fig:celltypes}
+\end{figure}
+
+
 \begin{table}[h]
     \centering
-    \begin{tabular}{|l|c|c|c|c|c|c|c}
-        \hline
-        Disks: & 4 & 5 & 6 & 7 & 8 & 9 & 10\\ \hline
-        A*/admissible & 8.85 & 11.85 & 14.6 & 17.5 & 20.2 & 24.1 & 27.6\\ \hline
-        A*/nonadmissible & 8.85 & 11.85 & 15.25 & 19 & 22.21 & 26.81 & 32.25 \\ \hline
-        RBFS/admissible & 9.25 & 12.95 & 16.5 & 20.05 & 23.8 & 27.4 & 34.05\\ \hline
-        RBFS/nonadmissible & 11.25 & 17.85 & 24.35 & 32.75 & 40.35 & 50.7 & 64.55\\ \hline
-    \end{tabular}
+    \scalebox{1.0}{
+	    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+		\hline
+		Disks: & 4 & 5 & 6 & 7 & 8 & 9 & 10\\ \hline
+		A*/admissible & 8.85 & 11.85 & 14.6 & 17.5 & 20.2 & 24.1 & 27.6\\ \hline
+		A*/nonadmissible & 8.85 & 11.85 & 15.25 & 19 & 22.21 & 26.81 & 32.25 \\ \hline
+		RBFS/admissible & 9.25 & 12.95 & 16.5 & 20.05 & 23.8 & 27.4 & 34.05\\ \hline
+		RBFS/nonadmissible & 11.25 & 17.85 & 24.35 & 32.75 & 40.35 & 50.7 & 64.55\\ \hline
+	    \end{tabular}
+    }
     \caption{Average solution length per algorithm, heuristic and disk size.}\label{tab:solen}
 \end{table}
 
