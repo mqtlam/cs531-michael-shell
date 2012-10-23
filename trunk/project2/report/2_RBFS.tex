@@ -4,7 +4,7 @@ Recursive best-first search or RBFS works by storing an f-limit for each node. T
 
 The advantage of RBFS over A* is that RBFS uses less memory. Whereas A* stores all of its explored nodes, RBFS will only keep relevant nodes in memory. However, the disadvantage of RBFS over A* is that RBFS could expand more nodes than A* due to redundancy. Since RBFS does not store all nodes explored, it can re-expand the same nodes and thereby increasing computation time.
 
-The pseudocode is listed in figure \ref{alg2}.
+The pseudocode is listed in algorithm \ref{alg2}.
 
 \begin{algorithm}
 \caption{RBFS Search}

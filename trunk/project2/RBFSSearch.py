@@ -24,7 +24,7 @@ class RBFSSearch:
 		h = self.heuristic.h(problem.initialState)
 
         	t1 = time()
-		[result, fvalue] = self.RBFS(problem, self.makeNode(problem.initialState, h), self.INFINITY)
+		(result, fvalue) = self.RBFS(problem, self.makeNode(problem.initialState, h), self.INFINITY)
         	t2 = time()
         	self.timeOnTotal = t2 - t1
 
@@ -36,9 +36,9 @@ class RBFSSearch:
 	def RBFS(self, problem, node, fLimit):
 		"""Returns a solution, or failure and a new f-cost limit."""
 		if self.exceedsNMAX():
-			return [[], 0]
+			return ([], 0)
 		if problem.goalTest(node.state):
-			return [self.solution(node), 0]
+			return (self.solution(node), 0)
 		successors = []
 		for action in problem.actions(node.state):
             		th1 = time()
@@ -47,16 +47,16 @@ class RBFSSearch:
             		self.timeOnHeuris = self.timeOnHeuris + (th2-th1)
 			successors.append(self.childNode(problem, node, action, h))
 		if not successors:
-			return [False, self.INFINITY]
+			return (False, self.INFINITY)
 		for s in successors:
 			s.f = max(s.pathCost + s.h, node.f)
 		while True:
 			[best, alternative] = self.getFirstSecondLowest(successors)
 			if best.f > fLimit:
-				return [False, best.f]
+				return (False, best.f)
 			[result, best.f] = self.RBFS(problem, best, min(fLimit, alternative.f))
 			if result != False:
-				return [result, best.f]
+				return (result, best.f)
 
 	def makeNode(self, initialState, heuristic):
 		"""Constructs a node, used for the initial state."""

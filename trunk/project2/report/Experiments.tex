@@ -35,23 +35,61 @@
 \subsection{Heuristics}
 We observed that the length of a path is the steps moving from initial state to goal state. So a natural heuristic can be designed based on an optimistic estimation of how many steps need to turn a state to its final goal. The first admissible heuristic is as following:
 \[
-h(s) = (\sum_i |pegs(1,i)-i| ) + numberDisks(pegs(2)) + numberDisks(pegs(3))
+h(s) = (\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))
 \]
-The intuition is that for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the place it should be, where $i$ is its current location on the peg. For example, if the $9th$ disk is on the bottom, it has to take $9-0$ steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from the current location to peg $1$ in at least $1$ step. This is in fact an admissible heuristic. A simple justification is given as follows: for any disk on peg $1$, before it reaches its ideal position, there should be $|k-i|$ disks put underneath it, and for every such disk, it takes at least $1$ step. 
+Here, s(i,j) is the $jth$ disks in peg $i$. The intuition is that for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the place it should be, where $i$ is its current location on the peg. For example, if the $9th$ disk is on the bottom, it has to take $9-0$ steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from the current location to peg $1$ in at least $1$ step. This is in fact an admissible heuristic. A simple justification is given as
+follows: for any disk on peg $1$, before it reaches its ideal position, there should be $|k-i|$ disks put underneath it, and for every such disk, it takes at least one step. Of course, a much trivial admissible heuristic can be used here, such as number of disks in the first peg, but for computational efficiency, we choose this admissible heuristic in our experiment.
+
+For non-admissible heuristic, we simplily enlarge the admissible heuristic by a factor of $2$. This is also reasonable since before we move a disk to its ideal position, usually we have to move another disk out of that place, which makes the number of steps double. But obviously this is not ture for all the cases. We can give a counterexample easily. 
+\[
+h(s) = 2 \times [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
+\]
 
 \subsection{Results}
 
 \begin{figure}[!t]
 \centering
-\includegraphics[scale=.35]{img/subplot.png}
-\caption{Plots for the number of nodes searched against the problem size for each algorithm and heuristic.}
-\label{fig:celltypes}
+\begin{tabular}{cc}
+\subfloat[A* nodes: all 140 experiments]{\includegraphics[scale=0.32]{../results/Astar_nodes.png}} 
+   & \subfloat[RBFS nodes: all 140 experiments]{\includegraphics[scale=0.32]{../results/RBFS_nodes.png}}\\
+\subfloat[A* average searched nodes]{\includegraphics[scale=0.32]{../results/Anode-aver.png}} 
+   & \subfloat[RBFS average searched nodes]{\includegraphics[scale=0.32]{../results/Rnode-aver.png}}\\
+%\subfloat[E]{\includegraphics[width=2cm]{logo}} 
+%   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
+\end{tabular}
+\caption{Plots for the number of nodes searched against the problem size for each algorithm and heuristic. For the first 2 figures, number of disks within 4-10, every 20 examples have the same problem size. We show average expanded nodes against number of disks for a clear demonstration. As the problem size becomes larger, the number of searched nodes grow up exponentially.}
+\label{fig:nodes}
 \end{figure}
 
+\begin{figure}[!t]
+\centering
+\begin{tabular}{cc}
+\subfloat[A*: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{../results/AHcpu-aver.png}} 
+   & \subfloat[RBFS: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{../results/RHcpu-aver.png}}\\
+\subfloat[A*: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{../results/ATcpu-aver.png}} 
+   & \subfloat[RBFS: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{../results/RTcpu-aver.png}}\\
+%\subfloat[E]{\includegraphics[width=2cm]{logo}} 
+%   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
+\end{tabular}
+\caption{Plots for the average cpu time against the problem size over 20 examples for each algorithm and heuristic.}
+\label{fig:cputime}
+\end{figure}
 
-\begin{table}[h]
+\begin{figure}[!t]
+\centering
+\begin{tabular}{cc}
+\subfloat[Nodes against disks for heurisitic 1]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H1_node.png}} 
+   & \subfloat[Nodes against disks for heurisitic 2]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H2_node.png}}\\
+\subfloat[cpu time against disks for heurisitic 1]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H1_cpu.png}} 
+   & \subfloat[cpu time against disks for heurisitic 2]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H2_cpu.png}}\\
+\end{tabular}
+\caption{Performance comparisons between A* and RBFS}
+\label{fig:astar-rbfs}
+\end{figure}
+
+\begin{table}[!h]
     \centering
-    \scalebox{1.0}{
+    \scalebox{0.9}{
 	    \begin{tabular}{|l|c|c|c|c|c|c|c|}
 		\hline
 		Disks: & 4 & 5 & 6 & 7 & 8 & 9 & 10\\ \hline
