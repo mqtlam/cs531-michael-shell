@@ -1,4 +1,4 @@
-\section{A* Search}
+\section{A* Search}\label{sec:astar}
 
 %\begin{figure}[!t]
 %\centering
@@ -7,4 +7,34 @@
 %\label{fig:celltypes}
 %\end{figure}
 
-We implement the A* search for 
+We implement the A* search algorithm for finding the paths between initial states to a given goal state in the problem of Tower of Corvallis. It summarized as follow:
+
+\begin{algorithm}
+\caption{A* Search}
+\label{alg1}
+\begin{algorithmic}
+\STATE exploredSet = $\emptyset$ 
+\STATE frontier = [initialPath]
+\WHILE{number(explored) $<$ NMAX}
+\IF{frontier == $\emptyset$}
+    \STATE \RETURN FALSE
+\ENDIF
+\STATE path = frontier.pop()
+\STATE state = path[0]
+\IF{state == goalState}
+    \STATE \RETURN path
+\ENDIF
+\FOR{action in state.validActions()}
+    \FOR{newState in action.results()}
+        \STATE newPath = path + newState
+        \IF{ismember(frontier,newPath) == FALSE}
+            \STATE frontier.push(newPath)
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+Here, for implementing the frontier, we use the priority queue, which is actually a heap data structure. We use a callback function $f(state) = g(state) + h(state)$ as the priority, the $g(state)$ is the length of the path and $h(state)$ is the heuristic for estimating the distance between current state to goal state. We will analyze several admissble and non-admissble heuristics in section \ref{sec:exp}.
+
