@@ -54,16 +54,17 @@ if arg1 == 1:
 
     problem = AstarProblem(initialState, goalState)
     startClock = clock()
-    result = alg.run(problem, heuristicType)
+    (result,numNodes) = alg.run(problem, heuristicType)
     endClock = clock()
 
     print "\nAlgorithm done."
     print "Clock: ", endClock - startClock
+    print "Number of nodes explored: %d" % numNodes
     #print result
-    for it,r in enumerate(result):
-        print 'step %d' % it
-        for i in range(3):
-            print r[i]
+    #for it,r in enumerate(result):
+    #    print 'step %d' % it
+    #    for i in range(3):
+    #        print r[i]
     print 'Total number of steps: %d' % len(result)
     ans = raw_input("Do you want to show steps (Y/N)? ")
     if ans.lower()[0] == 'y':

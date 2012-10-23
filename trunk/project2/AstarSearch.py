@@ -4,6 +4,8 @@ from Heuristic import *
 #import heapq
 from util import PriorityQueueWithFunction
 
+NMAX = 10000000
+
 class AstarSearch:
     def __init__(self):
         self.numExpandedNodes = 0
@@ -15,8 +17,9 @@ class AstarSearch:
         self.heuristic = Heuristic(heuristicType, problem.goalState)
         #h = self.heuristic.h(problem.initialState)
 
-        result = self.Astar(problem)
-        return result
+        (result,nNodes) = self.Astar(problem)
+        #print "Explored %d nodes" % len(nodes)
+        return (result, nNodes)
 
     def fcost(self, path):
         if len(path) > 0:
@@ -33,14 +36,17 @@ class AstarSearch:
         # Priority queue
         self.frontier.push(initialPath)
         while True:
+            #print "*debug* numExplored = %d" % len(explored)
+            if len(explored) > NMAX:
+                return (False,NMAX)
             if self.frontier.isEmpty():
-                return False
+                return (False,len(explored))
             # This is the 'remove_choice' line from the algorithm
             path = self.frontier.pop()
             s = path[-1]
             explored.add(s)
             if problem.goalTest(s):
-                return path
+                return (path,len(explored))
             for ns in problem.nextStates(s):
                 if ns not in explored:
                     newPath = path + [ns]
