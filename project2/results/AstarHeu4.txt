@@ -1,0 +1,1407 @@
+----------------------------------------------------------
+Length of solution: 10
+
+Initial State is:2013
+
+CPU time heuristic: 0.000119686126709
+
+CPU time Total: 0.00259208679199
+
+Number of nodes explored: 40
+
+Length of solution: 9
+
+Initial State is:2031
+
+CPU time heuristic: 0.000158071517944
+
+CPU time Total: 0.0034511089325
+
+Number of nodes explored: 62
+
+Length of solution: 5
+
+Initial State is:2310
+
+CPU time heuristic: 5.43594360352e-05
+
+CPU time Total: 0.000741958618164
+
+Number of nodes explored: 15
+
+Length of solution: 7
+
+Initial State is:1320
+
+CPU time heuristic: 9.41753387451e-05
+
+CPU time Total: 0.00183796882629
+
+Number of nodes explored: 33
+
+Length of solution: 8
+
+Initial State is:1230
+
+CPU time heuristic: 0.000152826309204
+
+CPU time Total: 0.0033221244812
+
+Number of nodes explored: 61
+
+Length of solution: 11
+
+Initial State is:0123
+
+CPU time heuristic: 0.000380277633667
+
+CPU time Total: 0.0097770690918
+
+Number of nodes explored: 151
+
+Length of solution: 7
+
+Initial State is:3120
+
+CPU time heuristic: 7.77244567871e-05
+
+CPU time Total: 0.00145196914673
+
+Number of nodes explored: 29
+
+Length of solution: 7
+
+Initial State is:2130
+
+CPU time heuristic: 6.05583190918e-05
+
+CPU time Total: 0.00107407569885
+
+Number of nodes explored: 19
+
+Length of solution: 9
+
+Initial State is:1302
+
+CPU time heuristic: 9.44137573242e-05
+
+CPU time Total: 0.00190186500549
+
+Number of nodes explored: 35
+
+Length of solution: 9
+
+Initial State is:1032
+
+CPU time heuristic: 6.5803527832e-05
+
+CPU time Total: 0.00146579742432
+
+Number of nodes explored: 25
+
+Length of solution: 10
+
+Initial State is:0213
+
+CPU time heuristic: 0.000187158584595
+
+CPU time Total: 0.0041401386261
+
+Number of nodes explored: 68
+
+Length of solution: 9
+
+Initial State is:3201
+
+CPU time heuristic: 0.000169277191162
+
+CPU time Total: 0.00385689735413
+
+Number of nodes explored: 68
+
+Length of solution: 10
+
+Initial State is:1203
+
+CPU time heuristic: 0.000243425369263
+
+CPU time Total: 0.00715112686157
+
+Number of nodes explored: 96
+
+Length of solution: 10
+
+Initial State is:0312
+
+CPU time heuristic: 0.000231027603149
+
+CPU time Total: 0.00622701644897
+
+Number of nodes explored: 96
+
+Length of solution: 9
+
+Initial State is:3102
+
+CPU time heuristic: 0.000100135803223
+
+CPU time Total: 0.00173115730286
+
+Number of nodes explored: 33
+
+Length of solution: 9
+
+Initial State is:0321
+
+CPU time heuristic: 0.000179290771484
+
+CPU time Total: 0.00371289253235
+
+Number of nodes explored: 65
+
+Length of solution: 9
+
+Initial State is:3021
+
+CPU time heuristic: 0.000211477279663
+
+CPU time Total: 0.00469994544983
+
+Number of nodes explored: 79
+
+Length of solution: 10
+
+Initial State is:0132
+
+CPU time heuristic: 0.000258445739746
+
+CPU time Total: 0.00626301765442
+
+Number of nodes explored: 103
+
+Length of solution: 9
+
+Initial State is:2301
+
+CPU time heuristic: 0.000246047973633
+
+CPU time Total: 0.00607514381409
+
+Number of nodes explored: 100
+
+Length of solution: 10
+
+Initial State is:2103
+
+CPU time heuristic: 0.000123500823975
+
+CPU time Total: 0.00219321250916
+
+Number of nodes explored: 40
+
+----------------------------------------------------------
+Length of solution: 13
+
+Initial State is:01342
+
+CPU time heuristic: 0.000993251800537
+
+CPU time Total: 0.02858710289
+
+Number of nodes explored: 409
+
+Length of solution: 8
+
+Initial State is:23410
+
+CPU time heuristic: 0.000175476074219
+
+CPU time Total: 0.00322604179382
+
+Number of nodes explored: 58
+
+Length of solution: 12
+
+Initial State is:40213
+
+CPU time heuristic: 0.000334739685059
+
+CPU time Total: 0.00641107559204
+
+Number of nodes explored: 112
+
+Length of solution: 12
+
+Initial State is:21403
+
+CPU time heuristic: 0.000466346740723
+
+CPU time Total: 0.0105710029602
+
+Number of nodes explored: 165
+
+Length of solution: 13
+
+Initial State is:03412
+
+CPU time heuristic: 0.00157427787781
+
+CPU time Total: 0.0538890361786
+
+Number of nodes explored: 661
+
+Length of solution: 13
+
+Initial State is:30142
+
+CPU time heuristic: 0.000864505767822
+
+CPU time Total: 0.0242819786072
+
+Number of nodes explored: 339
+
+Length of solution: 13
+
+Initial State is:04123
+
+CPU time heuristic: 0.00113415718079
+
+CPU time Total: 0.0340650081635
+
+Number of nodes explored: 465
+
+Length of solution: 5
+
+Initial State is:34210
+
+CPU time heuristic: 4.62532043457e-05
+
+CPU time Total: 0.000633955001831
+
+Number of nodes explored: 13
+
+Length of solution: 12
+
+Initial State is:10324
+
+CPU time heuristic: 0.000526428222656
+
+CPU time Total: 0.0120899677277
+
+Number of nodes explored: 190
+
+Length of solution: 13
+
+Initial State is:04213
+
+CPU time heuristic: 0.00121116638184
+
+CPU time Total: 0.0364019870758
+
+Number of nodes explored: 483
+
+Length of solution: 13
+
+Initial State is:01243
+
+CPU time heuristic: 0.000410556793213
+
+CPU time Total: 0.00993609428406
+
+Number of nodes explored: 152
+
+Length of solution: 13
+
+Initial State is:32014
+
+CPU time heuristic: 0.000397682189941
+
+CPU time Total: 0.00906920433044
+
+Number of nodes explored: 140
+
+Length of solution: 12
+
+Initial State is:14023
+
+CPU time heuristic: 0.000336647033691
+
+CPU time Total: 0.00799894332886
+
+Number of nodes explored: 127
+
+Length of solution: 12
+
+Initial State is:10342
+
+CPU time heuristic: 0.000140428543091
+
+CPU time Total: 0.00330901145935
+
+Number of nodes explored: 53
+
+Length of solution: 13
+
+Initial State is:20314
+
+CPU time heuristic: 0.000511646270752
+
+CPU time Total: 0.0126039981842
+
+Number of nodes explored: 183
+
+Length of solution: 13
+
+Initial State is:12034
+
+CPU time heuristic: 9.72747802734e-05
+
+CPU time Total: 0.00203800201416
+
+Number of nodes explored: 35
+
+Length of solution: 12
+
+Initial State is:40132
+
+CPU time heuristic: 0.000568151473999
+
+CPU time Total: 0.0146698951721
+
+Number of nodes explored: 230
+
+Length of solution: 11
+
+Initial State is:12340
+
+CPU time heuristic: 0.000603199005127
+
+CPU time Total: 0.013934135437
+
+Number of nodes explored: 230
+
+Length of solution: 13
+
+Initial State is:12043
+
+CPU time heuristic: 0.00175309181213
+
+CPU time Total: 0.0543780326843
+
+Number of nodes explored: 694
+
+Length of solution: 11
+
+Initial State is:43102
+
+CPU time heuristic: 0.000287532806396
+
+CPU time Total: 0.0058422088623
+
+Number of nodes explored: 96
+
+----------------------------------------------------------
+Length of solution: 17
+
+Initial State is:203514
+
+CPU time heuristic: 0.00857210159302
+
+CPU time Total: 0.340767145157
+
+Number of nodes explored: 3384
+
+Length of solution: 12
+
+Initial State is:214530
+
+CPU time heuristic: 0.000282764434814
+
+CPU time Total: 0.00555896759033
+
+Number of nodes explored: 95
+
+Length of solution: 15
+
+Initial State is:250134
+
+CPU time heuristic: 0.000243425369263
+
+CPU time Total: 0.0043408870697
+
+Number of nodes explored: 75
+
+Length of solution: 15
+
+Initial State is:503412
+
+CPU time heuristic: 0.00362682342529
+
+CPU time Total: 0.116003990173
+
+Number of nodes explored: 1433
+
+Length of solution: 16
+
+Initial State is:143025
+
+CPU time heuristic: 0.00271654129028
+
+CPU time Total: 0.092689037323
+
+Number of nodes explored: 1051
+
+Length of solution: 13
+
+Initial State is:430521
+
+CPU time heuristic: 0.000378847122192
+
+CPU time Total: 0.00764107704163
+
+Number of nodes explored: 129
+
+Length of solution: 14
+
+Initial State is:504213
+
+CPU time heuristic: 0.000770092010498
+
+CPU time Total: 0.0167059898376
+
+Number of nodes explored: 252
+
+Length of solution: 16
+
+Initial State is:341205
+
+CPU time heuristic: 0.000884056091309
+
+CPU time Total: 0.0200901031494
+
+Number of nodes explored: 302
+
+Length of solution: 16
+
+Initial State is:034152
+
+CPU time heuristic: 0.00311160087585
+
+CPU time Total: 0.0982489585876
+
+Number of nodes explored: 1248
+
+Length of solution: 16
+
+Initial State is:031524
+
+CPU time heuristic: 0.00380086898804
+
+CPU time Total: 0.122298955917
+
+Number of nodes explored: 1521
+
+Length of solution: 13
+
+Initial State is:431052
+
+CPU time heuristic: 0.000583410263062
+
+CPU time Total: 0.0141739845276
+
+Number of nodes explored: 218
+
+Length of solution: 16
+
+Initial State is:210345
+
+CPU time heuristic: 0.000375032424927
+
+CPU time Total: 0.00873994827271
+
+Number of nodes explored: 139
+
+Length of solution: 13
+
+Initial State is:534201
+
+CPU time heuristic: 0.00125455856323
+
+CPU time Total: 0.0307528972626
+
+Number of nodes explored: 448
+
+Length of solution: 10
+
+Initial State is:253410
+
+CPU time heuristic: 0.000527143478394
+
+CPU time Total: 0.0105340480804
+
+Number of nodes explored: 168
+
+Length of solution: 14
+
+Initial State is:031542
+
+CPU time heuristic: 0.0047242641449
+
+CPU time Total: 0.166790962219
+
+Number of nodes explored: 1903
+
+Length of solution: 16
+
+Initial State is:124035
+
+CPU time heuristic: 0.00297951698303
+
+CPU time Total: 0.0862920284271
+
+Number of nodes explored: 1158
+
+Length of solution: 15
+
+Initial State is:432105
+
+CPU time heuristic: 0.000747680664062
+
+CPU time Total: 0.0150628089905
+
+Number of nodes explored: 233
+
+Length of solution: 14
+
+Initial State is:410532
+
+CPU time heuristic: 0.000393867492676
+
+CPU time Total: 0.0104818344116
+
+Number of nodes explored: 150
+
+Length of solution: 16
+
+Initial State is:142305
+
+CPU time heuristic: 0.00123620033264
+
+CPU time Total: 0.0292267799377
+
+Number of nodes explored: 427
+
+Length of solution: 15
+
+Initial State is:143205
+
+CPU time heuristic: 0.000672340393066
+
+CPU time Total: 0.0147290229797
+
+Number of nodes explored: 223
+
+----------------------------------------------------------
+Length of solution: 15
+
+Initial State is:5462031
+
+CPU time heuristic: 0.00325989723206
+
+CPU time Total: 0.0862131118774
+
+Number of nodes explored: 1224
+
+Length of solution: 15
+
+Initial State is:2364150
+
+CPU time heuristic: 0.00115084648132
+
+CPU time Total: 0.0240988731384
+
+Number of nodes explored: 363
+
+Length of solution: 17
+
+Initial State is:0623541
+
+CPU time heuristic: 0.00967741012573
+
+CPU time Total: 0.412695169449
+
+Number of nodes explored: 3952
+
+Length of solution: 16
+
+Initial State is:4061532
+
+CPU time heuristic: 0.000756025314331
+
+CPU time Total: 0.0198011398315
+
+Number of nodes explored: 299
+
+Length of solution: 16
+
+Initial State is:6342105
+
+CPU time heuristic: 0.00181484222412
+
+CPU time Total: 0.038852930069
+
+Number of nodes explored: 556
+
+Length of solution: 16
+
+Initial State is:1625043
+
+CPU time heuristic: 0.00340867042542
+
+CPU time Total: 0.106647014618
+
+Number of nodes explored: 1387
+
+Length of solution: 17
+
+Initial State is:2365014
+
+CPU time heuristic: 0.00643134117126
+
+CPU time Total: 0.179708003998
+
+Number of nodes explored: 2326
+
+Length of solution: 19
+
+Initial State is:6013254
+
+CPU time heuristic: 0.00714159011841
+
+CPU time Total: 0.232764959335
+
+Number of nodes explored: 2731
+
+Length of solution: 21
+
+Initial State is:4031265
+
+CPU time heuristic: 0.00976252555847
+
+CPU time Total: 0.325053930283
+
+Number of nodes explored: 3532
+
+Length of solution: 20
+
+Initial State is:3206154
+
+CPU time heuristic: 0.0264434814453
+
+CPU time Total: 1.37149882317
+
+Number of nodes explored: 10180
+
+Length of solution: 19
+
+Initial State is:1306425
+
+CPU time heuristic: 0.00320434570312
+
+CPU time Total: 0.100692987442
+
+Number of nodes explored: 1249
+
+Length of solution: 19
+
+Initial State is:0354216
+
+CPU time heuristic: 0.00515842437744
+
+CPU time Total: 0.14133310318
+
+Number of nodes explored: 1777
+
+Length of solution: 18
+
+Initial State is:4106235
+
+CPU time heuristic: 0.000961542129517
+
+CPU time Total: 0.0224809646606
+
+Number of nodes explored: 347
+
+Length of solution: 17
+
+Initial State is:3105246
+
+CPU time heuristic: 0.00668954849243
+
+CPU time Total: 0.262277126312
+
+Number of nodes explored: 2584
+
+Length of solution: 19
+
+Initial State is:5213406
+
+CPU time heuristic: 0.0012366771698
+
+CPU time Total: 0.0253307819366
+
+Number of nodes explored: 404
+
+Length of solution: 16
+
+Initial State is:4623051
+
+CPU time heuristic: 0.00241684913635
+
+CPU time Total: 0.0637362003326
+
+Number of nodes explored: 894
+
+Length of solution: 16
+
+Initial State is:2463150
+
+CPU time heuristic: 0.00580048561096
+
+CPU time Total: 0.172034025192
+
+Number of nodes explored: 2193
+
+Length of solution: 16
+
+Initial State is:5603421
+
+CPU time heuristic: 0.0120940208435
+
+CPU time Total: 0.41468501091
+
+Number of nodes explored: 4861
+
+Length of solution: 18
+
+Initial State is:1256304
+
+CPU time heuristic: 0.01336145401
+
+CPU time Total: 0.553045988083
+
+Number of nodes explored: 5254
+
+Length of solution: 20
+
+Initial State is:2104356
+
+CPU time heuristic: 0.00129294395447
+
+CPU time Total: 0.0339179039001
+
+Number of nodes explored: 483
+
+----------------------------------------------------------
+Length of solution: 21
+
+Initial State is:57302416
+
+CPU time heuristic: 0.00643420219421
+
+CPU time Total: 0.158360004425
+
+Number of nodes explored: 2130
+
+Length of solution: 20
+
+Initial State is:06753142
+
+CPU time heuristic: 0.0437383651733
+
+CPU time Total: 2.31557893753
+
+Number of nodes explored: 17431
+
+Length of solution: 18
+
+Initial State is:71234650
+
+CPU time heuristic: 0.000535488128662
+
+CPU time Total: 0.0109729766846
+
+Number of nodes explored: 169
+
+Length of solution: 24
+
+Initial State is:34026157
+
+CPU time heuristic: 0.0283319950104
+
+CPU time Total: 1.40799713135
+
+Number of nodes explored: 10808
+
+Length of solution: 20
+
+Initial State is:37604152
+
+CPU time heuristic: 0.062819480896
+
+CPU time Total: 3.99274396896
+
+Number of nodes explored: 24671
+
+Length of solution: 22
+
+Initial State is:72306145
+
+CPU time heuristic: 0.00679636001587
+
+CPU time Total: 0.235265016556
+
+Number of nodes explored: 2638
+
+Length of solution: 19
+
+Initial State is:34652170
+
+CPU time heuristic: 0.0161068439484
+
+CPU time Total: 0.609677791595
+
+Number of nodes explored: 5774
+
+Length of solution: 18
+
+Initial State is:16725340
+
+CPU time heuristic: 0.030168056488
+
+CPU time Total: 1.24164795876
+
+Number of nodes explored: 11622
+
+Length of solution: 14
+
+Initial State is:54326710
+
+CPU time heuristic: 0.000259160995483
+
+CPU time Total: 0.00402998924255
+
+Number of nodes explored: 69
+
+Length of solution: 19
+
+Initial State is:42651703
+
+CPU time heuristic: 0.0134997367859
+
+CPU time Total: 0.479160070419
+
+Number of nodes explored: 5225
+
+Length of solution: 21
+
+Initial State is:16057324
+
+CPU time heuristic: 0.0109295845032
+
+CPU time Total: 0.461431026459
+
+Number of nodes explored: 4513
+
+Length of solution: 17
+
+Initial State is:32671450
+
+CPU time heuristic: 0.000834941864014
+
+CPU time Total: 0.0180230140686
+
+Number of nodes explored: 287
+
+Length of solution: 21
+
+Initial State is:43705126
+
+CPU time heuristic: 0.00807929039001
+
+CPU time Total: 0.330346107483
+
+Number of nodes explored: 3067
+
+Length of solution: 24
+
+Initial State is:13062745
+
+CPU time heuristic: 0.0258779525757
+
+CPU time Total: 1.19920015335
+
+Number of nodes explored: 9713
+
+Length of solution: 22
+
+Initial State is:14037265
+
+CPU time heuristic: 0.00785613059998
+
+CPU time Total: 0.338119029999
+
+Number of nodes explored: 3177
+
+Length of solution: 18
+
+Initial State is:54263710
+
+CPU time heuristic: 0.0289304256439
+
+CPU time Total: 1.04015302658
+
+Number of nodes explored: 10205
+
+Length of solution: 20
+
+Initial State is:24357601
+
+CPU time heuristic: 0.0600228309631
+
+CPU time Total: 3.93985414505
+
+Number of nodes explored: 23375
+
+Length of solution: 24
+
+Initial State is:05342167
+
+CPU time heuristic: 0.0141746997833
+
+CPU time Total: 0.624127149582
+
+Number of nodes explored: 5262
+
+Length of solution: 19
+
+Initial State is:54617032
+
+CPU time heuristic: 0.00146460533142
+
+CPU time Total: 0.0444509983063
+
+Number of nodes explored: 562
+
+Length of solution: 23
+
+Initial State is:13065247
+
+CPU time heuristic: 0.0128762722015
+
+CPU time Total: 0.520732879639
+
+Number of nodes explored: 5124
+
+----------------------------------------------------------
+Length of solution: 27
+
+Initial State is:146823075
+
+CPU time heuristic: 0.392041444778
+
+CPU time Total: 80.8905889988
+
+Number of nodes explored: 143131
+
+Length of solution: 28
+
+Initial State is:650218734
+
+CPU time heuristic: 0.122264623642
+
+CPU time Total: 14.3471410275
+
+Number of nodes explored: 44503
+
+Length of solution: 25
+
+Initial State is:750824163
+
+CPU time heuristic: 0.0941860675812
+
+CPU time Total: 8.90878796577
+
+Number of nodes explored: 35860
+
+Length of solution: 25
+
+Initial State is:325640871
+
+CPU time heuristic: 0.222260951996
+
+CPU time Total: 32.7573120594
+
+Number of nodes explored: 82479
+
+Length of solution: 22
+
+Initial State is:801375462
+
+CPU time heuristic: 0.039922952652
+
+CPU time Total: 3.60598182678
+
+Number of nodes explored: 15830
+
+Length of solution: 25
+
+Initial State is:750314682
+
+CPU time heuristic: 0.0103189945221
+
+CPU time Total: 0.382241010666
+
+Number of nodes explored: 3736
+
+Length of solution: 23
+
+Initial State is:218567304
+
+CPU time heuristic: 0.180474996567
+
+CPU time Total: 20.2264630795
+
+Number of nodes explored: 69099
+
+Length of solution: 26
+
+Initial State is:840621753
+
+CPU time heuristic: 0.142070055008
+
+CPU time Total: 19.2955150604
+
+Number of nodes explored: 53223
+
+Length of solution: 23
+
+Initial State is:621345780
+
+CPU time heuristic: 0.0683825016022
+
+CPU time Total: 4.62106204033
+
+Number of nodes explored: 25520
+
+Length of solution: 28
+
+Initial State is:513820476
+
+CPU time heuristic: 0.0887887477875
+
+CPU time Total: 7.44497108459
+
+Number of nodes explored: 33459
+
+Length of solution: 23
+
+Initial State is:624583071
+
+CPU time heuristic: 0.0234451293945
+
+CPU time Total: 1.04716992378
+
+Number of nodes explored: 8955
+
+Length of solution: 25
+
+Initial State is:014826735
+
+CPU time heuristic: 0.355265140533
+
+CPU time Total: 109.217890024
+
+Number of nodes explored: 131166
+
+Length of solution: 26
+
+Initial State is:753260418
+
+CPU time heuristic: 0.194070577621
+
+CPU time Total: 20.2092010975
+
+Number of nodes explored: 69609
+
+Length of solution: 22
+
+Initial State is:850367241
+
+CPU time heuristic: 0.0649287700653
+
+CPU time Total: 5.0270550251
+
+Number of nodes explored: 25670
+
+Length of solution: 20
+
+Initial State is:758264013
+
+CPU time heuristic: 0.0297422409058
+
+CPU time Total: 1.03842377663
+
+Number of nodes explored: 9871
+
+Length of solution: 26
+
+Initial State is:602835174
+
+CPU time heuristic: 0.110497236252
+
+CPU time Total: 12.3517489433
+
+Number of nodes explored: 41515
+
+Length of solution: 25
+
+Initial State is:572134608
+
+CPU time heuristic: 0.00340032577515
+
+CPU time Total: 0.0883691310883
+
+Number of nodes explored: 1137
+
+Length of solution: 23
+
+Initial State is:735268104
+
+CPU time heuristic: 0.0817863941193
+
+CPU time Total: 6.20177698135
+
+Number of nodes explored: 31133
+
+Length of solution: 18
+
+Initial State is:276345810
+
+CPU time heuristic: 0.00970888137817
+
+CPU time Total: 0.264964103699
+
+Number of nodes explored: 3329
+
+Length of solution: 22
+
+Initial State is:763058214
+
+CPU time heuristic: 0.00570917129517
+
+CPU time Total: 0.153663158417
+
+Number of nodes explored: 1974
+
+----------------------------------------------------------
+Length of solution: 29
+
+Initial State is:7126049853
+
+CPU time heuristic: 0.0768840312958
+
+CPU time Total: 5.81923699379
+
+Number of nodes explored: 26990
+
+Length of solution: 24
+
+Initial State is:6394812507
+
+CPU time heuristic: 0.225924015045
+
+CPU time Total: 24.5749518871
+
+Number of nodes explored: 83480
+
+Length of solution: 28
+
+Initial State is:0419862735
+
+CPU time heuristic: 0.841678619385
+
+CPU time Total: 452.223043919
+
+Number of nodes explored: 282318
+
+Length of solution: 27
+
+Initial State is:3476928051
+
+CPU time heuristic: 2.06449127197
+
+CPU time Total: 1521.95214701
+
+Number of nodes explored: 664868
+
+Length of solution: 26
+
+Initial State is:4738190652
+
+CPU time heuristic: 0.0218501091003
+
+CPU time Total: 1.01392889023
+
+Number of nodes explored: 8313
+
+Length of solution: 28
+
+Initial State is:0237864519
+
+CPU time heuristic: 0.0594947338104
+
+CPU time Total: 6.44072318077
+
+Number of nodes explored: 23042
+
+Length of solution: 27
+
+Initial State is:6932418750
+
+CPU time heuristic: 0.0789585113525
+
+CPU time Total: 4.24816322327
+
+Number of nodes explored: 26616
+
+Length of solution: 25
+
+Initial State is:5974183206
+
+CPU time heuristic: 0.245848894119
+
+CPU time Total: 14.675249815
+
+Number of nodes explored: 86100
+
+Length of solution: 27
+
+Initial State is:4198207365
+
+CPU time heuristic: 0.835671901703
+
+CPU time Total: 382.942030907
+
+Number of nodes explored: 287240
+
+Length of solution: 29
+
+Initial State is:9710364258
+
+CPU time heuristic: 0.0164639949799
+
+CPU time Total: 0.640841007233
+
+Number of nodes explored: 5968
+
+Length of solution: 28
+
+Initial State is:4583906127
+
+CPU time heuristic: 0.0397312641144
+
+CPU time Total: 3.57334899902
+
+Number of nodes explored: 15592
+
+Length of solution: 25
+
+Initial State is:2407865931
+
+CPU time heuristic: 0.127437353134
+
+CPU time Total: 16.8068759441
+
+Number of nodes explored: 51079
+
+Length of solution: 28
+
+Initial State is:0869412357
+
+CPU time heuristic: 0.0439631938934
+
+CPU time Total: 2.74709582329
+
+Number of nodes explored: 16646
+
+Length of solution: 28
+
+Initial State is:0867123495
+
+CPU time heuristic: 0.245331048965
+
+CPU time Total: 40.1475760937
+
+Number of nodes explored: 91008
+
+Length of solution: 27
+
+Initial State is:6729381405
+
+CPU time heuristic: 0.296061038971
+
+CPU time Total: 46.3515839577
+
+Number of nodes explored: 111321
+
+Length of solution: 32
+
+Initial State is:2014897365
+
+CPU time heuristic: 1.5531103611
+
+CPU time Total: 1294.35312605
+
+Number of nodes explored: 520719
+
+Length of solution: 34
+
+Initial State is:0726315948
+
+CPU time heuristic: 0.393337965012
+
+CPU time Total: 97.9933109283
+
+Number of nodes explored: 146974
+
+Length of solution: 27
+
+Initial State is:1345698720
+
+CPU time heuristic: 0.245675802231
+
+CPU time Total: 35.5336670876
+
+Number of nodes explored: 92162
+
+Length of solution: 26
+
+Initial State is:4796251038
+
+CPU time heuristic: 0.0123887062073
+
+CPU time Total: 0.451069116592
+
+Number of nodes explored: 4745
+
+Length of solution: 27
+
+Initial State is:3685790124
+
+CPU time heuristic: 2.31853175163
+
+CPU time Total: 1681.79391408
+
+Number of nodes explored: 824257
+
