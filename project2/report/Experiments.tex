@@ -39,5 +39,19 @@ h(s) = (\sum_i |pegs(1,i)-i| ) + numberDisks(pegs(2)) + numberDisks(pegs(3))
 \]
 The intuition is for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the place it should be, where $i$ is its current location on the peg. For example, if the $9th$ disk on the bottom, it has to take $9-0$ steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from current location to peg $1$ in at least $1$ step. This is in fact an admissible heuristic. We are not going to prove it here. A simple justification is given as follow. For any disk on peg $1$, before it reaches to its ideal position, there should be $|k-i|$ disks put underneath it, and for every such disk, takes at least $1$ step. 
 
+\subsection{Results}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|c|c}
+        \hline
+        Disks: & 4 & 5 & 6 & 7 & 8 & 9 & 10\\ \hline
+        A*/admissible & 8.85 & 11.85 & 14.6 & 17.5 & 20.2 & 24.1 & 27.6\\ \hline
+        A*/nonadmissible & 8.85 & 11.85 & 15.25 & 19 & 22.21 & 26.81 & 32.25 \\ \hline
+        RBFS/admissible & 9.25 & 12.95 & 16.5 & 20.05 & 23.8 & 27.4 & 34.05\\ \hline
+        RBFS/nonadmissible & 11.25 & 17.85 & 24.35 & 32.75 & 40.35 & 50.7 & 64.55\\ \hline
+    \end{tabular}
+    \caption{Average solution length per algorithm, heuristic and disk size.}\label{tab:solen}
+\end{table}
 
 
