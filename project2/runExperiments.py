@@ -22,26 +22,21 @@ if len(sys.argv) < 3:
 arg1 = int(sys.argv[1])
 arg2 = int(sys.argv[2])
 
-# set algorithm
-#alg = None
-#if arg1 == 1:
-#	alg = AstarSearch()
-#elif arg1 == 2:
-#	alg = RBFSSearch()
-#else:
-#	printUsage()
-#	exit(2)
-
 # set heuristic
 heuristicType = arg2
-if heuristicType not in [0, 1, 2, 3, 4, 5]:
+if heuristicType not in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
 	printUsage()
 	exit(3)
 
-dairy = open('./log/experiment1.txt', 'w')
+dairy = open('./log/AstarHeur6.txt', 'w')
+solen = []
+numNodesExp = []
+cpuHeu = []
+cpuTot = []
 
 for nd in range(4,11):
     print "------------------------------------------------------------"
+    dairy.write("----------------------------------------------------------\n")
     print "Experiment on %d disks" % nd
     direct = "./data/perms-%d.txt" % nd
     f = open(direct)
@@ -68,20 +63,31 @@ for nd in range(4,11):
                 alg = AstarSearch()
 
                 problem = AstarProblem(initialState, goalState)
-                startClock = clock()
+                #startClock = clock()
                 (result,numNodes) = alg.run(problem, heuristicType)
-                endClock = clock()
+                #endClock = clock()
 
                 print "Algorithm done."
                 if result == False:
                     print "Search failed!!!"
+                    solen.append(-1)
+                    dairy.write("Search failed!!!" + "\n\n")
                 else:
-                    print "Search succeeded!"
-                print "Clock: ", endClock - startClock
+                    print "Solution length is %d\n" % len(result)
+                    solen.append(len(result))
+                    dairy.write("Length of solution: %d" % len(result) + "\n\n")
+                #print "Clock: ", endClock - startClock
+                print "Time spend on heurisitic is %f" % alg.timeOnHeuris
+                print "Time spend on Total is %f\n" % alg.timeOnTotal
                 print "Number of nodes explored: %d\n" % numNodes
 
+                numNodesExp.append(numNodes)
+                cpuHeu.append(alg.timeOnHeuris)
+                cpuTot.append(alg.timeOnTotal)
+
                 dairy.write("Initial State is:" + si + "\n\n")
-                dairy.write("Clock: " + str(endClock - startClock) + "\n\n")
+                dairy.write("CPU time heuristic: " + str(alg.timeOnHeuris) + "\n\n")
+                dairy.write("CPU time Total: " + str(alg.timeOnTotal) + "\n\n")
                 dairy.write("Number of nodes explored: %d" % numNodes + "\n\n")
 
                 #print result
@@ -110,11 +116,46 @@ for nd in range(4,11):
                 problem = Problem(initialState, goalState)
 
                 ### Run Problem
-                startClock = time()
+                #startClock = time()
                 result = alg.run(problem, heuristicType)
-                endClock = time()
+                #endClock = time()
 
-                print "\nAlgorithm done."
-                print "Clock: ", endClock - startClock
-                for r in result:
-                    print r.state
+                #print "\nAlgorithm done."
+                #print "Clock: ", endClock - startClock
+                #for r in result:
+                #    print r.state
+
+                print "Algorithm done."
+                if result == False:
+                    print "Search failed!!!"
+                    solen.append(-1)
+                    dairy.write("Search failed!!!" + "\n\n")
+                else:
+                    print "Solution length is %d\n" % len(result)
+                    solen.append(len(result))
+                    dairy.write("Length of solution: %d" % len(result) + "\n\n")
+                #print "Clock: ", endClock - startClock
+                print "Time spend on heurisitic is %f" % alg.timeOnHeuris
+                print "Time spend on Total is %f\n" % alg.timeOnTotal
+                print "Number of nodes explored: %d\n" % alg.numExpandedNodes
+
+                numNodesExp.append(alg.numExpandedNodes)
+                cpuHeu.append(alg.timeOnHeuris)
+                cpuTot.append(alg.timeOnTotal)
+
+                dairy.write("Initial State is:" + si + "\n\n")
+                dairy.write("CPU time heuristic: " + str(alg.timeOnHeuris) + "\n\n")
+                dairy.write("CPU time Total: " + str(alg.timeOnTotal) + "\n\n")
+                dairy.write("Number of nodes explored: %d" % alg.numExpandedNodes + "\n\n")
+
+#figures
+x_nodes = []
+for i in range(4,11):
+    x_nodes = x_nodes + [i]*20
+pylab.plot(x_nodes, numNodesExp, 'bo')
+
+pylab.xlabel('number of disks')
+pylab.ylabel('number of expanded nodes')
+pylab.title('performance curve')
+pylab.grid(True)
+pylab.show()
