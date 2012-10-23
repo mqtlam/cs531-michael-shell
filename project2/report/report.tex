@@ -29,19 +29,20 @@
 \maketitle
 
 \begin{abstract}
-In this assignment we design and implement 2 different informed search algorithms to solve the Towers of Corvallis, which is a variation of Towers of Hanoi. 
+In this assignment we design, implement and discuss two different informed search algorithms and heuristics to solve the Towers of Corvallis, which is a variation of Towers of Hanoi. 
 \end{abstract}
 
 % -------------------------------------------------
 \section{Introduction}
 
+The Towers of Corvallis puzzle is a variation on the Towers of Hanoi puzzle. While similarly consisting of 3 pegs and $n$ disks, the Corvallis variation allows any disk to go on top of any other disk. The goal is to find the smallest number of moves in getting from an initial state to the goal state, which is defined as the order 9876543210 on peg A for 10 disks and similarly for fewer disks.
+
+We implement two informed search algorithms: A* and RBFS (recursive best-first search). As informed searches, we also implement two heuristics, one admissible and one non-admissible. For each algorithm and heuristic function, we evaluate the performance by testing across different number of disks and different initial states.
 
 \input{1_Astar}
 \input{2_RBFS}
 \input{Experiments}
-
-\section{Discussion}
-
+\input{Discussion}
 
 \bibliographystyle{plain}
 \bibliography{ref}

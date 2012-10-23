@@ -1,5 +1,32 @@
 \section{Recursive Best-First Search}
 
+Recursive best-first search or RBFS works by storing a best and alternative f-limits. The algorithm uses the f-limit to decide which subtree of the problem state to explore.
+
+The advantage of RBFS over A* is that RBFS uses less memory. Whereas A* stores all of its explored nodes, RBFS will only keep relevant nodes in memory. However, the disadvantage of RBFS over A* is that RBFS could expand more nodes than A* due to redundancy. Since RBFS does not store all nodes explored, it can re-expand the same nodes and thereby increasing computation time.
+
+The following is the pseudocode:
+
+\begin{verbatim}
+
+RBFS(state, f-limit)
+    if state is the goal state 
+        return solution
+    successors := all children of state
+    if successors is empty
+        return failure
+    else
+        for each s in successors
+            s.f := max(s.g + s.h, state f)
+        loop do
+            best := lowest f-value node in successors
+            if best.f > f-limit
+                return failure, best.f
+            alternative := second best f-value of any node in successors
+            result, best.f := RBFS(best, min(f-limit, alternative))
+            if result is not failure
+                return result
+\end{verbatim}
+
 %\begin{table}[h]
 %    \centering
 %    \begin{tabular}{|l|l|l|c|c|c|c|c|}
@@ -17,4 +44,3 @@
 %    \end{tabular}
 %    \caption{Parameters of multinomial distributions for each situation.}\label{tab:random}
 %\end{table}
-
