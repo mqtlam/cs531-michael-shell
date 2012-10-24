@@ -2,30 +2,44 @@
 
 We discuss our results and answer the questions in this section.
 
-1. Show an example solution sequence for each algorithm for the largest size you tested
+\textbf{1. Show an example solution sequence for each algorithm for the largest size you tested}
 
-For size $n = 10$ and A* on problem "7126049853":
+For size $n = 10$ and A* on problem "46910517328":
 
-[46910517328,\_,\_], [126049853,7,\_], [26049853,17,\_], [6049853,217,\_], [049853,6217,\_], [49853,06217,\_], [9853,406217,\_], [853,9406217,\_], [53,89406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [53,89406217,\_], [53,9406217,8], [53,406217,98], [3,5406217,98], [3,406217,598], [3,06217,4598], [\_,06217,34598], [0,6217,34598], [0,217,634598], [0,17,2634598], [10,7,2634598], [210,7,634598], [210,67,34598], [3210,67,4598], [43210,67,598], [543210,67,98], [6543210,7,98], [76543210,\_,98], [76543210,9,8], [876543210,9,\_], [9876543210,\_,\_]
+[46910517328,\_,\_], ...
 
 For size $n = 10$ and RBFS on problem "7126049853":
 
 [7126049853,\_,\_], [126049853,7,\_], [26049853,17,\_], [6049853,217,\_], [049853,6217,\_], [49853,06217,\_], [9853,406217,\_], [853,9406217,\_], [53,89406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [53,89406217,\_], [53,9406217,8], [53,406217,98], [3,5406217,98], [3,406217,598], [3,06217,4598], [\_,06217,34598], [0,6217,34598], [0,217,634598], [0,17,2634598], [10,7,2634598], [210,7,634598], [210,67,34598], [3210,67,4598], [43210,67,598], [543210,67,98], [6543210,7,98], [76543210,\_,98], [76543210,9,8], [876543210,9,\_], [9876543210,\_,\_]
 
-2. Is there a clear preference ordering among the heuristics you tested considering the number of nodes searched and the total CPU time taken to solve the problems for the two algorithms?
+\textbf{2. Is there a clear preference ordering among the heuristics you tested considering the number of nodes searched and the total CPU time taken to solve the problems for the two algorithms?}
 
-3. Can a small sacrifice in optimality give a large reduction in the number of nodes expanded? What about CPU time?
+Answer
+
+\textbf{3. Can a small sacrifice in optimality give a large reduction in the number of nodes expanded? What about CPU time?}
 
 For RBFS, one can sacrifice optimality by pruning parts of the search tree. While it may not necessarily yield an optimal solution, this may yield a large reduction in the number of expanded nodes if the RBFS search considers one path down the search tree without having to backtrack and expand nodes redundantly. If one is lucky, RBFS may yield an optimal solution if parts of the search tree were pruned properly.
 
-4. How did you come up with your heuristic evaluation functions?
+\textbf{4. How did you come up with your heuristic evaluation functions?}
 
-5. How do the two algorithms compare in the amount of search involved and the cpu-time?
+We created several heuristic evaluation functions based on some intuitions and for the sake of testing. One of our first heuristic evaluation functions is a simple count of the number of disks in the first peg. Then we gradually took advantage of the goal state's structure and compared it to the current state in our later heuristic designs.
 
-6. Do you think that either of these algorithms scale to even larger problems? What is the largest problem you could solve with the best algorithm+heuristic combination? Report the wall-clock time, CPU-time, and the number of nodes searched.
+\textbf{5. How do the two algorithms compare in the amount of search involved and the cpu-time?}
 
-7. Is there any tradeoff between how good a heuristic is in cutting down the number of nodes and how long it took to compute? Can you quantify it?
+Answer
 
-8. Is there anything else you found that is of interest?
+\textbf{6. Do you think that either of these algorithms scale to even larger problems? What is the largest problem you could solve with the best algorithm+heuristic combination? Report the wall-clock time, CPU-time, and the number of nodes searched.}
 
+The algorithms could scale to even larger problems if the heuristic were designed very well. It is amazing to see an algorithm with one heuristic run very slowly with many node expansions while the same algorithm with a better heuristic finishing the job much faster with significantly fewer node expansions. Therefore, a carefully designed heuristic will allow both algorithms to scale to even larger problems by reducing the amount of expanded nodes and thereby reducing CPU time.
 
+A smaller factor in scaling to larger problems is the algorithm design. A* may run out of memory eventually compared to RBFS since A* stores every node it expands, but this would take awhile since our computers contain a lot of memory. RBFS could scale further since it does not store every node in memory, but it will take longer to finish the job due to that trade-off. However, changing the heuristic would have the most impact because the overall number of expanded nodes would be reduced with a better heuristic, regardless of the algorithm chosen.
+
+The largest problem we could solve is of disk size 10, using A* and the non-admissible.
+
+\textbf{7. Is there any tradeoff between how good a heuristic is in cutting down the number of nodes and how long it took to compute? Can you quantify it?}
+
+A heuristic function $H1$ can take longer to compute than heuristic function $H2$, but if $H1$ significantly reduces the number of nodes, then the overall time to solve the problem could be less using $H1$ than $H2$.
+
+\textbf{8. Is there anything else you found that is of interest?}
+
+None
