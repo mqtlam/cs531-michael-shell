@@ -563,6 +563,9 @@ numNodesExpRH8 = [3171,
  2841119]
 
 
+numNodesExpAH7 =
+#-------------------------------------------------------------------------------
+
 import pylab
 
 anodeAH4H = [0]*7
@@ -579,8 +582,8 @@ for i in range(0,140,20):
     c = c + 1
 
 pylab.figure(101)
-pylab.plot(range(4,11), anodeAH4H, 'r-', linewidth = 2.5, label = "heuristic 1")
-pylab.plot(range(4,11), anodeAH6H, 'b-', linewidth = 2.5, label = "heuristic 2")
+pylab.plot(range(4,11), anodeAH4H, 'r-', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(4,11), anodeAH6H, 'b--', linewidth = 3.5, label = "heuristic 2")
 pylab.xlabel('number of disks')
 pylab.ylabel('number of nodes')
 pylab.legend(loc='upper left')
@@ -588,8 +591,8 @@ pylab.title('average nodes expanded of A* search')
 
 
 pylab.figure(102)
-pylab.plot(range(4,11), anodeRH5H, 'r-', linewidth = 2.5, label = "heuristic 1")
-pylab.plot(range(4,11), anodeRH8H, 'b-', linewidth = 2.5, label = "heuristic 2")
+pylab.plot(range(4,11), anodeRH5H, 'r-', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(4,11), anodeRH8H, 'b--', linewidth = 3.5, label = "heuristic 2")
 pylab.xlabel('number of disks')
 pylab.ylabel('number of nodes')
 pylab.legend(loc='upper left')
@@ -597,33 +600,35 @@ pylab.title('average nodes expanded of RBFS search')
 
 
 pylab.figure(103)
-pylab.plot(range(1,141), numNodesExpAH4, 'r-', linewidth = 2.5, label = "heuristic 1")
-pylab.plot(range(1,141), numNodesExpAH6, 'b-', linewidth = 2.5, label = "heuristic 2")
+pylab.plot(range(1,141), numNodesExpAH4, 'go', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(1,141), numNodesExpAH6, 'y^', linewidth = 3.5, label = "heuristic 2")
 pylab.xlabel('index of experiments')
 pylab.ylabel('number of nodes')
 pylab.legend(loc='upper left')
 pylab.title('nodes expanded of A* search')
 
 pylab.figure(104)
-pylab.plot(range(1,141), numNodesExpRH5, 'r-', linewidth = 2.5, label = "heuristic 1")
-pylab.plot(range(1,141), numNodesExpRH8, 'b-', linewidth = 2.5, label = "heuristic 2")
+pylab.plot(range(1,141), numNodesExpRH5, 'ro', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(1,141), numNodesExpRH8, 'b^', linewidth = 3.5, label = "heuristic 2")
 pylab.xlabel('index of experiments')
 pylab.ylabel('number of nodes')
 pylab.legend(loc='upper left')
 pylab.title('nodes expanded of RBFS search')
 
 pylab.figure(105)
-pylab.plot(range(1,141), numNodesExpAH4, 'r-', linewidth = 2.5, dash_joinstyle = 'round', label = 'A*')
-pylab.plot(range(1,141), numNodesExpRH5, 'b-', linewidth = 2.5, dash_joinstyle = 'round', label = 'RBFS')
-pylab.xlabel('index of experiments')
+pylab.plot(range(4,11), anodeAH4H, 'r-', linewidth = 3.5, dash_joinstyle = 'round', label = 'A*')
+pylab.plot(range(4,11), anodeRH5H, 'b--', linewidth = 3.5, dash_joinstyle = 'round', label = 'RBFS')
+#pylab.xlabel('index of experiments')
+pylab.xlabel('number of disks')
 pylab.ylabel('number of expanded nodes')
 pylab.legend(loc='upper left')
 pylab.title('A* v.s. RBFS search (node expanded) heuristic 1')
 
 pylab.figure(106)
-pylab.plot(range(1,141), numNodesExpAH6, 'r-', linewidth = 2.5, dash_joinstyle = 'round', label = 'A*')
-pylab.plot(range(1,141), numNodesExpRH8, 'b-', linewidth = 2.5, dash_joinstyle = 'round', label = 'RBFS')
-pylab.xlabel('index of experiments')
+pylab.plot(range(4,11), anodeAH6H, 'r-', linewidth = 3.5, dash_joinstyle = 'round', label = 'A*')
+pylab.plot(range(4,11), anodeRH8H, 'b--', linewidth = 3.5, dash_joinstyle = 'round', label = 'RBFS')
+#pylab.xlabel('index of experiments')
+pylab.xlabel('number of disks')
 pylab.ylabel('number of expanded nodes')
 pylab.legend(loc='upper left')
 pylab.title('A* v.s. RBFS search (node expanded) heuristic 2')

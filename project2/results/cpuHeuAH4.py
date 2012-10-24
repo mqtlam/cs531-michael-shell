@@ -292,7 +292,7 @@ for i in range(0,140,20):
     c = c + 1
 
 pylab.plot(range(4,11), acpuAH4H, 'r-', linewidth = 2.5, label = "heuristic 1")
-pylab.plot(range(4,11), acpuAH6H, 'b-', linewidth = 2.5, label = "heuristic 2")
+pylab.plot(range(4,11), acpuAH6H, 'b--', linewidth = 2.5, label = "heuristic 2")
 
 pylab.xlabel('number of disks')
 pylab.ylabel('cpu time on heuristic')
