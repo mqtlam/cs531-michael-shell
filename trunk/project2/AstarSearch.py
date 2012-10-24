@@ -5,7 +5,7 @@ from Heuristic import *
 from util import PriorityQueueWithFunction
 from time import *
 
-NMAX = 10000000
+NMAX = 1000000 # make this value small to control time
 
 class AstarSearch:
     def __init__(self):

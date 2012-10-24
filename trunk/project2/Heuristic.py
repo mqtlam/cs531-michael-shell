@@ -88,8 +88,10 @@ class Heuristic:
 	def heuristicFunction7(self, state):
 		"""Returns the heuristic function value evaluated at current state."""
         	h = 0
-        	for i,s in enumerate(state.pegs[0]):
-            		h = h + abs(self.goalState[0][i]-s)*2
+        	hh = [0]
+            	for i,s in enumerate(state.pegs[0]):
+                	hh.append(abs(self.goalState[0][i]-s))
+        	h = h + max(hh)
         	h = h + state.numDisksInPeg(1)
         	h = h + state.numDisksInPeg(2)
 		return h
