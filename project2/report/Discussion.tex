@@ -1,6 +1,6 @@
 \section{Discussion}
 
-We discuss our results and answer the questions in this section.
+We discuss our results and answer the questions in this section.\\
 
 \textbf{1. Show an example solution sequence for each algorithm for the largest size you tested}
 
@@ -14,19 +14,32 @@ For size $n = 10$ and RBFS on problem "7126049853":
 
 \textbf{2. Is there a clear preference ordering among the heuristics you tested considering the number of nodes searched and the total CPU time taken to solve the problems for the two algorithms?}
 
-Answer
+746 958\\
 
 \textbf{3. Can a small sacrifice in optimality give a large reduction in the number of nodes expanded? What about CPU time?}
 
-For RBFS, one can sacrifice optimality by pruning parts of the search tree. While it may not necessarily yield an optimal solution, this may yield a large reduction in the number of expanded nodes if the RBFS search considers one path down the search tree without having to backtrack and expand nodes redundantly. If one is lucky, RBFS may yield an optimal solution if parts of the search tree were pruned properly.
+Times two heuristic $=>$ longer time\\
 
 \textbf{4. How did you come up with your heuristic evaluation functions?}
 
-We created several heuristic evaluation functions based on some intuitions and for the sake of testing. One of our first heuristic evaluation functions is a simple count of the number of disks in the first peg. Then we gradually took advantage of the goal state's structure and compared it to the current state in our later heuristic designs.
+We created several heuristic evaluation functions based on some intuitions and for the sake of testing. One of our first heuristic evaluation functions is a simple count of the number of disks in the first peg. Then we gradually took advantage of the goal state's structure and compared it to the current state in our later heuristic designs. Hence, we came up with our heuristic evaluation functions by designing easier ones first, then gradually evolving them into more complex ones. We briefly describe all of our heuristics here, even if we only chose some for our experiments:
+
+\begin{description}
+	\item[Heuristic 1] Number of disks in the first peg. RBFS.
+	\item[Heuristic 2] Total number of disks MINUS the number of matches between goal state and first peg. RBFS.
+	\item[Heuristic 3] Double the total number of disks MINUS the number of matches between goal state and first peg, AND MINUS the streak length of the first peg to the goal state starting at the bottom. RBFS.
+	\item[Heuristic 4] Sum the distances of all current disk positions to their goal positions plus the lengths of the second and third pegs. A*.
+	\item[Heuristic 5] Same as heuristic 4 for RBFS.
+	\item[Heuristic 6] Same as heuristic 4, but enlarge heuristic value by factor of 2. A*. 
+	\item[Heuristic 7] Same as heuristic 4, but instead of summing the distances, take the max distance of every disk position to their goal position on the first peg. A*.
+	\item[Heuristic 8] Same as heuristic 6 for RBFS.
+\end{description}
+
+Note: since our two algorithms utilize different data structures, some heuristics are equivalent but use different data structures. Our organization might not have been the best.\\
 
 \textbf{5. How do the two algorithms compare in the amount of search involved and the cpu-time?}
 
-Answer
+According to our results, in general, A* does a better job by expanding less nodes than RBFS and using less cpu-time. Furthermore, the nonadmissible heuristic does a better job than the admissible heuristic. We can see these on our graphs, where RBFS has higher values of number of expanded nodes and cpu-time as the number of disks increases, and similarly for the admissible heuristic.\\
 
 \textbf{6. Do you think that either of these algorithms scale to even larger problems? What is the largest problem you could solve with the best algorithm+heuristic combination? Report the wall-clock time, CPU-time, and the number of nodes searched.}
 
@@ -34,12 +47,14 @@ The algorithms could scale to even larger problems if the heuristic were designe
 
 A smaller factor in scaling to larger problems is the algorithm design. A* may run out of memory eventually compared to RBFS since A* stores every node it expands, but this would take awhile since our computers contain a lot of memory. RBFS could scale further since it does not store every node in memory, but it will take longer to finish the job due to that trade-off. However, changing the heuristic would have the most impact because the overall number of expanded nodes would be reduced with a better heuristic, regardless of the algorithm chosen.
 
-The largest problem we could solve is of disk size 10, using A* and the non-admissible.
+The largest problem we could solve is of disk size 10, using A* and the non-admissible. It took less than ten minutes.  
+
+We went further and tested disks sizes above 10.\\
 
 \textbf{7. Is there any tradeoff between how good a heuristic is in cutting down the number of nodes and how long it took to compute? Can you quantify it?}
 
-A heuristic function $H1$ can take longer to compute than heuristic function $H2$, but if $H1$ significantly reduces the number of nodes, then the overall time to solve the problem could be less using $H1$ than $H2$.
+A heuristic function $H1$ can take longer to compute than heuristic function $H2$, but if $H1$ significantly reduces the number of nodes, then the overall time to solve the problem could be less using $H1$ than $H2$. In every experiment, we measured every time it takes to compute a heuristic function and averaged them. To take one concrete example, the heuristic of counting the number of disks in the first peg takes shorter computation time than the heuristic of calculating matches between the first peg and the goal state. As the disk size increases, the computation time noticeably but slightly increases. However, the matching heuristic performs better than the counting heuristic because it reduces the number of expanded nodes significantly. Therefore, while a heuristic evaluation function may take longer to compute, it may reduce the overall number of expanded nodes to make a significant reduction in overall computation time of the problem.\\
 
 \textbf{8. Is there anything else you found that is of interest?}
 
-None
+We had several interesting observations.
