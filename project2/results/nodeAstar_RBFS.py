@@ -562,310 +562,243 @@ numNodesExpRH8 = [3171,
  266739,
  2841119]
 
-
-numNodesExpAH7 = [172,
- 114,
+numNodesExpAH7 = [114,
+ 31,
  15,
- 34,
- 64,
- 178,
- 30,
+ 46,
+ 71,
+ 194,
+ 36,
+ 36,
+ 53,
+ 52,
+ 153,
+ 19,
+ 113,
+ 92,
+ 99,
+ 31,
+ 35,
+ 94,
+ 27,
+ 21,
+ 599,
+ 75,
+ 271,
+ 107,
+ 591,
+ 680,
+ 726,
+ 13,
+ 777,
+ 549,
+ 748,
+ 517,
+ 382,
+ 303,
+ 787,
+ 723,
+ 228,
+ 429,
+ 278,
+ 39,
+ 4737,
+ 1335,
+ 2811,
+ 2060,
+ 1183,
  63,
- 60,
- 67,
- 218,
- 76,
- 42,
- 109,
- 65,
- 78,
- 85,
- 128,
- 116,
- 38,
- 792,
- 69,
- 171,
- 226,
- 795,
- 305,
- 514,
- 15,
- 270,
- 187,
- 401,
- 115,
- 186,
- 442,
- 148,
- 426,
- 298,
- 247,
- 146,
- 141,
- 2860,
- 431,
- 977,
- 2365,
- 1302,
- 1303,
- 955,
- 502,
- 4666,
- 3129,
- 912,
- 595,
- 1098,
- 161,
- 1259,
- 1878,
- 494,
- 412,
- 906,
- 1062,
- 2908,
- 1084,
- 11252,
- 6207,
- 2085,
- 2292,
- 4647,
- 19405,
- 9782,
- 2747,
- 12418,
- 3050,
- 2506,
- 2576,
- 4267,
- 6446,
- 3099,
- 10378,
- 4986,
- 5021,
- 39099,
- 22130,
- 8624,
- 98050,
- 28437,
- 20243,
- 3808,
- 17086,
- 1915,
- 7306,
- 9421,
- 3276,
- 10554,
- 122539,
- 25924,
- 1477,
- 71239,
- 22151,
- 23923,
- 11359,
- 464518,
- 80521,
- 108530,
- 237411,
- 130883,
- 88772,
- 101628,
- 361263,
- 11764,
- 110394,
- 138385,
- 583489,
- 40743,
- 243021,
- 78789,
- 170585,
- 120390,
- 118548,
- 8904,
- 287489,
- 808931,
- 421713,
- 764104,
- 441701,
- 207912,
- 789705,
- 21837,
- 280463,
- 207700,
- 631941,
- 294377,
- 965180,
- 1589719]
+ 888,
+ 2645,
+ 4027,
+ 2653,
+ 1179,
+ 2247,
+ 275,
+ 325,
+ 601,
+ 2971,
+ 1109,
+ 1027,
+ 3840,
+ 2519,
+ 1956,
+ 10676,
+ 4249,
+ 5148,
+ 6371,
+ 1972,
+ 8580,
+ 28834,
+ 7166,
+ 2960,
+ 17577,
+ 12044,
+ 10306,
+ 14776,
+ 8699,
+ 1869,
+ 11597,
+ 4177,
+ 20774,
+ 14228,
+ 37033,
+ 40760,
+ 75271,
+ 128260,
+ 81155,
+ 74463,
+ 48953,
+ 87101,
+ 5546,
+ 16586,
+ 101730,
+ 43139,
+ 64257,
+ 135802,
+ 163906,
+ 11598,
+ 33324,
+ 69425,
+ 5362,
+ 78454]
 
-numNodesExpRH9 = [23041,
- 1863,
+numNodesExpRH9 = [2297,
+ 183,
+ 227,
+ 2819,
+ 11497,
+ 8983,
+ 2885,
+ 3915,
+ 421,
+ 127,
+ 1329,
+ 159,
+ 4207,
+ 1361,
+ 107,
+ 283,
+ 215,
+ 2505,
+ 477,
+ 75,
+ 24651,
+ 11561,
+ 5259,
+ 559,
+ 31913,
+ 6105,
+ 40425,
+ 227,
+ 8577,
+ 2805,
+ 24153,
+ 14949,
+ 9823,
+ 8477,
+ 47391,
+ 58023,
+ 3449,
+ 728865,
+ 13211,
+ 181,
+ 1477317,
+ 3188049,
+ 324349,
+ 100455,
+ 26475,
+ 759,
+ 11633,
+ 453039,
+ 90315,
+ 181019,
+ 339,
+ 135979,
+ 2275,
+ 227637,
+ 10111,
+ 382163,
  119,
- 367,
- 2517,
- 42295,
- 409,
- 643,
- 2201,
- 1663,
- 26869,
- 2713,
- 10645,
- 23359,
- 1777,
- 2251,
- 1745,
- 11457,
- 2577,
- 1943,
- 285707,
- 2573,
- 305343,
- 13509,
- 669695,
- 44103,
- 216389,
- 119,
- 42831,
- 391299,
- 340769,
- 289537,
- 53283,
- 37429,
- 802487,
- 251943,
- 39909,
- 46431,
- 42785,
- 11641,
- 35335451,
- 39005,
- 1562173,
- 6293581,
- 457551,
- 50775,
- 2997117,
- 3837745,
- 1575951,
- 2095391,
- 50279,
- 1063051,
- 218171,
- 24597,
- 247463,
- 1183339,
- 56187,
- 42071,
- 1444303,
- 2147733,
- 428519,
- 1291887,
- 17090013,
- 1178521,
- 1829673,
- 1473041,
- 30508363,
+ 459,
+ 1138289,
+ 37315,
+ 4665,
  42000003,
- 38056873,
- 1053317,
+ 279153,
+ 50609,
+ 105021,
+ 127443,
+ 2008563,
+ 237029,
+ 601437,
+ 93505,
+ 8684829,
+ 214075,
+ 382617,
+ 389767,
+ 1981593,
+ 92641,
  42000003,
- 42000001,
- 20995493,
- 20057915,
- 13862401,
- 3316893,
- 4985321,
- 3113373,
- 31328421,
- 10458613,
- 42000001,
- 42000001,
- 33724935,
- 42000005,
- 42000001,
- 42000001,
- 11433281,
- 30922743,
- 441949,
- 10593709,
- 35606837,
- 8742469,
- 42000005,
+ 19065,
  42000003,
- 42000001,
- 8464695,
- 42000001,
- 42000001,
- 11632149,
- 42000003,
- 42000001,
- 42000001,
+ 475163,
+ 4392025,
+ 577515,
  42000001,
  42000003,
- 42000005,
+ 5045747,
+ 19942885,
  42000001,
  42000001,
  42000001,
- 42000003,
+ 2000373,
+ 2374625,
  42000001,
- 42000003,
- 42000005,
- 42000001,
- 42000003,
- 42000001,
- 42000001,
- 42000005,
  42000001,
  42000003,
  42000003,
  42000001,
- 42000005,
- 42000003,
- 42000001,
- 42000003,
- 42000003,
- 42000005,
- 42000001,
- 42000003,
- 42000003,
- 42000001,
- 42000001,
- 42000003,
- 42000003,
- 42000005,
- 42000001,
- 42000003,
- 42000001,
- 42000001,
- 42000003]
+ 40408729,
+ 3973279,
+ 1123157,
+ 27368257]
+
 #-------------------------------------------------------------------------------
 
 import pylab
 
-for i in range(7):
-    t = -pylab.randint(1,13)
-    numNodesExpAH7.append(numNodesExpAH7[t] + pylab.randint(1,100000))
+#for i in range(7):
+#    t = -pylab.randint(1,13)
+#    numNodesExpAH7.append(numNodesExpAH7[t] + pylab.randint(1,100000))
 
 anodeAH4H = [0]*7
 anodeAH6H = [0]*7
-anodeAH7H = [0]*7
+anodeAH7H = [0]*5
 
 anodeRH5H = [0]*7
 anodeRH8H = [0]*7
-anodeRH9H = [0]*7
+anodeRH9H = [0]*5
 
 c = 0
 for i in range(0,140,20):
     anodeAH4H[c] = sum(numNodesExpAH4[i:i+20]) / 20.0
     anodeAH6H[c] = sum(numNodesExpAH6[i:i+20]) / 20.0
-    anodeAH7H[c] = sum(numNodesExpAH7[i:i+20]) / 20.0
-
     anodeRH5H[c] = sum(numNodesExpRH5[i:i+20]) / 20.0
     anodeRH8H[c] = sum(numNodesExpRH8[i:i+20]) / 20.0
+    c = c + 1
+
+c = 0
+for i in range(0,100,20):
+    anodeAH7H[c] = sum(numNodesExpAH7[i:i+20]) / 20.0
     anodeRH9H[c] = sum(numNodesExpRH9[i:i+20]) / 20.0
     c = c + 1
 
+
+
+
 pylab.figure(101)
-pylab.plot(range(4,11), anodeAH7H, 'r-', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(4,9), anodeAH7H, 'r-', linewidth = 3.5, label = "heuristic 1")
 pylab.plot(range(4,11), anodeAH4H, 'b--', linewidth = 3.5, label = "heuristic 2")
 pylab.plot(range(4,11), anodeAH6H, 'g-.', linewidth = 3.5, label = "heuristic 3")
 pylab.xlabel('number of disks')
@@ -875,7 +808,7 @@ pylab.title('average nodes expanded of A* search')
 
 
 pylab.figure(102)
-pylab.plot(range(4,11), anodeRH9H, 'r-', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(4,9), anodeRH9H, 'r-', linewidth = 3.5, label = "heuristic 1")
 pylab.plot(range(4,11), anodeRH5H, 'b--', linewidth = 3.5, label = "heuristic 2")
 pylab.plot(range(4,11), anodeRH8H, 'g-.', linewidth = 3.5, label = "heuristic 3")
 pylab.xlabel('number of disks')
@@ -885,7 +818,7 @@ pylab.title('average nodes expanded of RBFS search')
 
 
 pylab.figure(103)
-pylab.plot(range(1,141), numNodesExpAH7, 'ms', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(1,101), numNodesExpAH7, 'ms', linewidth = 3.5, label = "heuristic 1")
 pylab.plot(range(1,141), numNodesExpAH4, 'go', linewidth = 3.5, label = "heuristic 2")
 pylab.plot(range(1,141), numNodesExpAH6, 'y^', linewidth = 3.5, label = "heuristic 3")
 pylab.xlabel('index of experiments')
@@ -894,7 +827,7 @@ pylab.legend(loc='upper left')
 pylab.title('nodes expanded of A* search')
 
 pylab.figure(104)
-pylab.plot(range(1,141), numNodesExpRH9, 'gs', linewidth = 3.5, label = "heuristic 1")
+pylab.plot(range(1,101), numNodesExpRH9, 'gs', linewidth = 3.5, label = "heuristic 1")
 pylab.plot(range(1,141), numNodesExpRH5, 'ro', linewidth = 3.5, label = "heuristic 2")
 pylab.plot(range(1,141), numNodesExpRH8, 'b^', linewidth = 3.5, label = "heuristic 3")
 pylab.xlabel('index of experiments')
@@ -902,6 +835,15 @@ pylab.ylabel('number of nodes')
 pylab.legend(loc='upper left')
 pylab.title('nodes expanded of RBFS search')
 
+#pylab.figure(107)
+#pylab.plot(range(4,9), anodeAH7H, 'r-', linewidth = 3.5, dash_joinstyle = 'round', label = 'A*')
+#pylab.plot(range(4,9), anodeRH9H, 'b--', linewidth = 3.5, dash_joinstyle = 'round', label = 'RBFS')
+##pylab.xlabel('index of experiments')
+#pylab.xlabel('number of disks')
+#pylab.ylabel('number of expanded nodes')
+#pylab.legend(loc='upper left')
+#pylab.title('A* v.s. RBFS search (node expanded) heuristic 1')
+#
 #pylab.figure(105)
 #pylab.plot(range(4,11), anodeAH4H, 'r-', linewidth = 3.5, dash_joinstyle = 'round', label = 'A*')
 #pylab.plot(range(4,11), anodeRH5H, 'b--', linewidth = 3.5, dash_joinstyle = 'round', label = 'RBFS')
@@ -909,7 +851,7 @@ pylab.title('nodes expanded of RBFS search')
 #pylab.xlabel('number of disks')
 #pylab.ylabel('number of expanded nodes')
 #pylab.legend(loc='upper left')
-#pylab.title('A* v.s. RBFS search (node expanded) heuristic 1')
+#pylab.title('A* v.s. RBFS search (node expanded) heuristic 2')
 #
 #pylab.figure(106)
 #pylab.plot(range(4,11), anodeAH6H, 'r-', linewidth = 3.5, dash_joinstyle = 'round', label = 'A*')
@@ -918,7 +860,7 @@ pylab.title('nodes expanded of RBFS search')
 #pylab.xlabel('number of disks')
 #pylab.ylabel('number of expanded nodes')
 #pylab.legend(loc='upper left')
-#pylab.title('A* v.s. RBFS search (node expanded) heuristic 2')
+#pylab.title('A* v.s. RBFS search (node expanded) heuristic 3')
 
 
 pylab.show()
