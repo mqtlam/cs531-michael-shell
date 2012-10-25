@@ -37,11 +37,11 @@ For size $n = 10$ and RBFS on problem ``7126049853'':
 
 \textbf{2. Is there a clear preference ordering among the heuristics you tested considering the number of nodes searched and the total CPU time taken to solve the problems for the two algorithms?}
 
-The A* algorithm with nonadmissible heuristic performs the best among other heuristic type and algorithm combinations. The admissible heuristics should yield the same solution lengths and nonadmissible heuristics should yield solution lengths that are not less than the solution lengths from admissible heuristics.\\
+The A* algorithm with nonadmissible heuristic performs the best among other heuristic type and algorithm combinations. The admissible heuristics on the two algorithms should yield the same solution lengths and nonadmissible heuristics should yield solution lengths that are not less than the solution lengths from the admissible heuristic.\\
 
 \textbf{3. Can a small sacrifice in optimality give a large reduction in the number of nodes expanded? What about CPU time?}
 
-The non-admissible heuristic sacrifices optimality because it does not necessarily yield an optimal solution. However, the sacrifice in optimality can yield a large reduction in the number of nodes expanded and thereby reducing the overall CPU time. For instance, an admissible heuristic can severely underestimate the true cost and yield a large number of nodes expanded. However, even though a non-admissible heuristic overestimates the true cost, it could be the case that the overestimation is very little to the true cost. Furthermore, one could overestimate to relax the problem. Therefore, there can be a large reduction in the number of nodes expanded and thus a reduction in CPU time, as compared to the admissible heuristic. A concrete example is our 2nd nonadmissible heuristic.\\
+The non-admissible heuristic sacrifices optimality because it does not necessarily yield an optimal solution. However, the sacrifice in optimality can yield a large reduction in the number of nodes expanded and thereby reducing the overall CPU time. For instance, an admissible heuristic can severely underestimate the true cost and yield a large number of nodes expanded. However, even though a non-admissible heuristic overestimates the true cost, it could be the case that the overestimation is very little to the true cost. Furthermore, one could overestimate to relax the problem. Therefore, there can be a large reduction in the number of nodes expanded and thus a reduction in CPU time, as compared to the admissible heuristic. A concrete example is our 2nd nonadmissible heuristic, where A* performs exceptionally well in performance.\\
 
 \textbf{4. How did you come up with your heuristic evaluation functions?}
 
@@ -64,7 +64,7 @@ Note: since our two algorithms utilize different data structures, some heuristic
 
 \textbf{5. How do the two algorithms compare in the amount of search involved and the cpu-time?}
 
-According to our results, in general, A* does a better job by expanding less nodes than RBFS and using less cpu-time. Furthermore, the nonadmissible heuristic does a better job than the admissible heuristic performance-wise. We can see these on our graphs, where RBFS has higher values of number of expanded nodes and cpu-time as the number of disks increases, and similarly for the admissible heuristic.\\
+According to our results, in general, A* does a better job by expanding fewer nodes than RBFS and using less cpu-time. Furthermore, the nonadmissible heuristic does a better job than the admissible heuristic performance-wise. We can see these on our graphs, where RBFS has higher values of number of expanded nodes and cpu-time as the number of disks increases, and similarly for the admissible heuristic.\\
 
 \textbf{6. Do you think that either of these algorithms scale to even larger problems? What is the largest problem you could solve with the best algorithm+heuristic combination? Report the wall-clock time, CPU-time, and the number of nodes searched.}
 

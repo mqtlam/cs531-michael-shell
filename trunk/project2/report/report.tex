@@ -43,9 +43,9 @@ In this assignment we design, implement and discuss two different informed searc
 
 The Towers of Corvallis puzzle is a variation on the Towers of Hanoi puzzle. While similarly consisting of 3 pegs and $n$ disks, the Corvallis variation allows any disk to go on top of any other disk. The goal is to find the smallest number of moves in getting from an initial state to the goal state, which is defined as the order 9876543210 on peg A for 10 disks and similarly for fewer disks.
 
-We implement two informed search algorithms: A* and RBFS (recursive best-first search). As informed searches, we also implement two heuristics, one admissible and one non-admissible. For each algorithm and heuristic function, we evaluate the performance by testing across different number of disks and different initial states.
+We implement two informed search algorithms: A* and RBFS (recursive best-first search). As informed searches, we also implement two heuristics, one admissible and one non-admissible. We ended up implementing a second non-admissible heuristic to demonstrate potential for more computational efficiency. For each algorithm and heuristic function, we evaluate the performance by testing across different number of disks and different initial states.
 
-We discovered that A* outperformed RBFS in terms of the number of nodes expanded and cpu time in general, but more noticeable in one of the non-admissible heuristics that we designed. The non-admissible heuristics outperformed the admissible heuristic with exception to optimality. We also discovered that the heuristic function yields the same optimal solution lengths for each algorithm.
+We discovered that A* outperformed RBFS in terms of the number of nodes expanded and cpu time in general. This was especially noticeable in one of the non-admissible heuristics that we designed. The non-admissible heuristics outperformed the admissible heuristic with exception to optimality. We also discovered that the heuristic function yields the same optimal solution lengths for each algorithm.
 
 \input{1_Astar}
 \input{2_RBFS}

@@ -3,7 +3,7 @@
 \subsection{Heuristics}
 We designed many heuristics for both A* and RBFS. Here we show an admissible one and two non-admissible ones for demonstration. Other heuristics will be discussed in section \ref{sec:dis}.
 
-We designed an admissible heuristic by reasonning about simulating the game of tower. For the second and third peg, disks on there should intuitively be moved to the first peg to get to the goal state. An admissible estimation of steps is the amount of disks in these pegs. If a disk at the bottom of the first peg is not the right one, it should be moved out first and then move to its ideal position, which takes at least $2k$ steps, where k is the number of disks on top of it. We show the heuristic below:
+We designed an admissible heuristic by reasoning about simulating the game. For the second and third peg, disks on there should intuitively be moved to the first peg to get to the goal state. An admissible estimation of steps is the amount of disks in these pegs. If a disk at the bottom of the first peg is not the right one, it should be moved out first and then move to its ideal position, which takes at least $2k$ steps, where k is the number of disks on top of it. We show the heuristic below:
 \[
 h1(s) = I(s(1,0)==goal(1,0))\cdot 2 \cdot num(s(1)) + num(s(2)) + num(s(3))
 \]
@@ -62,7 +62,7 @@ h3(s) = 2 \cdot [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 \end{figure}
 
 
-We tested the three heuristics on all 140 examples for the problem size ranging from $4-10$ with each size having $20$ examples. We couldn't finish the admissible heuristic on the whole data with a ten minute max execution time (which is represented as an NMAX constant, the maximum number of nodes to expand)  per problem. For a large size like $9$ or $10$, a few examples can take more than one hour. For RBFS, the number of expanded nodes grew rapidly and failed the NMAX constraint. We show the results on disk sizes $4-9$ for the admissible heuristic (heuristic 1) and the whole data for non-admissible heuristics (heuristic 2 and 3). 
+We tested the three heuristics on all 140 examples for the problem size ranging from 4 to 10 with each size having $20$ examples. We couldn't finish the admissible heuristic on the whole data with a ten minute max execution time (which is represented as an NMAX constant, the maximum number of nodes to expand)  per problem. For a large size like $9$ or $10$, a few examples can take more than one hour. For RBFS, the number of expanded nodes grew rapidly and failed the NMAX constraint. We show the results on disk sizes 4 to 8 for the admissible heuristic (heuristic 1) and the whole data for non-admissible heuristics (heuristic 2 and 3). 
 
 The first and second experiments are comparisons of the number of expanded nodes and cpu time between different heurisitics, which are shown in figure \ref{fig:nodes} and figure \ref{fig:cputime} respectively. We can see that both nodes and cpu time grow up expenentially. However, a well-designed heuristic function can control the increase in a certain range. It may not necessarily lead to an optimal solution but it is efficient for a real-time problem. 
 
