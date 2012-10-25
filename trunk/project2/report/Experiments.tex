@@ -1,20 +1,21 @@
 \section{Experiments}\label{sec:exp}
 
 \subsection{Heuristics}
-We design many heuristics for both A* and RBFS. Here we show an admissible one and two non-admissible ones for demonstrating. Other heuristics will be discussed in section \ref{sec:dis}.
+We designed many heuristics for both A* and RBFS. Here we show an admissible one and two non-admissible ones for demonstration. Other heuristics will be discussed in section \ref{sec:dis}.
 
-An admissible heuristic is designed by simulating the game of tower. For the second and third peg, disks on there should be moved to the first peg. An admissible esitimation of steps is the amount of disks in these pegs. If a disk on the bottom of peg 1 is not the right one, it should be moved out first and then move to its ideal position, which takes at least $2k$ steps, where k is the number of disks on top of it. We show the heuristic below:
+We designed an admissible heuristic by reasonning about simulating the game of tower. For the second and third peg, disks on there should intuitively be moved to the first peg to get to the goal state. An admissible estimation of steps is the amount of disks in these pegs. If a disk at the bottom of the first peg is not the right one, it should be moved out first and then move to its ideal position, which takes at least $2k$ steps, where k is the number of disks on top of it. We show the heuristic below:
 \[
 h1(s) = I(s(1,0)==goal(1,0))\cdot 2 \cdot num(s(1)) + num(s(2)) + num(s(3))
 \]
-Here $I(\cdot)$ is indication function, and $num(\cdot)$ is the function for counting disks. A non-trivial non-admissible heuristic is designed in a similar way but taking ordering into account:
+Here $I(\cdot)$ is indication function, and $num(\cdot)$ is the function for counting disks.
+
+A non-trivial non-admissible heuristic is designed in a similar way but taking ordering into account:
 \[
 h2(s) = (\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))
 \]
-Here s(i,j) is the $jth$ disks in peg $i$. The intuition is that for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the $kth$ place by moving away or filling out disks on peg $0$, where $i$ is its current location on the peg. For example, if the $9th$ disk is on the bottom, it has to take $9-0$ steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from the current location to peg $1$ in at least $1$ step, which are the same as admissible
-heuristic. However this is not an admissible heuristic because there are multiple counts for disks on peg $0$. 
+Here s(i,j) is the $jth$ disk in peg $i$ (pegs indexed 0 to 2 from left to right here). The intuition is that for a disk $k$ in peg $1$, it has to take $|k-i|$ steps to get to the $kth$ place by moving away or filling out disks on peg $0$, where $i$ is its current location on the peg. For example, if the $9th$ disk is on the bottom, it has to take 9 minus 0 steps to get to the top. For disks on peg $2$ and peg $3$, they have to be moved from the current location to peg $1$ in at least $1$ step, which is the same as the admissible heuristic. However this is not an admissible heuristic because there are multiple counts for disks on peg $0$. 
 
-For a fast non-admissible heuristic, we simplily enlarge the former heuristic by a factor of $2$. we will see this relaxion makes the increasing of computation and expanded nodes becomes linear in problem size ranging from $4-10$.
+For a fast non-admissible heuristic, we simplily enlarge the former heuristic by a factor of $2$. We will see that this relaxation makes the increasing of computation and expanded nodes become linear in the problem size ranging from $4-10$.
 \[
 h3(s) = 2 \cdot [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 \]
@@ -30,7 +31,7 @@ h3(s) = 2 \cdot [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 %\subfloat[E]{\includegraphics[width=2cm]{logo}} 
 %   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
 \end{tabular}
-\caption{Plots for the number of nodes searched against the problem size for each algorithm and heuristic. For the first 2 figures, number of disks within 4-10, every 20 examples have the same problem size. We show average expanded nodes against number of disks for a clear demonstration. As the problem size becomes larger, the number of searched nodes grow up exponentially.}
+\caption{Plots for the number of nodes searched against the problem size for each algorithm and heuristic. For the first 2 figures, for each number of disks 4 to 10, every 20 examples have the same problem size.  We show the average number of expanded nodes against the number of disks for a clear demonstration. As the problem size becomes larger, the number of searched nodes grows exponentially.}
 \label{fig:nodes}
 \end{figure}
 
@@ -61,13 +62,13 @@ h3(s) = 2 \cdot [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 \end{figure}
 
 
-We tested the three heuristics on all 140 examples for the problem size ranging from $4-10$, each size has $20$ examples. We couldn't finish the admissible heuristic on whole data. For large size like $9$ or $10$, a few examples take more than one hour. For RBFS, the expanded nodes grow up rapidly and failed to maximum limitation. We show $4-9$ for admissible heuristic (heuristic 1) and whole data for non-admissible heuristics (heuristic 2 and 3). 
+We tested the three heuristics on all 140 examples for the problem size ranging from $4-10$ with each size having $20$ examples. We couldn't finish the admissible heuristic on the whole data with a ten minute max execution time (which is represented as an NMAX constant, the maximum number of nodes to expand)  per problem. For a large size like $9$ or $10$, a few examples can take more than one hour. For RBFS, the number of expanded nodes grew rapidly and failed the NMAX constraint. We show the results on disk sizes $4-9$ for the admissible heuristic (heuristic 1) and the whole data for non-admissible heuristics (heuristic 2 and 3). 
 
-The first and second experiment are comparisons of expanded nodes and cpu time between different heurisitics, which are shown in figure \ref{fig:nodes} and figure \ref{fig:cputime} respectively. We can see that both nodes and cpu time grow up expenentially. However, a well designed heuristic function can control the increasing in a certain range. It may not lead to optimal solution but efficient for real-time problem. 
+The first and second experiments are comparisons of the number of expanded nodes and cpu time between different heurisitics, which are shown in figure \ref{fig:nodes} and figure \ref{fig:cputime} respectively. We can see that both nodes and cpu time grow up expenentially. However, a well-designed heuristic function can control the increase in a certain range. It may not necessarily lead to an optimal solution but it is efficient for a real-time problem. 
 
-We also compared A* and RBFS (figure \ref{fig:astar-rbfs}), we found the trendencies expanded nodes and cpu time are similar, so we only show the nodes comparison. A* outperforms RBFS in terms of cpu time and searched nodes. From figure \ref{fig:cputime}, we can see RBFS spends $1/3$ of whole cpu time on heuristic computation while A* takes less than $1$ second. This is because RBFS expanding more nodes than A*, every node has to compute a heuristic value.
+We also compared A* and RBFS (figure \ref{fig:astar-rbfs}): we found that the trends of number of expanded nodes and cpu time are similar, so we only show the nodes comparison. A* outperforms RBFS in terms of cpu time and searched nodes. From figure \ref{fig:cputime}, we can see RBFS spends $1/3$ of the whole cpu time on heuristic computation while A* takes less than $1$ second. This is because RBFS expands more nodes than A* and every node has to compute a heuristic value.
 
-The average solution lengths are shown in table \ref{tab:solen}. Because some experiments are failed in RBFS for reaching the maximum limitation of expanded nodes, the average lengths of admissible RBFS are a little bit smaller without these examples. All values are not far away. It suggests non-admissible heuristics are also reasonable choices for large scale problems.
+The average solution lengths are shown in table \ref{tab:solen}. Because some experiments failed in RBFS for reaching the maximum limitation of expanded nodes, the average lengths of the admissible RBFS case are a little bit smaller without these examples, but all values are not far away. It suggests that non-admissible heuristics are also reasonable choices for large scale problems.
 
 \begin{table}[!h]
     \centering
@@ -84,7 +85,7 @@ The average solution lengths are shown in table \ref{tab:solen}. Because some ex
 		RBFS/nonadmissible 2 & 11.25 & 17.85 & 24.35 & 32.75 & 40.35 & 50.7 & 64.55\\ \hline
 	    \end{tabular}
     }
-    \caption{Average solution length per algorithm, heuristic and disk size. n/a means unable to compute within 10 minutes for all problems. Note some experiments failed for reaching the maximum limitation of expanded nodes have been taken out.}\label{tab:solen}
+    \caption{Average solution length per algorithm, heuristic and disk size. n/a means unable to compute within 10 minutes for all problems. Note that some experiments failed for completing before NMAX nodes; these were not included in the average.}\label{tab:solen}
 \end{table}
 
 

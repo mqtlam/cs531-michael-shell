@@ -1,8 +1,8 @@
 \section{Recursive Best-First Search}
 
-Recursive best-first search or RBFS works by storing an f-limit for each node. The algorithm uses the f-limit to decide which subtree of the problem tree to explore by considering the best and 2nd best (alternative) f-limits. In order to keep the search functional, RBFS also updates the f-values of each node during the search.
+Recursive best-first search or RBFS works by storing an f-limit variable to keep track of the f-value of the best alternative path available from any ancestor node to the current node. The algorithm uses the f-limit to decide which subtree of the problem tree to explore by considering the current path and the best alternative path. In order to keep the search functional, RBFS also updates the f-values of each node during the recursion unwinding. This allows RBFS to consider the forgotten subtree in the future.
 
-The advantage of RBFS over A* is that RBFS uses less memory. Whereas A* stores all of its explored nodes, RBFS will only keep relevant nodes in memory. However, the disadvantage of RBFS over A* is that RBFS could expand more nodes than A* due to redundancy. Since RBFS does not store all nodes explored, it can re-expand the same nodes and thereby increasing computation time.
+The advantage of RBFS over A* is that RBFS uses less memory, linear space. Whereas A* stores all of its explored nodes, RBFS will only keep ``relevant'' nodes in memory. However, the disadvantage of RBFS over A* is that RBFS could expand more nodes than A* due to redundancy. Since RBFS does not store all nodes explored, it can re-expand the same nodes and thereby increasing computation time.
 
 The pseudocode is listed in algorithm \ref{alg2}.
 
