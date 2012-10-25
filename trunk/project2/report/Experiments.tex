@@ -5,7 +5,7 @@ We design many heuristics for both A* and RBFS. Here we show an admissible one a
 
 An admissible heuristic is designed by simulating the game of tower. For the second and third peg, disks on there should be moved to the first peg. An admissible esitimation of steps is the amount of disks in these pegs. If a disk on the bottom of peg 1 is not the right one, it should be moved out first and then move to its ideal position, which takes at least $2k$ steps, where k is the number of disks on top of it. We show the heuristic below:
 \[
-h1(s) = I(s(1,0)==goal(1,0))\cdot num(S(1)) + num(s(2)) + num(s(3))
+h1(s) = I(s(1,0)==goal(1,0))\cdot 2 \cdot num(s(1)) + num(s(2)) + num(s(3))
 \]
 Here $I(\cdot)$ is indication function, and $num(\cdot)$ is the function for counting disks. A non-trivial non-admissible heuristic is designed in a similar way but taking ordering into account:
 \[
