@@ -50,10 +50,10 @@ h(s) = 2 \times [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 \begin{figure}[!t]
 \centering
 \begin{tabular}{cc}
-\subfloat[A* nodes: all 140 experiments]{\includegraphics[scale=0.32]{../results/Astar_nodes.png}} 
-   & \subfloat[RBFS nodes: all 140 experiments]{\includegraphics[scale=0.32]{../results/RBFS_nodes.png}}\\
-\subfloat[A* average searched nodes]{\includegraphics[scale=0.32]{../results/Anode-aver.png}} 
-   & \subfloat[RBFS average searched nodes]{\includegraphics[scale=0.32]{../results/Rnode-aver.png}}\\
+\subfloat[A* nodes: all 140 experiments]{\includegraphics[scale=0.32]{img/tnode_Astar.pdf}} 
+   & \subfloat[RBFS nodes: all 140 experiments]{\includegraphics[scale=0.32]{./img/tnode_RBFS.pdf}}\\
+\subfloat[A* average searched nodes]{\includegraphics[scale=0.32]{./img/anode_Astar.pdf}} 
+   & \subfloat[RBFS average searched nodes]{\includegraphics[scale=0.32]{./img/anode_RBFS.pdf}}\\
 %\subfloat[E]{\includegraphics[width=2cm]{logo}} 
 %   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
 \end{tabular}
@@ -64,10 +64,10 @@ h(s) = 2 \times [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 \begin{figure}[!t]
 \centering
 \begin{tabular}{cc}
-\subfloat[A*: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{../results/AHcpu-aver.png}} 
-   & \subfloat[RBFS: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{../results/RHcpu-aver.png}}\\
-\subfloat[A*: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{../results/ATcpu-aver.png}} 
-   & \subfloat[RBFS: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{../results/RTcpu-aver.png}}\\
+\subfloat[A*: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{./img/AHcpu-aver.pdf}} 
+   & \subfloat[RBFS: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{./img/RHcpu-aver.pdf}}\\
+\subfloat[A*: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{./img/ATcpu-aver.pdf}} 
+   & \subfloat[RBFS: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{./img/RTcpu-aver.pdf}}\\
 %\subfloat[E]{\includegraphics[width=2cm]{logo}} 
 %   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
 \end{tabular}
@@ -78,10 +78,10 @@ h(s) = 2 \times [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 \begin{figure}[!t]
 \centering
 \begin{tabular}{cc}
-\subfloat[Nodes against disks for heurisitic 1]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H1_node.png}} 
-   & \subfloat[Nodes against disks for heurisitic 2]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H2_node.png}}\\
-\subfloat[cpu time against disks for heurisitic 1]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H1_cpu.png}} 
-   & \subfloat[cpu time against disks for heurisitic 2]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H2_cpu.png}}\\
+\subfloat[Nodes against disks for admissible heurisitic]{\includegraphics[scale=0.32]{../results/node_Astar_RBFS_H_ad.pdf}} 
+   & \subfloat[Nodes against disks for non-admissible heurisitic]{\includegraphics[scale=0.32]{../results/node_Astar_RBFS_H_nad.pdf}}\\
+%\subfloat[cpu time against disks for heurisitic 1]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H1_cpu.png}} 
+   %& \subfloat[cpu time against disks for heurisitic 2]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H2_cpu.png}}\\
 \end{tabular}
 \caption{Performance comparisons between A* and RBFS}
 \label{fig:astar-rbfs}
@@ -93,9 +93,9 @@ h(s) = 2 \times [(\sum_i |s(1,i)-i| ) + numberDisks(s(2)) + numberDisks(s(3))]
 	    \begin{tabular}{|l|c|c|c|c|c|c|c|}
 		\hline
 		Disks: & 4 & 5 & 6 & 7 & 8 & 9 & 10\\ \hline
-		A*/admissible H1 & 8.8 & 11.6 & 13.95 & 16.5 & 19.0 & n/a & n/a\\ \hline
-		A*/admissible H7 & 8.95 & 11.6 & 13.95 & 16.75 & 19.2 & 22.4 & 24.77\\ \hline
-		RBFS/admissible H9 & 8.8 & 11.6 & 13.95 & 16.35 & 17.11 & n/a & n/a\\ \hline
+		A*/admissible & 8.8 & 11.6 & 13.95 & 16.5 & 18.2 & n/a & n/a\\ \hline
+		%A*/admissible H7 & 8.95 & 11.6 & 13.95 & 16.75 & 19.2 & 22.4 & 24.77\\ \hline
+		RBFS/admissible & 8.8 & 11.6 & 13.95 & 16.35 & 17.11 & n/a & n/a\\ \hline
 		A*/nonadmissible 1 & 8.85 & 11.85 & 14.6 & 17.5 & 20.2 & 24.1 & 27.6\\ \hline
 		RBFS/nonadmissible 1 & 8.85 & 11.85 & 15.25 & 19 & 22.21 & 26.81 & 32.25 \\ \hline
 		A*/nonadmissible 2 & 9.25 & 12.95 & 16.5 & 20.05 & 23.8 & 27.4 & 34.05\\ \hline
