@@ -1,4 +1,4 @@
-\section{Discussion}
+\section{Discussion}\label{sec:dis}
 
 We discuss our results and answer the questions in this section.\\
 
@@ -23,7 +23,16 @@ For size $n = 10$ and RBFS on problem "7126049853":
 
 \begin{quote}
 \noindent
-[7126049853,\_,\_], [126049853,7,\_], [26049853,17,\_], [6049853,217,\_], [049853,6217,\_], [49853,06217,\_], [9853,406217,\_], [853,9406217,\_], [53,89406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [53,89406217,\_], [53,9406217,8], [53,406217,98], [3,5406217,98], [3,406217,598], [3,06217,4598], [\_,06217,34598], [0,6217,34598], [0,217,634598], [0,17,2634598], [10,7,2634598], [210,7,634598], [210,67,34598], [3210,67,4598], [43210,67,598], [543210,67,98], [6543210,7,98], [76543210,\_,98], [76543210,9,8], [876543210,9,\_], [9876543210,\_,\_] \\
+[7126049853,\_,\_], [126049853,7,\_], [26049853,17,\_], [6049853,217,\_], 
+[049853,6217,\_], [49853,06217,\_], [9853,406217,\_], [853,9406217,\_], 
+[53,89406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], 
+[\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], 
+[\_,3589406217,\_], [3,589406217,\_], [53,89406217,\_], [53,9406217,8], 
+[53,406217,98], [3,5406217,98], [3,406217,598], [3,06217,4598], 
+[\_,06217,34598], [0,6217,34598], [0,217,634598], [0,17,2634598], 
+[10,7,2634598], [210,7,634598], [210,67,34598], [3210,67,4598], 
+[43210,67,598], [543210,67,98], [6543210,7,98], [76543210,\_,98], 
+[76543210,9,8], [876543210,9,\_], [9876543210,\_,\_] 
 \end{quote}
 
 \textbf{2. Is there a clear preference ordering among the heuristics you tested considering the number of nodes searched and the total CPU time taken to solve the problems for the two algorithms?}
@@ -39,14 +48,14 @@ The non-admissible heuristic sacrifices optimality because it does not necessari
 We created several heuristic evaluation functions based on some intuitions and for the sake of testing. One of our first heuristic evaluation functions is a simple count of the number of disks in the first peg. Then we gradually took advantage of the goal state's structure and compared it to the current state in our later heuristic designs. Hence, we came up with our heuristic evaluation functions by designing easier ones first, then gradually evolving them into more complex ones. We briefly describe all of our heuristics here, even if we only chose some for our experiments:
 
 \begin{description}
-	\item[Heuristic 1] Number of disks in the first peg. RBFS.
-	\item[Heuristic 2] Total number of disks MINUS the number of matches between goal state and first peg. RBFS.
-	\item[Heuristic 3] Double the total number of disks MINUS the number of matches between goal state and first peg, AND MINUS the streak length of the first peg to the goal state starting at the bottom. RBFS.
-	\item[Heuristic 4] Sum the distances of all current disk positions to their goal positions plus the lengths of the second and third pegs. A*.
-	\item[Heuristic 5] Same as heuristic 4 for RBFS.
-	\item[Heuristic 6] Same as heuristic 4, but enlarge heuristic value by factor of 2. A*. 
-	\item[Heuristic 7] Same as heuristic 4, but instead of summing the distances, take the max distance of every disk position to their goal position on the first peg. A*.
-	\item[Heuristic 8] Same as heuristic 6 for RBFS.
+	\item[Heuristic a] Number of disks in the first peg. RBFS.
+	\item[Heuristic b] Total number of disks MINUS the number of matches between goal state and first peg. RBFS.
+	\item[Heuristic c] Double the total number of disks MINUS the number of matches between goal state and first peg, AND MINUS the streak length of the first peg to the goal state starting at the bottom. RBFS.
+	\item[Heuristic d] Sum the distances of all current disk positions to their goal positions plus the lengths of the second and third pegs. A*.
+	\item[Heuristic e] Same as heuristic d for RBFS.
+	\item[Heuristic f] Same as heuristic d, but enlarge heuristic value by factor of 2. A*. 
+	\item[Heuristic i] Same as heuristic d, but instead of summing the distances, take the max distance of every disk position to their goal position on the first peg. A*.
+	\item[Heuristic j] Same as heuristic f for RBFS.
 \end{description}
 
 Note: since our two algorithms utilize different data structures, some heuristics are equivalent but use different data structures. Our organization might not have been the best.\\
@@ -63,7 +72,7 @@ A smaller factor in scaling to larger problems is the algorithm design. A* may r
 
 The largest problem we could solve is of disk size 10, using A* and the non-admissible. It took less than ten minutes. For the initial state of "", it was able to solve the problem in 1.41 seconds and 6536 expanded nodes, with a solution length of 34 steps. As a non-admissible heuristic, it may not necessarily be the optimal solution, but the problem was nonetheless solved.
 
-We went further and tested disks sizes above 10. We tested up to size 15. Given an initial state of \[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14\], the A* algorithm using the non-admissible heuristic was able to solve the problem in 2687 seconds and 987156 expanded nodes, with a solution length of 62 steps. That is about 44 minutes. We believe we can go higher, but it will take hours to complete. This demonstrates that our algorithms and heuristics can scale to even larger problems.\\
+We went further and tested disks sizes above 10. We tested up to size 15. Given an initial state of $[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]$, the A* algorithm using the non-admissible heuristic was able to solve the problem in 2687 seconds and 987156 expanded nodes, with a solution length of 62 steps. That is about 44 minutes. We believe we can go higher, but it will take hours to complete. This demonstrates that our algorithms and heuristics can scale to even larger problems.\\
 
 \textbf{7. Is there any tradeoff between how good a heuristic is in cutting down the number of nodes and how long it took to compute? Can you quantify it?}
 
