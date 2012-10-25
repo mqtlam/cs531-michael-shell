@@ -10,15 +10,15 @@ For size $n = 10$ and A* on problem "46910517328":
 
 For size $n = 10$ and RBFS on problem "7126049853":
 
-[7126049853,\_,\_], [126049853,7,\_], [26049853,17,\_], [6049853,217,\_], [049853,6217,\_], [49853,06217,\_], [9853,406217,\_], [853,9406217,\_], [53,89406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [53,89406217,\_], [53,9406217,8], [53,406217,98], [3,5406217,98], [3,406217,598], [3,06217,4598], [\_,06217,34598], [0,6217,34598], [0,217,634598], [0,17,2634598], [10,7,2634598], [210,7,634598], [210,67,34598], [3210,67,4598], [43210,67,598], [543210,67,98], [6543210,7,98], [76543210,\_,98], [76543210,9,8], [876543210,9,\_], [9876543210,\_,\_]
+[7126049853,\_,\_], [126049853,7,\_], [26049853,17,\_], [6049853,217,\_], [049853,6217,\_], [49853,06217,\_], [9853,406217,\_], [853,9406217,\_], [53,89406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [\_,3589406217,\_], [3,589406217,\_], [53,89406217,\_], [53,9406217,8], [53,406217,98], [3,5406217,98], [3,406217,598], [3,06217,4598], [\_,06217,34598], [0,6217,34598], [0,217,634598], [0,17,2634598], [10,7,2634598], [210,7,634598], [210,67,34598], [3210,67,4598], [43210,67,598], [543210,67,98], [6543210,7,98], [76543210,\_,98], [76543210,9,8], [876543210,9,\_], [9876543210,\_,\_] \\
 
 \textbf{2. Is there a clear preference ordering among the heuristics you tested considering the number of nodes searched and the total CPU time taken to solve the problems for the two algorithms?}
 
-746 958\\
+The A* algorithm with nonadmissible heuristic performs the best among other heuristic type and algorithm combinations.\\
 
 \textbf{3. Can a small sacrifice in optimality give a large reduction in the number of nodes expanded? What about CPU time?}
 
-Times two heuristic $=>$ longer time\\
+The non-admissible heuristic sacrifices optimality because it does not necessarily yield an optimal solution. However, the sacrifice in optimality can yield a large reduction in the number of nodes expanded and thereby reducing the overall CPU time. For instance, an admissible heuristic can severely underestimate the true cost and yield a large number of nodes expanded. However, even though a non-admissible heuristic overestimates the true cost, it could be the case that the overestimation is very little to the true cost. Therefore, there can be a large reduction in the number of nodes expanded and thus a reduction in CPU time, as compared to the admissible heuristic that severely underestimates the true cost.\\
 
 \textbf{4. How did you come up with your heuristic evaluation functions?}
 
@@ -47,9 +47,9 @@ The algorithms could scale to even larger problems if the heuristic were designe
 
 A smaller factor in scaling to larger problems is the algorithm design. A* may run out of memory eventually compared to RBFS since A* stores every node it expands, but this would take awhile since our computers contain a lot of memory. RBFS could scale further since it does not store every node in memory, but it will take longer to finish the job due to that trade-off. However, changing the heuristic would have the most impact because the overall number of expanded nodes would be reduced with a better heuristic, regardless of the algorithm chosen.
 
-The largest problem we could solve is of disk size 10, using A* and the non-admissible. It took less than ten minutes.  
+The largest problem we could solve is of disk size 10, using A* and the non-admissible. It took less than ten minutes. For the initial state of "", it was able to solve the problem in 1.41 seconds and 6536 expanded nodes, with a solution length of 34 steps. As a non-admissible heuristic, it may not necessarily be the optimal solution, but the problem was nonetheless solved.
 
-We went further and tested disks sizes above 10.\\
+We went further and tested disks sizes above 10. We tested up to size 15. Given an initial state of \[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14\], the A* algorithm using the non-admissible heuristic was able to solve the problem in 2687 seconds and 987156 expanded nodes, with a solution length of 62 steps. That is about 44 minutes. We believe we can go higher, but it will take hours to complete. This demonstrates that our algorithms and heuristics can scale to even larger problems.\\
 
 \textbf{7. Is there any tradeoff between how good a heuristic is in cutting down the number of nodes and how long it took to compute? Can you quantify it?}
 
@@ -57,4 +57,4 @@ A heuristic function $H1$ can take longer to compute than heuristic function $H2
 
 \textbf{8. Is there anything else you found that is of interest?}
 
-We had several interesting observations.
+We observe that our admissible heuristic function yields different solution lengths, ever so slightly, for the different algoithms. We do not expect this, since a heuristic function should yield an optimal solution and thus have the same lengths. That either suggests that our admissible heuristic function is not indeed admissible, or that there is a problem in our heuristic or algorithm, or computation results.
