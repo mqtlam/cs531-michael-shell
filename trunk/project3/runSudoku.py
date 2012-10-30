@@ -71,12 +71,10 @@ for problem, comment in zip(problemSet, problemComments):
 	sudoku.printBoard()
 
 	print "Solving...",
-	startClock = time()
-	(success, numBacktracking) = sudoku.solve()
-	endClock = time()
+	(success, numBacktracking, time) = sudoku.solve()
 
-	print "done."
+	print "success." if success else "failed."
 	print "\nFinal board:"
-	sudoku.printBoard()
+	sudoku.printFullBoard()
 
-	print "Time: ", endClock - startClock
+	print "Time: ", time
