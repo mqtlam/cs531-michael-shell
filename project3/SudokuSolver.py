@@ -5,14 +5,14 @@ from random import choice
 class SudokuSolver:
 	"""The Sudoku class represents a sudoku board."""
 
-	def __init__(self, useRandomUnassignedVariable = False):
+	def __init__(self, useRandomUnassignedVariable = False, useNakedStrategy = [2, 3]):
 		"""Initialize the Sudoku board and CSP formulation."""
+		### Options
+		self.useNakedStrategy = useNakedStrategy
+		self.useRandomUnassignedVariable = useRandomUnassignedVariable
 
 		### Initialize variables
 		self.resetVariables()
-
-		### Options
-		self.useRandomUnassignedVariable = useRandomUnassignedVariable
 
 	def resetVariables(self):
 		### Sudoku board construction
@@ -29,16 +29,20 @@ class SudokuSolver:
 		self.variables = dict((s, self.domain) for s in self.squares)
 
 		# list of alldiff constraints
-		self.alldiffs = ([[i+j for i in self.rows for j in c] for c in self.cols] +
-				[[i+j for i in r for j in self.cols] for r in self.rows] +
-				[[i+j for i in r for j in c] for r in ['123','456','789'] for c in ['abc','def','ghi']])
+		self.rowAlldiffs = [[i+j for i in self.rows for j in c] for c in self.cols]
+		self.colAlldiffs = [[i+j for i in r for j in self.cols] for r in self.rows]
+		self.boxAlldiffs = [[i+j for i in r for j in c] for r in ['123','456','789'] for c in ['abc','def','ghi']]
+
+		self.alldiffs = (self.rowAlldiffs + self.colAlldiffs + self.boxAlldiffs)
 
 		# maps each square to a set of squares affected by it (should have 20 affected squares per square)
 		self.neighbors = dict((s, list(set(sum([i for i in self.alldiffs if s in i],[]))-set([s]))) for s in self.squares)
 
 		### Variables to keep track of statistics
 		self.numBacktrackings = 0
+		self.numRuleOne = 0
 		self.numRuleTwo = 0
+		self.numNakedStrategy = dict((k, 0) for k in self.useNakedStrategy) 
 		self.numFilledIn = 0
 		self.solved = None
 
@@ -63,7 +67,7 @@ class SudokuSolver:
 		self.variables = self.backtrackSearch(self.variables)
 		endClock = time()
 
-		self.solved = [self.isSolved(self.variables), self.numBacktrackings, self.numRuleTwo, self.numFilledIn, endClock - startClock]
+		self.solved = [self.isSolved(self.variables), self.numBacktrackings, self.numRuleOne, self.numRuleTwo, self.numNakedStrategy, self.numFilledIn, endClock - startClock]
 		return self.solved 
 
 	def isSolved(self, variables):
@@ -100,7 +104,7 @@ class SudokuSolver:
 		for r in self.rows:
 			print r, ''.join(variables[r+c].center(width)+('| ' if c in 'cf' else '') for c in self.cols)
 			if r in '36':
-				print ' -' + '-'.join(['-'*(width*3)]*3)
+				print ' ---' + '-'.join(['-'*(width*3)]*3)
 		print
 
 	### CSP Functions
@@ -112,14 +116,14 @@ class SudokuSolver:
 		while changed:
 			changed = False
 
-			# (rule 1) - implicit in representation
+			# (rule 1) - game start precondition and in propagation step
 
 			# (rule 2)
 			(variables, changed) = self.ruleTwo(variables, changed)
 
-			# (rule 3) - naked triples
-			(variables, changed) = self.nakedK(2, variables, changed)
-			(variables, changed) = self.nakedK(3, variables, changed)
+			# (rule 3) - naked twins/triples
+			for k in self.useNakedStrategy: # by default, k = 2 and 3
+				(variables, changed) = self.nakedK(k, variables, changed)
 
 			# propagation step
 			for square in variables:
@@ -133,6 +137,8 @@ class SudokuSolver:
 					for neighbor in self.neighbors[square]:
 						if values in variables[neighbor]:
 							variables[neighbor] = variables[neighbor].replace(values,'')
+							if len(variables[neighbor]) == 1:
+								self.numRuleOne += 1
 							changed = True
 		return variables
 
@@ -158,9 +164,34 @@ class SudokuSolver:
 					break
 		return [variables, changed]
 
-	def nakedK(self, k, variables, changed):
-		"""Performs the "naked triples" strategy for constraint propagation for a general k."""
-		# TODO
+	def nakedK(self, K, variables, changed):
+		"""Performs the "naked twins/triples" strategy for constraint propagation for a general K.
+		K = 2 is naked twins and K = 3 is naked triples."""
+		if K not in Range(1,10):
+			raise ValueError("K must be between 1 and 9")
+
+		for unit in self.alldiffs:
+			for square in unit:
+				foundSet = []
+				if square not in foundSet and len(variables[square]) == K:
+					nakedValues = set(variables[square])
+					nakedSet = [square]
+					for s in unit:
+						if s != square and set(variables[s]).issubset(nakedValues):
+							nakedSet.append(s)
+					if len(nakedSet) == K:
+						foundSet.extend(nakedSet)
+						affected = False
+						for s in unit:
+							if s not in nakedSet:
+								for value in nakedValues:
+									oldLen = len(variables[s])
+									variables[s] = variables[s].replace(value, '')
+									if oldLen != len(variables[s]):
+										changed = True
+										affected = True
+						if affected is True:
+							self.numNakedStrategy[K] += 1
 		return [variables, changed]
 
 	def backtrackSearch(self, variables):

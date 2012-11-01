@@ -61,7 +61,9 @@ else:
 	exit(3)
 
 ### Set up sudoku solver
-sudoku = SudokuSolver.SudokuSolver(False) # True = choose random unassigned variable, False = choose most constrained unassigned variable
+useRandomUnassignedVariable = False
+useNakedStrategy = [2, 3]
+sudoku = SudokuSolver.SudokuSolver(useRandomUnassignedVariable, useNakedStrategy)
 for problem, comment in zip(problemSet, problemComments):
 	print "--------------------------------------------------"
 	print "Running: " + comment
@@ -71,13 +73,16 @@ for problem, comment in zip(problemSet, problemComments):
 	sudoku.printBoard()
 
 	print "Solving...",
-	(success, numBacktracking, numRuleTwo, numFilledIn, time) = sudoku.solve()
+	(success, numBacktracking, numRuleOne, numRuleTwo, numNakedStrategy, numFilledIn, time) = sudoku.solve()
 
 	print "success." if success else "failed."
 	print "\nFinal board:"
 	sudoku.printFullBoard()
 
-	print "Time: \t\t\t", time
-	print "Num backtrackings: \t", numBacktracking
-	print "Num Rule Two's: \t", numRuleTwo
-	print "Initially filled: \t", numFilledIn
+	print "Time: \t\t\t\t", time
+	print "Initially filled: \t\t", numFilledIn
+	print "Num backtrackings: \t\t", numBacktracking
+	print "Num Rule One's: \t\t", numRuleOne
+	print "Num Rule Two's: \t\t", numRuleTwo
+	for k in numNakedStrategy:
+		print "Num Rule Three's ( K =", k, "):\t", numNakedStrategy[k]
