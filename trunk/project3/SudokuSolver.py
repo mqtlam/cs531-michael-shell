@@ -167,7 +167,7 @@ class SudokuSolver:
 	def nakedK(self, K, variables, changed):
 		"""Performs the "naked twins/triples" strategy for constraint propagation for a general K.
 		K = 2 is naked twins and K = 3 is naked triples."""
-		if K not in Range(1,10):
+		if K not in range(1,10):
 			raise ValueError("K must be between 1 and 9")
 
 		for unit in self.alldiffs:
