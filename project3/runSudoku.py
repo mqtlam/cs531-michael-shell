@@ -71,11 +71,13 @@ for problem, comment in zip(problemSet, problemComments):
 	sudoku.printBoard()
 
 	print "Solving...",
-	(success, numBacktracking, time) = sudoku.solve()
+	(success, numBacktracking, numRuleTwo, numFilledIn, time) = sudoku.solve()
 
 	print "success." if success else "failed."
 	print "\nFinal board:"
 	sudoku.printFullBoard()
 
-	print "Time: ", time
-	print "Num backtrackings: ", numBacktracking
+	print "Time: \t\t\t", time
+	print "Num backtrackings: \t", numBacktracking
+	print "Num Rule Two's: \t", numRuleTwo
+	print "Initially filled: \t", numFilledIn
