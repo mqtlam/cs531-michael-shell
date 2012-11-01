@@ -61,7 +61,7 @@ else:
 	exit(3)
 
 ### Set up sudoku solver
-sudoku = SudokuSolver.SudokuSolver()
+sudoku = SudokuSolver.SudokuSolver(False) # True = choose random unassigned variable, False = choose most constrained unassigned variable
 for problem, comment in zip(problemSet, problemComments):
 	print "--------------------------------------------------"
 	print "Running: " + comment
@@ -78,3 +78,4 @@ for problem, comment in zip(problemSet, problemComments):
 	sudoku.printFullBoard()
 
 	print "Time: ", time
+	print "Num backtrackings: ", numBacktracking
