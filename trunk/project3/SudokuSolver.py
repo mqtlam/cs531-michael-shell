@@ -8,6 +8,13 @@ class SudokuSolver:
 	def __init__(self, useRandomUnassignedVariable = False):
 		"""Initialize the Sudoku board and CSP formulation."""
 
+		### Initialize variables
+		self.resetVariables()
+
+		### Options
+		self.useRandomUnassignedVariable = useRandomUnassignedVariable
+
+	def resetVariables(self):
 		### Sudoku board construction
 		self.rows = "123456789"
 		self.cols = "abcdefghi"
@@ -29,17 +36,15 @@ class SudokuSolver:
 		# maps each square to a set of squares affected by it (should have 20 affected squares per square)
 		self.neighbors = dict((s, list(set(sum([i for i in self.alldiffs if s in i],[]))-set([s]))) for s in self.squares)
 
-		### Options
-		self.useRandomUnassignedVariable = useRandomUnassignedVariable
-
 		### Variables to keep track of statistics
 		self.numBacktrackings = 0
 		self.solved = None
 
+
 	def setup(self, board):
 		"""Initializes the board configuration to board."""
-		# reset all variables
-		self.variables = dict((s, self.domain) for s in self.squares)
+		# reset variables
+		self.resetVariables()
 
 		# set up board
 		for i, digit in enumerate(board):
