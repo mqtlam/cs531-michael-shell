@@ -5,9 +5,10 @@ from random import choice
 class SudokuSolver:
 	"""The Sudoku class represents a sudoku board."""
 
-	def __init__(self, useRandomUnassignedVariable = False, useNakedStrategy = [2, 3]):
+	def __init__(self, useRandomUnassignedVariable = False, useRuleTwo = False, useNakedStrategy = [2, 3]):
 		"""Initialize the Sudoku board and CSP formulation."""
 		### Options
+		self.useRuleTwo = useRuleTwo
 		self.useNakedStrategy = useNakedStrategy
 		self.useRandomUnassignedVariable = useRandomUnassignedVariable
 
@@ -75,11 +76,6 @@ class SudokuSolver:
 		for square in self.variables:
 			if len(variables[square]) != 1:
 				return False
-			"""for neighbor in self.neighbors[square]:
-				if len(variables[neighbor]) != 1:
-					return False
-				elif variables[neighbor] == variables[square]:
-					return False"""
 		return True
 
 	def printBoard(self, variables = None):
@@ -119,7 +115,8 @@ class SudokuSolver:
 			# (rule 1) - game start precondition and in propagation step
 
 			# (rule 2)
-			(variables, changed) = self.ruleTwo(variables, changed)
+			if self.useRuleTwo is True:
+				(variables, changed) = self.ruleTwo(variables, changed)
 
 			# (rule 3) - naked twins/triples
 			for k in self.useNakedStrategy: # by default, k = 2 and 3
