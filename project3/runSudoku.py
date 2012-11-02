@@ -4,7 +4,7 @@ import sys
 from time import clock, time
 
 def printUsage():
-	print "Usage: " + sys.argv[0] + " (-i sequence|-f inputFile) [--random|--naked K]"
+	print "Usage: " + sys.argv[0] + " (-i sequence|-f inputFile) [--random|--ruletwo|--naked K]"
 	print "\n\tChoose one run option:"
 	print "\t" + sys.argv[0] + " -i \"sequence\""
 	print "\t\treads in a board sequence string"
@@ -66,6 +66,7 @@ else:
 
 # Optional Arguments
 useRandomUnassignedVariable = False
+useRuleTwo = False
 useNakedStrategy = []
 
 if len(sys.argv) > 3:
@@ -73,6 +74,8 @@ if len(sys.argv) > 3:
 	while i < len(sys.argv):
 		if sys.argv[i] == "--random":
 			useRandomUnassignedVariable = True
+		if sys.argv[i] == "--ruletwo":
+			useRuleTwo = True
 		if sys.argv[i] == "--naked":
 			if i+1 < len(sys.argv):
 				useNakedStrategy = [int(x) for x in set(sys.argv[i+1])]
@@ -83,7 +86,7 @@ if len(sys.argv) > 3:
 		i+=1
 
 ### Set up sudoku solver
-sudoku = SudokuSolver.SudokuSolver(useRandomUnassignedVariable, useNakedStrategy)
+sudoku = SudokuSolver.SudokuSolver(useRandomUnassignedVariable, useRuleTwo, useNakedStrategy)
 for problem, comment in zip(problemSet, problemComments):
 	print "--------------------------------------------------"
 	print "Running: " + comment
@@ -103,6 +106,7 @@ for problem, comment in zip(problemSet, problemComments):
 	print "Initially filled: \t\t", numFilledIn
 	print "Num backtrackings: \t\t", numBacktracking
 	print "Num Rule One's: \t\t", numRuleOne
-	print "Num Rule Two's: \t\t", numRuleTwo
+	if useRuleTwo is True:
+		print "Num Rule Two's: \t\t", numRuleTwo
 	for k in numNakedStrategy:
 		print "Num Rule Three's ( K =", k, "):\t", numNakedStrategy[k]
