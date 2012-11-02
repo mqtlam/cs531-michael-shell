@@ -5,6 +5,8 @@ from time import clock, time
 
 def printUsage():
 	print "Usage: " + sys.argv[0] + " (-i sequence|-f inputFile) [--random|--ruletwo|--naked K]"
+	print "\t** By default, runs backtracking search with contraint propagation and only rule one."
+	print "\t   Add optional arguments to add on rules."
 	print "\n\tChoose one run option:"
 	print "\t" + sys.argv[0] + " -i \"sequence\""
 	print "\t\treads in a board sequence string"
@@ -14,6 +16,7 @@ def printUsage():
 	print "\t\tmust be formatted like repository.txt"
 	print "\n\tOptional Arguments (must be specified after run option above):"
 	print "\t\t--random: picks random slot instead of most constrained slot for unassigned variable heuristic"
+	print "\t\t--ruletwo: enables rule two, which assigns to any cell a value x if x is not in the domain of any other cell in that unit"
 	print "\t\t--naked K: enables naked-K rule, where K is a string of integers 1-9,"
 	print "\t\t\te.g. --naked 23 enables naked doubles (K=2) and naked triples rules (K=3)."
 
