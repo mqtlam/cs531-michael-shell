@@ -5,12 +5,13 @@ from random import choice
 class SudokuSolver:
 	"""The Sudoku class represents a sudoku board."""
 
-	def __init__(self, useRandomUnassignedVariable = False, useRuleTwo = False, useNakedStrategy = [2, 3]):
+	def __init__(self, noSearch = False, useRandomUnassignedVariable = False, useRuleTwo = False, useNakedStrategy = [2, 3]):
 		"""Initialize the Sudoku board and CSP formulation."""
 		### Options
 		self.useRuleTwo = useRuleTwo
 		self.useNakedStrategy = useNakedStrategy
 		self.useRandomUnassignedVariable = useRandomUnassignedVariable
+		self.noSearch = noSearch
 
 		### Initialize variables
 		self.resetVariables()
@@ -65,7 +66,10 @@ class SudokuSolver:
 			return self.solved
 
 		startClock = time()
-		self.variables = self.backtrackSearch(self.variables)
+		if self.noSearch is True:
+			self.variables = self.constraintPropagation(self.variables)
+		else:
+			self.variables = self.backtrackSearch(self.variables)
 		endClock = time()
 
 		self.solved = [self.isSolved(self.variables), self.numBacktrackings, self.numRuleOne, self.numRuleTwo, self.numNakedStrategy, self.numFilledIn, endClock - startClock]
