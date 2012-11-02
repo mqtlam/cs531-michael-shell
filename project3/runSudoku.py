@@ -4,7 +4,7 @@ import sys
 from time import clock, time
 
 def printUsage():
-	print "Usage: " + sys.argv[0] + " (-i sequence|-f inputFile) [--random|--ruletwo|--naked K]"
+	print "Usage: " + sys.argv[0] + " (-i sequence|-f inputFile) [--nosearch|--random|--ruletwo|--naked K]"
 	print "\t** By default, runs backtracking search with contraint propagation and only rule one."
 	print "\t   Add optional arguments to add on rules."
 	print "\n\tChoose one run option:"
@@ -15,6 +15,7 @@ def printUsage():
 	print "\t\treads from input file"
 	print "\t\tmust be formatted like repository.txt"
 	print "\n\tOptional Arguments (must be specified after run option above):"
+	print "\t\t--nosearch: disables backtracking search, only using constraint propagation and rules until convergence"
 	print "\t\t--random: picks random slot instead of most constrained slot for unassigned variable heuristic"
 	print "\t\t--ruletwo: enables rule two, which assigns to any cell a value x if x is not in the domain of any other cell in that unit"
 	print "\t\t--naked K: enables naked-K rule, where K is a string of integers 1-9,"
@@ -68,6 +69,7 @@ else:
 	exit(3)
 
 # Optional Arguments
+noSearch = False
 useRandomUnassignedVariable = False
 useRuleTwo = False
 useNakedStrategy = []
@@ -75,6 +77,8 @@ useNakedStrategy = []
 if len(sys.argv) > 3:
 	i = 3
 	while i < len(sys.argv):
+		if sys.argv[i] == "--nosearch":
+			noSearch = True
 		if sys.argv[i] == "--random":
 			useRandomUnassignedVariable = True
 		if sys.argv[i] == "--ruletwo":
@@ -82,14 +86,13 @@ if len(sys.argv) > 3:
 		if sys.argv[i] == "--naked":
 			if i+1 < len(sys.argv):
 				useNakedStrategy = [int(x) for x in set(sys.argv[i+1])]
-				print useNakedStrategy
 			else:
 				printUsage()
 				exit(4)
 		i+=1
 
 ### Set up sudoku solver
-sudoku = SudokuSolver.SudokuSolver(useRandomUnassignedVariable, useRuleTwo, useNakedStrategy)
+sudoku = SudokuSolver.SudokuSolver(noSearch, useRandomUnassignedVariable, useRuleTwo, useNakedStrategy)
 for problem, comment in zip(problemSet, problemComments):
 	print "--------------------------------------------------"
 	print "Running: " + comment
