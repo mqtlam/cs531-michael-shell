@@ -16,9 +16,29 @@ Afterwards, these rules are ``propagated'' across the board, updating the board 
 
 In our experiments section, we will show the performance of the constraint propagation step when toggling a subset of these rules on or off.
 
-The pseudocode for the constraint propagation step can be found below:
+\begin{algorithm}[H]
+\caption{Constraint Propagation}
+\label{constraint}
+\begin{algorithmic}
+\STATE function CONSTRAINT-PROPAGATION(puzzle)
+\WHILE{any variable's domain was updated}
+	\STATE perform rule one
+	\STATE perform rule two
+	\STATE perform naked doubles and triple rules
+	\FOR{square in puzzle}
+		\IF{domain is empty}
+			\RETURN failure
+		\ENDIF
 
-(ALGORITHM)
+		\IF{domain is exactly one value}
+			\FOR{sq in square.neighbors along row, column and box}
+				\STATE remove square.value from sq's domain
+			\ENDFOR
+		\ENDIF
+	\ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{Backtracking Search}
 
@@ -33,9 +53,36 @@ There are several heuristics that can be implemented for the backtracking search
 
 In fact, the first heuristic performs better than the second heuristic in general constraint satisfication problems because choosing an assignment from the most constrained variable will help prune the search tree faster. We will demonstrate the validity of this theory in our experiments.
 
-The pseudocode for the backtracking algorithm can be found below:
+In the pseudocode, SELECT-UNASSIGNED-VARIABLE is a heuristic function. In our experiment, we implemented the random slot heuristic and most constrained heuristic. Note that in our implementation, we take advantage of creating copies of puzzle states so that upon backtracking, we simply discard the entire state rather than undoing an assignment.
 
-(ALGORITHM)
+\begin{algorithm}[H]
+\caption{Backtracking Search}
+\label{backtrack}
+\begin{algorithmic}
+\STATE function BACKTRACK(assignment, puzzle)
+\IF{assignment is complete}
+	\RETURN assignment
+\ENDIF
+\STATE var = SELECT-UNASSIGNED-VARIABLE(puzzle)
+\FOR{value in var.domain}
+	\IF{value is consistent with assignment}
+		\STATE add {var = value} to assignment
+		\STATE update puzzle to new assignment
+		\STATE inferences = CONSTRAINT-PROPAGATION(puzzle)
+		\IF{inferences is not failure}
+			\STATE add inferences to assignment
+			\STATE result = BACKTRACK(assignment, puzzle)
+			\IF{result is not failure}
+				\RETURN result
+			\ENDIF
+		\ENDIF
+	\ENDIF
+	\STATE remove {var = value}
+	\STATE remove inferences from assignment
+\ENDFOR
+\RETURN failure
+\end{algorithmic}
+\end{algorithm}
 
 %\begin{algorithm}[H]
 %\caption{A* Search}

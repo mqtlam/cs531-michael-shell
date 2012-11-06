@@ -1,3 +1,13 @@
 \section{Discussion}\label{sec:dis}
 
-Discussion here.
+We place some further discussion points in this section.
+
+It appears that rule two was not as effective in reducing the domains of variables. Perhaps this is due to the effectiveness of rule one, since rule one appears a lot and updates have to be propagated around the board anyway. It may also be the order in which we applied our rules since it was applied after rule one.
+
+The naked doubles and triple rules were effective, eliminating backtracking entirely for most problems. This means in real life, the user did not have to make an educated guess for a slot, which is the assignment step of backtracking search. Another possibility is that the user made all successful guesses when he had to; the educated guesses were successful thanks to the most constrained heuristic.
+
+This makes sense because a SuDoKu problem should be solvable with just constraint propagation and a set of rules, no matter how fancy they are, even if the rules are more sophisticated than the naked triples. However, a puzzle creator can easily amuse (or annoy) a solver by forcing him to do backtracking search, which translates to "guessing" squares. Backtracking search forces the user to make guess assignments in real life, and if they make an assignment that contradicts, they have to "erase" their progress and try again by backtracking. We anticipated the use of backtracking search in harder problems, which was correct.
+
+Thefore, we evaluate the following conjecture: "easy problems may be solved by only using the first rule, medium problems may be solved by using the first two rules, and hard and evil problems require the naked triples rule and possibly backtracking." It seems that the conjecture is almost true. Almost all of the easy problems were solvable by the first rule (21 out of 23). Once naked doubles and triples were added, all easy problems were solved, most medium problems were now solved (19 out of 21) and almost all hard and evil problems were solved. It appears that rule two did nothing to help medium problems or any problems at all. However, adding backtracking to any problem solves the problem. These trends are observable in table \ref{tab:dif}. 
+
+Finally, each puzzle was solvable on the order of a second, even with the random slot heuristic. This heavily contrasts the Towers of Corvallis puzzle that used just search, which solved on the order of minutes to hours. While we would need to perform experiments to formalize this heavy contrast, intuitively it shows that constraint propagation takes advantage of the factored representation of each state to outperform general search.

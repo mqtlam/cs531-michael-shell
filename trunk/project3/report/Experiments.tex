@@ -1,6 +1,6 @@
 \section{Experiments}\label{sec:exp}
 
-We solved all the $77$ problems. The first figure \ref{fig:nback} shows the number of backtrackings for each problem. The ``naked triple (double)'' strategy exhibits impressive performance in constraint propagations. Without such kinds of rules, there are $1/4$ problems need to use backtracking, no matter pick the most constrained slot or pick slot randomly. Meanwhile, only $2$ or $3$ problems require backtracking for the ``naked triple'' case. 
+We solved all $77$ problems. Figure \ref{fig:nback} shows the number of backtrackings for each problem. The ``naked triple (double)'' strategy exhibits impressive performance in constraint propagations. Without such kinds of rules, there are $1/4$ problems that need to use backtracking, no matter if we pick the most constrained slot or pick a slot randomly. Meanwhile, only $2$ or $3$ problems require backtracking for the ``naked triple'' case. 
 
 \begin{figure}[ht]
 \centering
@@ -16,7 +16,8 @@ We solved all the $77$ problems. The first figure \ref{fig:nback} shows the numb
 \label{fig:nback}
 \end{figure}
 
-Next we show the problem completion in each difficulty level in table \ref{tab:dif}. From this table, we can see that the annotation for each problem are corrected approximately, except $3$ evil problems which were solved by only simple rules. For comparing the effectiveness of most constrained slot heuristic and random slot heuristic, we make the same experiment with random slot heuristic, which placed in last 4 rows in table \ref{tab:dif}. It seems these two heuristics are getting same results. We will further do experiments for this comparison on number of rules. For justifying the difficulty of problems, the average number of filled-in numbers are concerned, as shown in table \ref{tab:fill}.
+Next we show the problem completion in each difficulty level in table \ref{tab:dif}. As one introduces more rules, more puzzles are solvable. By adding backtracking search, all problems are solvable. This makes sense because backtracking search would have to go through all possible assignments.
+
 \begin{table}[!h]
     \centering
     \scalebox{0.8}{
@@ -34,8 +35,12 @@ Next we show the problem completion in each difficulty level in table \ref{tab:d
 		Evil rand    & 3 & 3 & 4 & 3 & 8 & 15 & 15 \\ \hline
 	    \end{tabular}
     }
-    \caption{Number of complete problems in different combinations of rules. The default heuristic is the most constrained slot. However, it seems picking most constrained slot or picking random slot is the same in this case. Here, r1: rule 1, r1,2: rule1 + rule2, n2: naked double, n3: naked triple, n2,3: n2 + n3.}\label{tab:dif}
+    \caption{Number of complete problems in different combinations of rules. The default heuristic is the most constrained slot. Picking the most constrained slot or picking random slot is the same. Here, r1: rule 1, r1,2: rule1 + rule2, n2: naked double, n3: naked triple, n2,3: n2 + n3.}\label{tab:dif}
 \end{table}
+
+For comparing the effectiveness of most constrained slot heuristic and random slot heuristic, we make the same experiment with random slot heuristic, which placed in last 4 rows in table \ref{tab:dif}. These two heuristics are getting same results, which confirms they are both functioning. However performance-wise, the number of backtrackings for using the constrained slot heuristic is severely reduced when compared to the random slot heuristic as shown in the previous figure \ref{fig:nback}. From the graph, in just using rule one and backtracking, the random slot heuristic yields hundreds of backtracking for certain problems whereas the most constrained heuristic solves in less significantly less than one hundred backtrackings. Of course, the random heuristic is random so one does expect the random heuristic to perform well sometimes.
+
+For justifying the difficulty of problems, the average number of filled-in numbers are concerned, as shown in table \ref{tab:fill}.
 
 \begin{table}[!h]
     \centering
@@ -49,7 +54,7 @@ Next we show the problem completion in each difficulty level in table \ref{tab:d
     \caption{Average filled-in numbers for each problem level.}\label{tab:fill}
 \end{table}
 
-The number of rules being used is an important factor, we also use it to estimate the difficulty of a problem and show the average number of different kinds of rules used for each set of problems. The results is shown in table \ref{tab:rule}. The trendency is clear that more hard problems requires more number of rules. Note that for this experiment we use the combination of all rules and backtracking for making sure every problem can be solved.
+The number of rules being used is an important factor. We also use it to estimate the difficulty of a problem and show the average number of different kinds of rules used for each set of problems. The results are shown in table \ref{tab:rule}. The trend is clear that more hard problems requires more number of rules. Note that for this experiment we use the combination of all rules and backtracking for making sure every problem can be solved.
 
 \begin{table}[!h]
     \centering
@@ -66,7 +71,7 @@ The number of rules being used is an important factor, we also use it to estimat
     \caption{Average number of rules used by problems in different levels. Here, r1: rule 1, r2: rule2, n2: naked double, n3: naked triple, bt: number of backtrackings.}\label{tab:rule}
 \end{table}
 
-We further compare with two heuristics in the number of rules being taken. Figure \ref{fig:heu} shows all pair of comparisons. By applying these two heuristics, a problem uses more or less the same number of rules. This is consistent with our experiment in number of complete problems. 
+We further compare with two heuristics in the number of rules being taken. Figure \ref{fig:heu} shows all pair of comparisons. By applying these two heuristics, a problem uses more or less the same number of rules. This is consistent with our experiment in the number of complete problems. 
 
 \begin{figure}[ht]
 \centering
