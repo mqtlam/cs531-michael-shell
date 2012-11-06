@@ -1,46 +1,86 @@
 \section{Experiments}\label{sec:exp}
 
-Experiments here.
+We solved all the $77$ problems. The first figure \ref{fig:nback} shows the number of backtrackings for each problem. The ``naked triple (double)'' strategy exhibits impressive performance in constraint propagations. Without such kinds of rules, there are $1/4$ problems need to use backtracking, no matter pick the most constrained slot or pick slot randomly. Meanwhile, only $2$ or $3$ problems require backtracking for the ``naked triple'' case. 
 
-%\begin{figure}[!t]
-%\centering
-%\begin{tabular}{cc}
-%\subfloat[A* nodes: all 140 experiments]{\includegraphics[scale=0.32]{img/tnode_Astar.pdf}} 
-%   & \subfloat[RBFS nodes: all 140 experiments]{\includegraphics[scale=0.32]{./img/tnode_RBFS.pdf}}\\
-%\subfloat[A* average searched nodes]{\includegraphics[scale=0.32]{./img/anode_Astar.pdf}} 
-%   & \subfloat[RBFS average searched nodes]{\includegraphics[scale=0.32]{./img/anode_RBFS.pdf}}\\
-%%\subfloat[E]{\includegraphics[width=2cm]{logo}} 
-%%   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
-%\end{tabular}
-%\caption{Plots for the number of nodes searched against the problem size for each algorithm and heuristic. For the first 2 figures, for each number of disks 4 to 10, every 20 examples have the same problem size.  We show the average number of expanded nodes against the number of disks for a clear demonstration. As the problem size becomes larger, the number of searched nodes grows exponentially.}
-%\label{fig:nodes}
-%\end{figure}
-%
-%\begin{figure}[!t]
-%\centering
-%\begin{tabular}{cc}
-%\subfloat[A*: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{./img/AHcpu-aver.pdf}} 
-%   & \subfloat[RBFS: average cpu time (s) on heuristics]{\includegraphics[scale=0.32]{./img/RHcpu-aver.pdf}}\\
-%\subfloat[A*: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{./img/ATcpu-aver.pdf}} 
-%   & \subfloat[RBFS: average cpu time (s) on whole problem]{\includegraphics[scale=0.32]{./img/RTcpu-aver.pdf}}\\
-%%\subfloat[E]{\includegraphics[width=2cm]{logo}} 
-%%   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
-%\end{tabular}
-%\caption{Plots for the average cpu time against the problem size over 20 examples for each algorithm and heuristic.}
-%\label{fig:cputime}
-%\end{figure}
-%
-%\begin{figure}[!t]
-%\centering
-%\begin{tabular}{cc}
-%\subfloat[Nodes against disks for admissible heurisitic]{\includegraphics[scale=0.32]{./img/node_Astar_RBFS_H_ad.pdf}} 
-%   & \subfloat[Nodes against disks for non-admissible heurisitic]{\includegraphics[scale=0.32]{./img/node_Astar_RBFS_H_nad.pdf}}\\
-%%\subfloat[cpu time against disks for heurisitic 1]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H1_cpu.png}} 
-%   %& \subfloat[cpu time against disks for heurisitic 2]{\includegraphics[scale=0.32]{../results/Astar_RBFS_H2_cpu.png}}\\
-%\end{tabular}
-%\caption{Performance comparisons between A* and RBFS}
-%\label{fig:astar-rbfs}
-%\end{figure}
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\subfloat[Rule 1]{\includegraphics[scale=0.32]{../results/bt-r1-bt.pdf}} 
+   & \subfloat[Rule 1,2]{\includegraphics[scale=0.32]{../results/bt-r1-r2-bt.pdf}}\\
+\subfloat[Rule 1 + Naked double and triple]{\includegraphics[scale=0.32]{../results/bt-r1-n23-bt.pdf}} 
+   & \subfloat[Rule 1,2 + Naked double and triple]{\includegraphics[scale=0.32]{../results/bt-r1-r2-n23-bt.pdf}}\\
+%\subfloat[E]{\includegraphics[width=2cm]{logo}} 
+%   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
+\end{tabular}
+\caption{Number of backtracing with respect to each problem.}
+\label{fig:nback}
+\end{figure}
+
+Next we show the problem completion in each difficulty level in table \ref{tab:dif}. From this table, we can see that the annotation for each problem are corrected approximately, except $3$ evil problems which were solved by only simple rules. For comparing the effectiveness of most constrained slot heuristic and random slot heuristic, we make the same experiment with random slot heuristic, which placed in last 4 rows in table \ref{tab:dif}. It seems these two heuristics are getting same results. We will further do experiments for this comparison on number of rules. For justifying the difficulty of problems, the average number of filled-in numbers are concerned, as shown in table \ref{tab:fill}.
+\begin{table}[!h]
+    \centering
+    \scalebox{0.8}{
+	    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+		\hline
+		Complexity   & r1 & r1,2 & r1,2+n2 & r1,2+n3 & r1,2+n2,3 & r1,2+bt & r1,2+n2,3+bt \\ \hline
+		Easy (23):   & 21 & 21 & 23 & 23 & 23 & 23 & 23 \\ \hline
+		Medimum (21) & 3 & 3 & 10 & 14 & 19 & 21 & 21 \\ \hline
+		Hard (18)    & 0 & 0 & 7 & 4 & 15 & 18 & 18 \\ \hline
+		Evil (15)    & 3 & 3 & 4 & 3 & 8 & 15 & 15 \\ \hline
+        \hline
+		Easy rand:   & 21 & 21 & 23 & 23 & 23 & 23 & 23 \\ \hline
+		Medimum rand & 3 & 3 & 10 & 14 & 19 & 21 & 21 \\ \hline
+		Hard rand    & 0 & 0 & 7 & 4 & 15 & 18 & 18 \\ \hline
+		Evil rand    & 3 & 3 & 4 & 3 & 8 & 15 & 15 \\ \hline
+	    \end{tabular}
+    }
+    \caption{Number of complete problems in different combinations of rules. The default heuristic is the most constrained slot. However, it seems picking most constrained slot or picking random slot is the same in this case. Here, r1: rule 1, r1,2: rule1 + rule2, n2: naked double, n3: naked triple, n2,3: n2 + n3.}\label{tab:dif}
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \scalebox{0.9}{
+	    \begin{tabular}{|l|c|c|c|c|}
+		\hline
+		             & easy & medimum & hard & evil \\ \hline
+		average number & 34.70 & 29.05 & 26.28 & 26.13 \\ \hline
+	    \end{tabular}
+    }
+    \caption{Average filled-in numbers for each problem level.}\label{tab:fill}
+\end{table}
+
+The number of rules being used is an important factor, we also use it to estimate the difficulty of a problem and show the average number of different kinds of rules used for each set of problems. The results is shown in table \ref{tab:rule}. The trendency is clear that more hard problems requires more number of rules. Note that for this experiment we use the combination of all rules and backtracking for making sure every problem can be solved.
+
+\begin{table}[!h]
+    \centering
+    \scalebox{0.8}{
+	    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+		\hline
+		             & r1 & r2 & n2 & n3 & bt \\ \hline
+		Easy (23):   & 42.26 & 0.04 & 22.00 & 12.70 & 0 \\ \hline
+		Medimum (21) & 46.95 & 0.14 & 31.14 & 16.81 & 0 \\ \hline
+		Hard (18)    & 49.06 & 0.33 & 32.11 & 15.94 & 0.06 \\ \hline
+		Evil (15)    & 59.40 & 0 & 38.20 & 22.33 & 0.60 \\ \hline
+	    \end{tabular}
+    }
+    \caption{Average number of rules used by problems in different levels. Here, r1: rule 1, r2: rule2, n2: naked double, n3: naked triple, bt: number of backtrackings.}\label{tab:rule}
+\end{table}
+
+We further compare with two heuristics in the number of rules being taken. Figure \ref{fig:heu} shows all pair of comparisons. By applying these two heuristics, a problem uses more or less the same number of rules. This is consistent with our experiment in number of complete problems. 
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\subfloat[Rule 1]{\includegraphics[scale=0.32]{../results/bt-r1-r2-n23-rule1.pdf}} 
+   & \subfloat[Rule 2]{\includegraphics[scale=0.32]{../results/bt-r1-r2-n23-rule2.pdf}}\\
+\subfloat[Naked double]{\includegraphics[scale=0.32]{../results/bt-r1-r2-n23-naked2.pdf}} 
+   & \subfloat[Naked triple]{\includegraphics[scale=0.32]{../results/bt-r1-r2-n23-naked3.pdf}}\\
+%\subfloat[E]{\includegraphics[width=2cm]{logo}} 
+%   & \subfloat[F]{\includegraphics[width=3cm]{logo}}\\
+\end{tabular}
+\caption{Comparisons between most constrained slot heuristic and random slot heuristic in number of rules taken.}
+\label{fig:heu}
+\end{figure}
 %
 %\begin{table}[!h]
 %    \centering
