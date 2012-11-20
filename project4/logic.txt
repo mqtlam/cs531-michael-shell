@@ -1,0 +1,21 @@
+%run with cmd:
+%./prover9 -f logic.txt
+
+set(production).
+
+formulas(usable).
+
+%perception fluents
+Breeze(u) & Loc(u,x,y) -> B(x,y).
+
+end_of_list.
+
+formulas(assumptions).
+Loc(0,0,0).
+Breeze(0).
+
+end_of_list.
+
+formulas(goals).
+B(0,0).
+end_of_list.
