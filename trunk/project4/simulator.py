@@ -11,12 +11,15 @@ if __name__ == "__main__":
 	directory = "./test_maps/"
 
 	#create the agent
-	player = agent.RandomAgent()
+	player = agent.LogicAgent()
 
 	print "file name, is solveable?, has good start?, map size, success?, died?, num actions, has arrow"
 
 	#for each of the map files run a simulation
 	for aFile in os.listdir(directory):
+
+		if aFile == ".svn":
+			continue
 
 		#build the environment
 		theMap = env.Environment(os.path.join(directory,aFile))
