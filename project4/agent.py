@@ -18,7 +18,7 @@ class LogicAgent(object):
 		self.hasArrow = True
 		self.KB = None
 		
-	def search(self, environment, logicEngine):
+	def search(self, environment, logicEngine): #TODO TODO TODO
 		"""
 		Executes a logical search for the gold
 		"""
@@ -48,20 +48,20 @@ class LogicAgent(object):
 			
 				else:
 					#tell KB perception
-					self.KB.tell(self.KB.makePerceptStatement([glitter, stench, breeze], self.actions))
+					self.KB.tell(self.KB.makePerceptStatement([glitter, stench, breeze, False, False], self.actions))
 					
 					#get a list of adjacent cells
 					adjacentCells = self.environ.proxy(x,y)
 
 					#here is a good place to ask a query to the logic engine....
-					query = "Safe(Pos(1,1))" #TODO
+					query = "Safe(Pos(1,1))"
 					isQueryProved = self.KB.ask(query)
 
 					#pick one randomly
-					(x, y) = random.choice(adjacentCells) #TODO
+					(x, y) = random.choice(adjacentCells)
 
 				#increment the action counter
-				self.KB.tell(self.KB.makeActionStatement("Forward", self.actions)) #TODO
+				self.KB.tell(self.KB.makeActionStatement("Forward", self.actions))
 				self.actions += 1
 
 		return (success, dead, self.actions, self.hasArrow)

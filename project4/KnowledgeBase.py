@@ -32,11 +32,11 @@ class KnowledgeBase(object):
 		self.tell("all t all i all j Location(Pos(i,j),t+1) <-> ( Location(Pos(i,j),t) & (-Action(Forward,t) | BumpAt(t)) ) | ( Location(Pos(i,j+(-1)),t) & (Facing(North,t) & Action(Forward,t)) ) | ( Location(Pos(i+(-1),j),t) & (Facing(East,t) & Action(Forward,t)) ) | ( Location(Pos(i,j+1),t) & (Facing(South,t) & Action(Forward,t)) ) | ( Location(Pos(i+1,j),t) & (Facing(North,t) & Action(Forward,t)) )")
 
 		# perception rules
-		#self.tell("all t all s all g all m all c Percept(Breeze,s,g,m,c,t) -> BreezeAt(t)")
-		#self.tell("all t all b all g all m all c Percept(b,Stench,g,m,c,t) -> StenchAt(t)")
-		#self.tell("all t all b all s all m all c Percept(b,s,Glitter,m,c,t) -> GlitterAt(t)")
-		#self.tell("all t all b all s all g all c Percept(b,s,g,Bump,c,t) -> BumpAt(t)")
-		#self.tell("all t all b all s all g all m Percept(b,s,g,m,Scream,t) -> ScreamAt(t)")
+		self.tell("all t all s all g all m all c Percept(Breeze,s,g,m,c,t) -> BreezeAt(t)")
+		self.tell("all t all b all g all m all c Percept(b,Stench,g,m,c,t) -> StenchAt(t)")
+		self.tell("all t all b all s all m all c Percept(b,s,Glitter,m,c,t) -> GlitterAt(t)")
+		self.tell("all t all b all s all g all c Percept(b,s,g,Bump,c,t) -> BumpAt(t)")
+		self.tell("all t all b all s all g all m Percept(b,s,g,m,Scream,t) -> ScreamAt(t)")
 
 		# facts
 		self.tell("Safe(Pos(1,1))") # square (1,1) is safe
@@ -60,6 +60,7 @@ class KnowledgeBase(object):
 			 "formulas(goals).\n\t" + \
 			 query + ".\n" + \
 			 "end_of_list.\n"
+
 		return result
 
 	def ask(self, query):
@@ -68,7 +69,6 @@ class KnowledgeBase(object):
 		"""
 		fullQuery = self.constructProver9Query(query)
 		result =  self.logic.query(fullQuery)
-		print result
 		return result
 
 	def tell(self, assertion):
@@ -83,7 +83,9 @@ class KnowledgeBase(object):
 		breeze = "Breeze" if percept[0] else "None"
 		stench = "Stench" if percept[1] else "None"
 		glitter = "Glitter" if percept[2] else "None"
-		return "Percept("+breeze+","+stench+","+glitter+","+str(time)+")"
+		bump = "Bump" if percept[3] else "None"
+		scream = "Scream" if percept[4] else "None"
+		return "Percept("+breeze+","+stench+","+glitter+","+bump+","+scream+","+str(time)+")"
 
 	def makeActionStatement(self, action, time):
 		return "Action("+action+","+str(time)+")"
