@@ -27,8 +27,7 @@ class LogicAgent(object):
 		self.actions = 0
 		self.hasArrow = True
 		self.KB = KnowledgeBase.KnowledgeBase(self.logic)
-		self.KB.tell(["man(x) -> mortal(x)", "man(george)"])
-		self.KB.tell("man(michael)")
+		self.KB.initWumpusWorldLogic()
 		success = False
 		dead = False
 		goldFound = False
@@ -48,18 +47,21 @@ class LogicAgent(object):
 					goldFound = True
 			
 				else:
+					#tell KB perception
+					self.KB.tell(self.KB.makePerceptStatement([glitter, stench, breeze], self.actions))
 					
 					#get a list of adjacent cells
 					adjacentCells = self.environ.proxy(x,y)
 
 					#here is a good place to ask a query to the logic engine....
-					query = "mortal(george)" #TODO
+					query = "Safe(Pos(1,1))" #TODO
 					isQueryProved = self.KB.ask(query)
 
 					#pick one randomly
-					(x, y) = random.choice(adjacentCells)
+					(x, y) = random.choice(adjacentCells) #TODO
 
 				#increment the action counter
+				self.KB.tell(self.KB.makeActionStatement("Forward", self.actions)) #TODO
 				self.actions += 1
 
 		return (success, dead, self.actions, self.hasArrow)
