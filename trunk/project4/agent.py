@@ -1,6 +1,6 @@
 import random
-
 import env
+import KnowledgeBase
 
 class LogicAgent(object):
 	"""
@@ -16,10 +16,7 @@ class LogicAgent(object):
 		self.environ = None
 		self.actions = 0
 		self.hasArrow = True
-
-		#load initial KB
-		with open('./initKB.txt', 'r') as f:
-			self.KB = f.read()
+		self.KB = None
 		
 	def search(self, environment, logicEngine):
 		"""
@@ -29,6 +26,7 @@ class LogicAgent(object):
 		self.logic = logicEngine
 		self.actions = 0
 		self.hasArrow = True
+		self.KB = KnowledgeBase.KnowledgeBase(self.logic)
 		success = False
 		dead = False
 		goldFound = False
@@ -53,8 +51,8 @@ class LogicAgent(object):
 					adjacentCells = self.environ.proxy(x,y)
 
 					#here is a good place to ask a query to the logic engine....
-					query = "B(0,0)."
-					isQueryProved = self.kbAsk(query)
+					query = "B(0,0)." #TODO
+					isQueryProved = self.KB.ask(query)
 
 					#pick one randomly
 					(x, y) = random.choice(adjacentCells)
@@ -63,12 +61,4 @@ class LogicAgent(object):
 				self.actions += 1
 
 		return (success, dead, self.actions, self.hasArrow)
-	
-	def kbTell(self, assertions):
-		self.KB += assertions
 
-	def kbAsk(self, query):
-		q = "formulas(goals).\n"
-		q += query 
-		q += "\nend_of_list."
-		return self.logic.query(self.KB + "\n" + q)
