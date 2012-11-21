@@ -27,6 +27,8 @@ class LogicAgent(object):
 		self.actions = 0
 		self.hasArrow = True
 		self.KB = KnowledgeBase.KnowledgeBase(self.logic)
+		self.KB.tell(["man(x) -> mortal(x)", "man(george)"])
+		self.KB.tell("man(michael)")
 		success = False
 		dead = False
 		goldFound = False
@@ -51,7 +53,7 @@ class LogicAgent(object):
 					adjacentCells = self.environ.proxy(x,y)
 
 					#here is a good place to ask a query to the logic engine....
-					query = "B(0,0)." #TODO
+					query = "mortal(george)" #TODO
 					isQueryProved = self.KB.ask(query)
 
 					#pick one randomly
