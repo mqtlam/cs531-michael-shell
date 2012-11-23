@@ -39,12 +39,12 @@ class KnowledgeBase(object):
 		self.tell("all t all b all s all g all m Percept(b,s,g,m,Scream,t) -> ScreamAt(t)")
 
 		# facts
-		self.tell("Safe(Pos(1,1))") # square (1,1) is safe
-		self.tell("HaveArrow(1)") # have arrow at time 1
-		self.tell("-HaveGold(1)") # not have gold at time 1
-		self.tell("DeadWumpus(1)") # wumpus is not dead at time 1
-		self.tell("Location(Pos(1,1),1)") # agent's location is (1,1) at time 1
-		self.tell("Facing(North,1)") # agent is facing north at time 1
+		self.tell("Safe(Pos(0,0))") # square (0,0) is safe
+		self.tell("HaveArrow(0)") # have arrow at time 0
+		self.tell("-HaveGold(0)") # not have gold at time 0
+		self.tell("DeadWumpus(0)") # wumpus is not dead at time 0
+		self.tell("Location(Pos(0,0),0)") # agent's location is (0,0) at time 0
+		self.tell("Facing(North,0)") # agent is facing north at time 0
 
 	def constructProver9Query(self, query):
 		"""
