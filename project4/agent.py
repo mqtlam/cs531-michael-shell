@@ -143,10 +143,10 @@ class LogicAgent(object):
 		actionSequence = []
 		# TODO
 		# dumb random actions for now
-        #actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
-        problem = AstarSearch.AstarProblem(current,goals,allowed)
-        search = AstarSearch.AstarSearch(problem)
-        actionSequence = search.run()
+        	#actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
+        	problem = AstarSearch.AstarProblem(current,goals,allowed)
+        	search = AstarSearch.AstarSearch(problem)
+        	actionSequence = search.run()
 		return actionSequence
 
 	### End Wumpus Hybrid Algorithm ###
