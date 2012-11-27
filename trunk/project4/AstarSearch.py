@@ -99,6 +99,8 @@ class AstarSearch:
         self.timeOnTotal = t2 - t1
         #print "Explored %d nodes" % len(nodes)
 
+        if result == False:
+            return []
 
         retActions = []
         initPos = result[0]
