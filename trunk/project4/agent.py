@@ -1,6 +1,7 @@
 import random
 import env
 import KnowledgeBase
+import AstarSearch
 
 NORTH = 0
 EAST = 1
@@ -12,7 +13,7 @@ class LogicAgent(object):
 	A hybrid agent that uses logic and a planner to work its way through the
 	wumpus world
 	"""
-	
+
 	def __init__(self):
 		"""
 		Initializes the agent
@@ -22,7 +23,7 @@ class LogicAgent(object):
 		self.timer = 0
 		self.hasArrow = True
 		self.KB = None
-		
+
 	def search(self, environment, logicEngine): #TODO TODO TODO
 		"""
 		Runs the program loop.
@@ -50,7 +51,7 @@ class LogicAgent(object):
 			# get percepts
 			(breeze, stench, glitter) = self.environ.sense(x,y)
 
-			dead = self.environ.isDeadly(x,y) 
+			dead = self.environ.isDeadly(x,y)
 
 			if not dead:
 				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y))
@@ -78,17 +79,17 @@ class LogicAgent(object):
 						if not bump:
 							(x, y) = (x-1, y)
 				elif action == "TurnLeft":
-					facing = facing - 1 % 4 
+					facing = facing - 1 % 4
 				elif action == "TurnRight":
-					facing = facing + 1 % 4 
+					facing = facing + 1 % 4
 				elif action == "Shoot" and self.hasArrow:
-					wumpusHit = self.environ.shootArrow(x, y, facing)	
+					wumpusHit = self.environ.shootArrow(x, y, facing)
 					self.hasArrow = False
 					if wumpusHit:
 						scream = True
 				elif action == "Grab":
 					if glitter and not haveGold:
-						haveGold = True	
+						haveGold = True
 				elif action == "Climb":
 					if (x, y) == (0, 0):
 						success = True
@@ -105,12 +106,13 @@ class LogicAgent(object):
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
 		"""
 		self.KB.tell(self.KB.makePerceptStatement(percept, self.timer))
-		
+
 		# tell KB temporal physics sentences for time t
 
 		safe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("Safe(Pos("+str(x)+","+str(y)+"))")]
-		
-		unvisited = [] 
+        #print safe
+
+		unvisited = []
 		if self.KB.ask("GlitterAt("+str(self.timer)+")"):
 			self.plan = ["Grab"] + self.planRoute(current, [(0,0)], safe) + ["Climb"]
 		if self.plan == []:
@@ -140,8 +142,11 @@ class LogicAgent(object):
 		"""
 		actionSequence = []
 		# TODO
-		# dumb random actions for now 
-		actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
+		# dumb random actions for now
+        #actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
+        problem = AstarSearch.AstarProblem(current,goals,allowed)
+        search = AstarSearch.AstarSearch(problem)
+        actionSequence = search.run()
 		return actionSequence
 
 	### End Wumpus Hybrid Algorithm ###
@@ -160,24 +165,24 @@ class LogicAgent(object):
 		dead = False
 		goldFound = False
 		x, y = (0,0)
-	
+
 		#keep looking for the gold stupidly
 		while not goldFound and not dead:
 
 			#get percepts
 			(breeze, stench, glitter) = self.environ.sense(x,y)
 
-			dead = self.environ.isDeadly(x,y) 
+			dead = self.environ.isDeadly(x,y)
 
 			if not dead:
-				
+
 				if glitter:
 					goldFound = True
-			
+
 				else:
 					#tell KB perception
 					self.KB.tell(self.KB.makePerceptStatement([glitter, stench, breeze, False, False], self.actions))
-					
+
 					#get a list of adjacent cells
 					adjacentCells = self.environ.proxy(x,y)
 
