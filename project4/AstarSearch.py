@@ -70,7 +70,8 @@ class AstarProblem:
         retStates = []
         for i,s in enumerate(states):
             if self.isAllowed(s) == True:
-                retStates.insert([s,direct[d][i]])
+                #retStates.insert([s,direct[d][i]])
+                retStates = retStates + [[s,direct[d][i]]]
         print '* nextStates:'
         print retStates
         return (retStates)
@@ -85,6 +86,10 @@ class AstarSearch:
 
     def run(self):
         "estimate running time of A*"
+
+        if self.problem.goalState == []:
+            print '*** No goals'
+            return []
 
         t1 = time()
         (result,nNodes) = self.Astar()
@@ -118,7 +123,6 @@ class AstarSearch:
                 retActions = retActions + ['TurnLeft','TurnLeft','Forward']
 
             prevPos = s
-        print '******************************************'
         print '------------------------------------------'
         print 'path:'
         print result
@@ -155,12 +159,10 @@ class AstarSearch:
             path = self.frontier.pop()
             s = path[-1]
             explored.add(s[0])
-            print '-------------------4----------------------'
             if self.problem.goalTest(s):
                 return (path,len(explored))
             #(states, actions) = self.problem.nextStates(s)
             #for ind,ns in states.items():
-            print '-------------------1----------------------'
             for ns in self.problem.nextStates(s):
                 if ns[0] not in explored:
                     newPath = path + [ns]
