@@ -38,7 +38,7 @@ class LogicAgent(object):
 		facing = NORTH
 
 		# persistent agent variables
-		self.KB = KnowledgeBase.KnowledgeBase(self.logic, self.environ.size)
+		self.KB = KnowledgeBase.KnowledgeBase(self.logic, self.environ)
 		self.KB.initWumpusWorldLogic()
 		self.timer = 0 # timer
 		self.plan = [] # action sequence
