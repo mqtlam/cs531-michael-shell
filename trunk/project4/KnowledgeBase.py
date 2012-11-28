@@ -3,12 +3,13 @@ class KnowledgeBase(object):
 	Knowledge Base that the logic agent uses.
 	"""
 
-	def __init__(self, logicEngine, worldSize):
+	def __init__(self, logicEngine, environ):
 		"""
 		Initializes the knowledge base.
 		"""
 		self.logic = logicEngine
-		self.worldSize = worldSize
+		self.environ = environ
+		self.worldSize = environ.size
 
 		#list of assertions in Prover-9 format each ending in '.'
 		self.KBAssumptions = [] 
@@ -30,10 +31,10 @@ class KnowledgeBase(object):
 		"""
 		assert(self.KBAssumptionsString != "" and self.KBUsableString != "" and query != "")
 
-		result = "formulas(usable).\n\t" + \
+		result = "formulas(usable).\n" + \
 			 self.KBUsableString + \
 			 "end_of_list.\n\n" + \
-			 "formulas(assumptions).\n\t" + \
+			 "formulas(assumptions).\n" + \
 			 self.KBAssumptionsString + \
 			 "end_of_list.\n\n" + \
 			 "formulas(goals).\n\t" + \
@@ -117,9 +118,12 @@ class KnowledgeBase(object):
 			self.tell("-HaveArrow(%d)" % time)
 
 	def tellUsableAtTime(self, time, current):
-		# Adjacent logic TODO
-		# B(3,0) <->P(2,0)|P(3,1).
-		# S(3,0) <->W(2,0)|W(3,1).
+		# Adjacent logic
+		adjacentCells = self.environ.proxy(current[0], current[1])
+		Pstring = ' | '.join(["P(%d,%d)" % c for c in adjacentCells])
+		Wstring = ' | '.join(["W(%d,%d)" % c for c in adjacentCells])
+		self.tell(("B(%d,%d) <-> " % current) + Pstring, True)
+		self.tell(("S(%d,%d) <-> " % current) + Pstring, True)
 
 		# Location logic
 		self.tell("Loc(%d,%d,%d) -> (Breeze(%d) <-> B(%d,%d))" % (current[0], current[1], time, time, current[0], current[1]), True)
