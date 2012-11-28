@@ -119,6 +119,7 @@ class LogicAgent(object):
 
 		# get all squares that are safe
 		safe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("OK(%d,%d,%d)" % (x,y,self.timer))]
+		print "OK", safe
 
 		unvisited = []
 		if self.KB.ask("Glitter(%d)" % self.timer):
@@ -126,13 +127,13 @@ class LogicAgent(object):
 
 		if self.plan == []:
             		print '=== No Glitter, find a safe unvisited square.'
-			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("-Loc(%d,%d,%d)" % (x,y,self.timer))]
+			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if all([not self.KB.ask("Loc(%d,%d,%d)" % (x,y,t)) for t in range(0,self.timer+1)])]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
 
-		if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
-            		print '=== No unvisited square, take a possible wumpus square.'
-			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
-			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
+		#if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
+            	#	print '=== No unvisited square, take a possible wumpus square.'
+		#	possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
+		#	self.plan = self.planRoute(current, facing, possibleWumpus, safe)
 
 		if self.plan == []: # no choice, but to take a risk
             		print '=== No wumpus found, find an unvisited but unsafe one.'
@@ -158,6 +159,7 @@ class LogicAgent(object):
 		allowed: list of squares allowed to go
 		"""
 		actionSequence = []
+		allowed = list(set(allowed).union(set(goals)))
             #print "----------------------------"
         	#print current
         	#print goals
