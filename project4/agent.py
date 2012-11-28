@@ -54,7 +54,7 @@ class LogicAgent(object):
 			dead = self.environ.isDeadly(x,y)
 
 			if not dead:
-				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y), facing)
+				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y), facing, self.hasArrow)
 
 				if bump:
 					bump = False
@@ -100,7 +100,7 @@ class LogicAgent(object):
 
 	### Wumpus Hybrid Algorithm ###
 
-	def hybridWumpusAgent(self, percept, current, facing):
+	def hybridWumpusAgent(self, percept, current, facing, hasArrow):
 		"""
 		Main logic algorithm.
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
@@ -109,26 +109,32 @@ class LogicAgent(object):
 		self.KB.tellPercepts(percept, self.timer, current)
 
 		# tell agent the current square is visited and safe
-		self.KB.tell("Visited(Pos("+str(current[0])+","+str(current[1])+"))")
-		self.KB.tell("Safe(Pos("+str(current[0])+","+str(current[1])+"))")
+		self.KB.tell("Loc(%d,%d,%d)" % (current[0], current[1], self.timer))
+		self.KB.tell("OK(%d,%d,%d)" % (current[0], current[1], self.timer))
+
+		# tell agent if has arrow
+		if hasArrow:
+			self.KB.tell("HaveArrow(%d)" % self.timer)
+		else:
+			self.KB.tell("-HaveArrow(%d)" % self.timer)
 
 		# get all squares that are safe
-		safe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("Safe(Pos("+str(x)+","+str(y)+"))")]
+		safe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("OK(%d,%d,%d)" % (x,y,self.timer))]
 
 		unvisited = []
-		if self.KB.ask("GlitterAt("+str(self.timer)+")"):
+		if self.KB.ask("Glitter(%d)" % self.timer):
 			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 
 		if self.plan == []:
-			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("-Visited(Pos("+str(x)+","+str(y)+"))")]
+			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("-Loc(%d,%d,%d)" % (x,y,self.timer))]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
 
-		if self.plan == [] and self.ask("HaveArrow("+str(self.timer)+")"):
-			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-Wumpus(Pos("+str(x)+","+str(y)+"))")]
+		if self.plan == [] and self.ask("HaveArrow(%d)" % self.timer):
+			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
 			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
 
 		if self.plan == []: # no choice, but to take a risk
-			notUnsafe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-OK(Pos("+str(x)+","+str(y)+",),"+str(t)+")")]
+			notUnsafe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-OK(%d,%d,%d)" % (x,y,self.timer))]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(notUnsafe))), safe)
 
 		if self.plan == []:
