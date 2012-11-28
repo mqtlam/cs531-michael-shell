@@ -83,18 +83,22 @@ class LogicAgent(object):
 				elif action == "TurnRight":
 					facing = facing + 1 % 4
 				elif action == "Shoot" and self.hasArrow:
+					print "used shoot action"
 					wumpusHit = self.environ.shootArrow(x, y, facing)
 					self.hasArrow = False
 					if wumpusHit:
 						scream = True
 				elif action == "Grab":
+					print "used grab action"
 					if glitter and not haveGold:
 						haveGold = True
 				elif action == "Climb":
-					if (x, y) == (0, 0):
+					print "used climb action"
+					if (x, y) == (0, 0) and haveGold:
 						success = True
-					#else:
-					#	break
+					else:
+						success = False
+						break
 
 		return (success, dead, self.timer, self.hasArrow)
 
