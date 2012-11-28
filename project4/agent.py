@@ -54,7 +54,7 @@ class LogicAgent(object):
 			dead = self.environ.isDeadly(x,y)
 
 			if not dead:
-				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y))
+				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y), facing)
 
 				if bump:
 					bump = False
@@ -100,7 +100,7 @@ class LogicAgent(object):
 
 	### Wumpus Hybrid Algorithm ###
 
-	def hybridWumpusAgent(self, percept, current):
+	def hybridWumpusAgent(self, percept, current, facing):
 		"""
 		Main logic algorithm.
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
@@ -115,18 +115,18 @@ class LogicAgent(object):
 
 		unvisited = []
 		if self.KB.ask("GlitterAt("+str(self.timer)+")"):
-			self.plan = ["Grab"] + self.planRoute(current, [(0,0)], safe) + ["Climb"]
+			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 		if self.plan == []:
 			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if all(self.KB.ask("Location(Pos("+str(x)+","+str(y)+"),"+str(t)+")") for t in range(0, self.timer))]
-			self.plan = self.planRoute(current, list(set(unvisited).intersection(set(safe))), safe)
+			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
 		if self.plan == [] and self.ask("HaveArrow("+str(self.timer)+")"):
 			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-Wumpus(Pos("+str(x)+","+str(y)+"))")]
-			self.plan = self.planRoute(current, possibleWumpus, safe)
+			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
 		if self.plan == []: # no choice, but to take a risk
 			notUnsafe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-OK(Pos("+str(x)+","+str(y)+",),"+str(t)+")")]
-			self.plan = self.planRoute(current, list(set(unvisited).intersection(set(notUnsafe))), safe)
+			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(notUnsafe))), safe)
 		if self.plan == []:
-			self.plan = self.planRoute(current, [(0,0)], safe) + ["Climb"]
+			self.plan = self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 		action = self.plan.pop(0)
 
 		self.KB.tell(self.KB.makeActionStatement(action, self.timer))
@@ -134,7 +134,7 @@ class LogicAgent(object):
 
 		return action
 
-	def planRoute(self, current, goals, allowed):
+	def planRoute(self, current, facing, goals, allowed):
 		"""
 		Plan a route. Calls A*.
 		current: current location (x,y)
@@ -142,10 +142,18 @@ class LogicAgent(object):
 		allowed: list of squares allowed to go
 		"""
 		actionSequence = []
+        	print "----------------------------"
+        	print current
+        	print goals
 		# TODO
 		# dumb random actions for now
+        	for i,g in enumerate(goals):
+            		goals[i] = [g,0]
+        	print "----------------------------"
+        	print goals
+
         	#actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
-        	problem = AstarSearch.AstarProblem(current,goals,allowed)
+        	problem = AstarSearch.AstarProblem([current,facing],goals,allowed)
         	search = AstarSearch.AstarSearch(problem)
         	actionSequence = search.run()
 		return actionSequence
