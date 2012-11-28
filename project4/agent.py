@@ -105,28 +105,35 @@ class LogicAgent(object):
 		Main logic algorithm.
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
 		"""
-		# self.KB.tell(self.KB.makePerceptStatement(percept, self.timer))
-		self.KB.tellPercepts(percept, self.timer)
+		# tell agent the percepts and therefore breezy, smelly
+		self.KB.tellPercepts(percept, self.timer, current)
 
-		# tell KB temporal physics sentences for time t
+		# tell agent the current square is visited and safe
+		self.KB.tell("Visited(Pos("+str(current[0])+","+str(current[1])+"))")
+		self.KB.tell("Safe(Pos("+str(current[0])+","+str(current[1])+"))")
 
+		# get all squares that are safe
 		safe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("Safe(Pos("+str(x)+","+str(y)+"))")]
-        #print safe
 
 		unvisited = []
 		if self.KB.ask("GlitterAt("+str(self.timer)+")"):
 			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
+
 		if self.plan == []:
-			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if all(self.KB.ask("Location(Pos("+str(x)+","+str(y)+"),"+str(t)+")") for t in range(0, self.timer))]
+			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("-Visited(Pos("+str(x)+","+str(y)+"))")]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
+
 		if self.plan == [] and self.ask("HaveArrow("+str(self.timer)+")"):
 			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-Wumpus(Pos("+str(x)+","+str(y)+"))")]
 			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
+
 		if self.plan == []: # no choice, but to take a risk
 			notUnsafe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-OK(Pos("+str(x)+","+str(y)+",),"+str(t)+")")]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(notUnsafe))), safe)
+
 		if self.plan == []:
 			self.plan = self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
+
 		action = self.plan.pop(0)
 
 		self.KB.tell(self.KB.makeActionStatement(action, self.timer))

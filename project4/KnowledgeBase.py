@@ -77,12 +77,14 @@ class KnowledgeBase(object):
 			self.KBString += "\t" + assertion + ".\n"
 			self.KB.append(assertion)
 
-	def tellPercepts(self, percept, time):
+	def tellPercepts(self, percept, time, current):
 		(breeze, stench, glitter, bump, scream) = percept
 		if breeze:
 			self.tell("BreezeAt("+str(time)+")")
+			self.tell("Breezy(Pos("+str(current[0])+","+str(current[1])+")")
 		if stench:
 			self.tell("StenchAt("+str(time)+")")
+			self.tell("Smelly(Pos("+str(current[0])+","+str(current[1])+")")
 		if glitter:
 			self.tell("GlitterAt("+str(time)+")")
 		if bump:
