@@ -48,6 +48,8 @@ class LogicAgent(object):
 		bump = False
 
 		while not success and not dead:
+            		self.environ.printMap()
+
 			# get percepts
 			(breeze, stench, glitter) = self.environ.sense(x,y)
 
@@ -123,18 +125,22 @@ class LogicAgent(object):
 			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 
 		if self.plan == []:
+            print 'No Glitter, find a safe unvisited square.'
 			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("-Loc(%d,%d,%d)" % (x,y,self.timer))]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
 
 		if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
+            print 'No unvisited square, take a possible wumpus square.'
 			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
 			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
 
 		if self.plan == []: # no choice, but to take a risk
+            print 'No wumpus found, find an unvisited but unsafe one.'
 			notUnsafe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-OK(%d,%d,%d)" % (x,y,self.timer))]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(notUnsafe))), safe)
 
 		if self.plan == []:
+            print 'Nothing plan'
 			self.plan = self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 
 		action = self.plan.pop(0)

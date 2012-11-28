@@ -29,6 +29,9 @@ class AstarProblem:
         print '-------------------------------------'
         print 'goals:'
         print goalState
+        print '-------------------------------------'
+        print 'current:'
+        print initialState
 
     def isAllowed(self,square):
         try:
@@ -72,8 +75,8 @@ class AstarProblem:
             if self.isAllowed(s) == True:
                 #retStates.insert([s,direct[d][i]])
                 retStates = retStates + [[s,direct[d][i]]]
-        print '* nextStates:'
-        print retStates
+        #print '* nextStates:'
+        #print retStates
         return (retStates)
 
 class AstarSearch:
@@ -88,7 +91,7 @@ class AstarSearch:
         "estimate running time of A*"
 
         if self.problem.goalState == []:
-            print '*** No goals'
+            print '*** No goals, no actions'
             return []
 
         t1 = time()
@@ -98,7 +101,7 @@ class AstarSearch:
         #print "Explored %d nodes" % len(nodes)
 
         if result == False:
-            print '*** Could not find a path'
+            print '*** Could not find a path, no actions'
             return []
 
         retActions = []
@@ -123,12 +126,13 @@ class AstarSearch:
                 retActions = retActions + ['TurnLeft','TurnLeft','Forward']
 
             prevPos = s
-        print '------------------------------------------'
+        #print '------------------------------------------'
         print 'path:'
         print result
-        print '------------------------------------------'
+        #print '------------------------------------------'
         print 'action sequence:'
         print retActions
+        print '\n'
         return (retActions)
 
 
