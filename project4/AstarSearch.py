@@ -92,6 +92,7 @@ class AstarSearch:
 
         if self.problem.goalState == []:
             print '*** No goals, no actions'
+            print '\n'
             return []
 
         t1 = time()
@@ -102,6 +103,7 @@ class AstarSearch:
 
         if result == False:
             print '*** Could not find a path, no actions'
+            print '\n'
             return []
 
         retActions = []
