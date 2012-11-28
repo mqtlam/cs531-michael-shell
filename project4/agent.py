@@ -38,7 +38,7 @@ class LogicAgent(object):
 		facing = NORTH
 
 		# persistent agent variables
-		self.KB = KnowledgeBase.KnowledgeBase(self.logic)
+		self.KB = KnowledgeBase.KnowledgeBase(self.logic, self.environ.size)
 		self.KB.initWumpusWorldLogic()
 		self.timer = 0 # timer
 		self.plan = [] # action sequence
@@ -106,17 +106,10 @@ class LogicAgent(object):
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
 		"""
 		# tell agent the percepts and therefore breezy, smelly
-		self.KB.tellPercepts(percept, self.timer, current)
+		self.KB.tellAssumptionsAtTime(percept, self.timer, current, hasArrow)
 
-		# tell agent the current square is visited and safe
-		self.KB.tell("Loc(%d,%d,%d)" % (current[0], current[1], self.timer))
-		self.KB.tell("OK(%d,%d,%d)" % (current[0], current[1], self.timer))
-
-		# tell agent if has arrow
-		if hasArrow:
-			self.KB.tell("HaveArrow(%d)" % self.timer)
-		else:
-			self.KB.tell("-HaveArrow(%d)" % self.timer)
+		# tell agent update of world
+		self.KB.tellUsableAtTime(self.timer, current)
 
 		# get all squares that are safe
 		safe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("OK(%d,%d,%d)" % (x,y,self.timer))]
@@ -129,7 +122,7 @@ class LogicAgent(object):
 			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if self.KB.ask("-Loc(%d,%d,%d)" % (x,y,self.timer))]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
 
-		if self.plan == [] and self.ask("HaveArrow(%d)" % self.timer):
+		if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
 			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
 			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
 

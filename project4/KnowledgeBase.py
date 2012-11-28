@@ -3,11 +3,12 @@ class KnowledgeBase(object):
 	Knowledge Base that the logic agent uses.
 	"""
 
-	def __init__(self, logicEngine):
+	def __init__(self, logicEngine, worldSize):
 		"""
 		Initializes the knowledge base.
 		"""
 		self.logic = logicEngine
+		self.worldSize = worldSize
 
 		#list of assertions in Prover-9 format each ending in '.'
 		self.KBAssumptions = [] 
@@ -72,20 +73,65 @@ class KnowledgeBase(object):
 				self.KBAssumptionsString += "\t" + assertion + ".\n"
 				self.KBAssumptions.append(assertion)
 
-	def tellPercepts(self, percept, time, current):
+	def tellAssumptionsAtTime(self, percept, time, current, hasArrow):
+		# tell percepts
 		(breeze, stench, glitter, bump, scream) = percept
 		if breeze:
 			self.tell("Breeze(%d)" % time)
 			self.tell("B(%d,%d)" % current)
+		else:
+			self.tell("-Breeze(%d)" % time)
+			self.tell("-B(%d,%d)" % current)
 		if stench:
 			self.tell("Stench(%d)" % time)
 			self.tell("S(%d,%d)" % current)
+		else:
+			self.tell("-Stench(%d)" % time)
+			self.tell("-S(%d,%d)" % current)
 		if glitter:
 			self.tell("Glitter(%d)" % time)
+			self.tell("G(%d,%d)" % current)
+		else:
+			self.tell("-Glitter(%d)" % time)
+			self.tell("-G(%d,%d)" % current)
 		if bump:
 			self.tell("Bump(%d)" % time)
+		else:
+			self.tell("-Bump(%d)" % time)
 		if scream:
 			self.tell("Scream(%d)" % time)
+		else:
+			self.tell("-Scream(%d)" % time)
+
+		# tell if wumpus is alive TODO
+		#self.tell("WumpusAlive(0)")
+
+		# tell current location and safe
+		self.tell("Loc(%d,%d,%d)" % (current[0], current[1], time))
+		self.tell("OK(%d,%d,%d)" % (current[0], current[1], time))
+
+		# tell if has arrow
+		if hasArrow:
+			self.tell("HaveArrow(%d)" % time)
+		else:
+			self.tell("-HaveArrow(%d)" % time)
+
+	def tellUsableAtTime(self, time, current):
+		# Adjacent logic TODO
+		# B(3,0) <->P(2,0)|P(3,1).
+		# S(3,0) <->W(2,0)|W(3,1).
+
+		# Location logic
+		self.tell("Loc(%d,%d,%d) -> (Breeze(%d)<-> B(%d,%d))" % (current[0], current[1], time, time, current[0], current[1]), True)
+		self.tell("Loc(%d,%d,%d) -> -P(%d,%d)" % (current[0], current[1], time, current[0], current[1]), True)
+		self.tell("Loc(%d,%d,%d) -> (Stench(%d)<-> W(%d,%d))" % (current[0], current[1], time, time, current[0], current[1]), True)
+		self.tell("Loc(%d,%d,%d) ->(-W(%d,%d)) | (W(%d,%d) & -WumpusAlive(%d))" % (current[0], current[1], time, current[0], current[1], current[0], current[1], time), True)
+		self.tell("Loc(%d,%d,%d) & G(%d,%d) -> Grab(%d)" % (current[0], current[1], time, current[0], current[1], time))
+		
+		# OK logic
+		for x in range(self.worldSize):
+			for y in range(self.worldSize):
+				self.tell("OK(%d,%d,%d) <-> -P(%d,%d) & -(W(%d,%d) & WumpusAlive(%d))" % (x,y,time,x,y,x,y,time), True)	
 
 	def makeActionStatement(self, action, time):
 		assert(action in ["Forward","TurnLeft","TurnRight","Shoot","Grab","Climb"])
