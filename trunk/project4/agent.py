@@ -105,7 +105,8 @@ class LogicAgent(object):
 		Main logic algorithm.
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
 		"""
-		self.KB.tell(self.KB.makePerceptStatement(percept, self.timer))
+		# self.KB.tell(self.KB.makePerceptStatement(percept, self.timer))
+		self.KB.tellPercepts(percept, self.timer)
 
 		# tell KB temporal physics sentences for time t
 

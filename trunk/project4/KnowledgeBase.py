@@ -11,6 +11,7 @@ class KnowledgeBase(object):
 
 		#list of assertions in Prover-9 format each ending in '.'
 		self.KB = [] 
+		self.KBString = ""
 
 	def initWumpusWorldLogic(self):
 		"""
@@ -20,23 +21,11 @@ class KnowledgeBase(object):
 		self.tell("all x all y all a all b Adjacent(Pos(x,y),Pos(a,b)) <-> (x = a & (y = b+(-1) | y = b+1)) | (y = b & (x = a+(-1) | x = a+1))") # adjacent definition
 		self.tell("all s Breezy(s) <-> exists r Adjacent(r,s) & Pit(r)") # breezy & pit rule
 		self.tell("all s Smelly(s) <-> exists r Adjacent(r,s) & Wumpus(r)") # smelly & wumpus rule
-		self.tell("all t DeadWumpus(t+1) <-> ( Action(Shoot,t) & ScreamAt(t+1) ) | DeadWumpus(t)") # dead wumpus successor-state axiom
+		self.tell("all t DeadWumpus(t+1) <-> ( Shoot(t) & ScreamAt(t+1) ) | DeadWumpus(t)") # dead wumpus successor-state axiom
 
 		# successor-state axioms for agent properties
-		self.tell("all t HaveArrow(t+1) <-> HaveArrow(t) & -Action(Shoot, t)")
-		self.tell("all t HaveGold(t+1) <-> (GlitterAt(t) & Action(Grab, t)) | HaveGold(t)")
-		self.tell("all t Facing(North,t+1) <-> ( (Facing(West,t) & Action(TurnRight, t)) | (Facing(East,t) & Action(TurnLeft,t)) ) | ( Facing(North,t) & -(Action(Right,t) & Action(Left,t)))")
-		self.tell("all t Facing(East,t+1) <-> ( (Facing(North,t) & Action(TurnRight, t)) | (Facing(South,t) & Action(TurnLeft,t)) ) | ( Facing(East,t) & -(Action(Right,t) & Action(Left,t)))")
-		self.tell("all t Facing(South,t+1) <-> ( (Facing(East,t) & Action(TurnRight, t)) | (Facing(West,t) & Action(TurnLeft,t)) ) | ( Facing(South,t) & -(Action(Right,t) & Action(Left,t)))")
-		self.tell("all t Facing(West,t+1) <-> ( (Facing(South,t) & Action(TurnRight, t)) | (Facing(North,t) & Action(TurnLeft,t)) ) | ( Facing(West,t) & -(Action(Right,t) & Action(Left,t)))")
-		self.tell("all t all i all j Location(Pos(i,j),t+1) <-> ( Location(Pos(i,j),t) & (-Action(Forward,t) | BumpAt(t)) ) | ( Location(Pos(i,j+(-1)),t) & (Facing(North,t) & Action(Forward,t)) ) | ( Location(Pos(i+(-1),j),t) & (Facing(East,t) & Action(Forward,t)) ) | ( Location(Pos(i,j+1),t) & (Facing(South,t) & Action(Forward,t)) ) | ( Location(Pos(i+1,j),t) & (Facing(North,t) & Action(Forward,t)) )")
-
-		# perception rules
-		self.tell("all t all s all g all m all c Percept(Breeze,s,g,m,c,t) -> BreezeAt(t)")
-		self.tell("all t all b all g all m all c Percept(b,Stench,g,m,c,t) -> StenchAt(t)")
-		self.tell("all t all b all s all m all c Percept(b,s,Glitter,m,c,t) -> GlitterAt(t)")
-		self.tell("all t all b all s all g all c Percept(b,s,g,Bump,c,t) -> BumpAt(t)")
-		self.tell("all t all b all s all g all m Percept(b,s,g,m,Scream,t) -> ScreamAt(t)")
+		self.tell("all t HaveArrow(t+1) <-> HaveArrow(t) & -Shoot(t)")
+		self.tell("all t HaveGold(t+1) <-> (GlitterAt(t) & Grab(t)) | HaveGold(t)")
 
 		# facts
 		self.tell("Safe(Pos(0,0))") # square (0,0) is safe
@@ -51,15 +40,18 @@ class KnowledgeBase(object):
 		Constructs a Prover-9 query by appending the knowledge base
 		and ask query into Prover-9 format.
 		"""
-		assert(self.KB != [] and query != "")
+		assert(self.KBString != "" and query != "")
 
-		result = "set(production).\n\n" + \
-			 "formulas(assumptions).\n\t" + \
-			 ".\n\t".join(self.KB) + '.\n' + \
+		result = "formulas(assumptions).\n\t" + \
+			 self.KBString + \
 			 "end_of_list.\n\n" + \
 			 "formulas(goals).\n\t" + \
 			 query + ".\n" + \
 			 "end_of_list.\n"
+
+		# debug...
+		with open("./kb.txt", 'w') as f:
+			f.write(result)
 
 		return result
 
@@ -69,23 +61,36 @@ class KnowledgeBase(object):
 		"""
 		fullQuery = self.constructProver9Query(query)
 		result =  self.logic.query(fullQuery)
+
+		# cache proven results
+		if result:
+			self.tell(query)
+
 		return result
 
 	def tell(self, assertion):
 		"""
 		Performs a TELL query to the knowledge base.
 		"""
-		#course check for not adding duplicate logic rules
+		# coarse check for not adding duplicate logic rules
 		if all(assertion not in l for l in self.KB):
+			self.KBString += "\t" + assertion + ".\n"
 			self.KB.append(assertion)
 
-	def makePerceptStatement(self, percept, time):
-		breeze = "Breeze" if percept[0] else "None"
-		stench = "Stench" if percept[1] else "None"
-		glitter = "Glitter" if percept[2] else "None"
-		bump = "Bump" if percept[3] else "None"
-		scream = "Scream" if percept[4] else "None"
-		return "Percept("+breeze+","+stench+","+glitter+","+bump+","+scream+","+str(time)+")"
+	def tellPercepts(self, percept, time):
+		(breeze, stench, glitter, bump, scream) = percept
+		if breeze:
+			self.tell("BreezeAt("+str(time)+")")
+		if stench:
+			self.tell("StenchAt("+str(time)+")")
+		if glitter:
+			self.tell("GlitterAt("+str(time)+")")
+		if bump:
+			self.tell("BumpAt("+str(time)+")")
+		if scream:
+			self.tell("ScreamAt("+str(time)+")")
 
 	def makeActionStatement(self, action, time):
-		return "Action("+action+","+str(time)+")"
+		assert(action in ["Forward","TurnLeft","TurnRight","Shoot","Grab","Climb"])
+
+		return action+"("+str(time)+")"
