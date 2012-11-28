@@ -10,40 +10,30 @@ class KnowledgeBase(object):
 		self.logic = logicEngine
 
 		#list of assertions in Prover-9 format each ending in '.'
-		self.KB = [] 
-		self.KBString = ""
+		self.KBAssumptions = [] 
+		self.KBAssumptionsString = ""
+
+		self.KBUsable = []
+		self.KBUsableString = ""
 
 	def initWumpusWorldLogic(self):
 		"""
 		Adds Wumpus World logic to the KB. Only used for initialization.
 		"""
-		# wumpus world rules
-		self.tell("all x all y all a all b Adjacent(Pos(x,y),Pos(a,b)) <-> (x = a & (y = b+(-1) | y = b+1)) | (y = b & (x = a+(-1) | x = a+1))") # adjacent definition
-		self.tell("all s Breezy(s) <-> exists r Adjacent(r,s) & Pit(r)") # breezy & pit rule
-		self.tell("all s Smelly(s) <-> exists r Adjacent(r,s) & Wumpus(r)") # smelly & wumpus rule
-		self.tell("all t DeadWumpus(t+1) <-> ( Shoot(t) & ScreamAt(t+1) ) | DeadWumpus(t)") # dead wumpus successor-state axiom
-
-		# successor-state axioms for agent properties
-		self.tell("all t HaveArrow(t+1) <-> HaveArrow(t) & -Shoot(t)")
-		self.tell("all t HaveGold(t+1) <-> (GlitterAt(t) & Grab(t)) | HaveGold(t)")
-
-		# facts
-		self.tell("Safe(Pos(0,0))") # square (0,0) is safe
-		self.tell("HaveArrow(0)") # have arrow at time 0
-		self.tell("-HaveGold(0)") # not have gold at time 0
-		self.tell("DeadWumpus(0)") # wumpus is not dead at time 0
-		self.tell("Location(Pos(0,0),0)") # agent's location is (0,0) at time 0
-		self.tell("Facing(North,0)") # agent is facing north at time 0
+		#self.tell("")
 
 	def constructProver9Query(self, query):
 		"""
 		Constructs a Prover-9 query by appending the knowledge base
-		and ask query into Prover-9 format.
+		and ask query into Prover9 format.
 		"""
-		assert(self.KBString != "" and query != "")
+		assert(self.KBAssumptionsString != "" and self.KBUsableString != "" and query != "")
 
-		result = "formulas(assumptions).\n\t" + \
-			 self.KBString + \
+		result = "formulas(usable).\n\t" + \
+			 self.KBUsableString + \
+			 "end_of_list.\n\n" + \
+			 "formulas(assumptions).\n\t" + \
+			 self.KBAssumptionsString + \
 			 "end_of_list.\n\n" + \
 			 "formulas(goals).\n\t" + \
 			 query + ".\n" + \
@@ -68,29 +58,34 @@ class KnowledgeBase(object):
 
 		return result
 
-	def tell(self, assertion):
+	def tell(self, assertion, usable = False):
 		"""
 		Performs a TELL query to the knowledge base.
 		"""
 		# coarse check for not adding duplicate logic rules
-		if all(assertion not in l for l in self.KB):
-			self.KBString += "\t" + assertion + ".\n"
-			self.KB.append(assertion)
+		if usable:
+			if all(assertion not in l for l in self.KBUsable):
+				self.KBUsableString += "\t" + assertion + ".\n"
+				self.KBUsable.append(assertion)
+		else:
+			if all(assertion not in l for l in self.KBAssumptions):
+				self.KBAssumptionsString += "\t" + assertion + ".\n"
+				self.KBAssumptions.append(assertion)
 
 	def tellPercepts(self, percept, time, current):
 		(breeze, stench, glitter, bump, scream) = percept
 		if breeze:
-			self.tell("BreezeAt("+str(time)+")")
-			self.tell("Breezy(Pos("+str(current[0])+","+str(current[1])+")")
+			self.tell("Breeze(%d)" % time)
+			self.tell("B(%d,%d)" % current)
 		if stench:
-			self.tell("StenchAt("+str(time)+")")
-			self.tell("Smelly(Pos("+str(current[0])+","+str(current[1])+")")
+			self.tell("Stench(%d)" % time)
+			self.tell("S(%d,%d)" % current)
 		if glitter:
-			self.tell("GlitterAt("+str(time)+")")
+			self.tell("Glitter(%d)" % time)
 		if bump:
-			self.tell("BumpAt("+str(time)+")")
+			self.tell("Bump(%d)" % time)
 		if scream:
-			self.tell("ScreamAt("+str(time)+")")
+			self.tell("Scream(%d)" % time)
 
 	def makeActionStatement(self, action, time):
 		assert(action in ["Forward","TurnLeft","TurnRight","Shoot","Grab","Climb"])
