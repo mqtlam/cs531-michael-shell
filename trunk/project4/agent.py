@@ -24,7 +24,7 @@ class LogicAgent(object):
 		self.hasArrow = True
 		self.KB = None
 
-	def search(self, environment, logicEngine): #TODO TODO TODO
+	def search(self, environment, logicEngine):
 		"""
 		Runs the program loop.
 		"""
@@ -34,7 +34,7 @@ class LogicAgent(object):
 		success = False
 		dead = False
 		haveGold = False
-		x, y = (1,1)
+		x, y = (0,0)
 		facing = NORTH
 
 		# persistent agent variables
