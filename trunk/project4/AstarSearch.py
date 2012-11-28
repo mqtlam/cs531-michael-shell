@@ -34,7 +34,7 @@ class AstarProblem:
         else:
             return True
 
-    def heuristics(self,current):
+    def heuristic(self,current):
         "without considering direction"
         (xg,yg) = self.goalState[0]
         (x,y) = current[0]
