@@ -149,15 +149,9 @@ class LogicAgent(object):
 		allowed: list of squares allowed to go
 		"""
 		actionSequence = []
-        	print "----------------------------"
-        	print current
-        	print goals
-		# TODO
-		# dumb random actions for now
-        	for i,g in enumerate(goals):
-            		goals[i] = [g,0]
-        	print "----------------------------"
-        	print goals
+            #print "----------------------------"
+        	#print current
+        	#print goals
 
         	#actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
         	problem = AstarSearch.AstarProblem([current,facing],goals,allowed)

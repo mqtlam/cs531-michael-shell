@@ -19,10 +19,16 @@ direct = [[0,1,3,2], # d = u
 
 class AstarProblem:
     def __init__(self, initialState, goalState, allowed):
-        "state is [(x,y),dir]"
+        "initState is [(x,y),dir], goalState is (x,y)"
         self.initialState = initialState
         self.goalState = goalState
         self.map = allowed
+        print '-------------------------------------'
+        print 'allowed:'
+        print allowed
+        print '-------------------------------------'
+        print 'goals:'
+        print goalState
 
     def isAllowed(self,square):
         try:
@@ -36,38 +42,23 @@ class AstarProblem:
 
     def heuristic(self,current):
         "without considering direction"
-        (xg,yg) = self.goalState[0]
+        "minimum block dist(current, goalState[i])"
         (x,y) = current[0]
-        return abs(xg-x) + abs(yg-y)
+        minDist = -1
+        for g in self.goalState:
+            (xg,yg) = g
+            #print (xg,yg)
+            dist = abs(xg-x) + abs(yg-y)
+            if  dist < minDist:
+                minDist = dist
+        return minDist
 
     def goalTest(self, state):
         #return state[0] == self.goalState[0]
         for gs in self.goalState:
-            if state[0] == gs[0]:
+            if state[0] == gs:
                 return True
         return False
-
-    #def nextStates(self, curState):
-    #    "Return list of all legal states that follow one step from this state"
-    #    (x,y,d) = curState
-    #    states = [(x+neigh[d][0][0],y+neigh[d][0][1]),
-    #            (x+neigh[d][1][0],y+neigh[d][1][1]),
-    #            (x+neigh[d][2][0],y+neigh[d][2][1]),
-    #            (x+neigh[d][3][0],y+neigh[d][3][1])]
-    #    retStates = {}
-    #    retActions = {}
-    #    for i,s in enumerate(neigh):
-    #        if self.isAllowed(s) == True:
-    #            retStates[i] = s
-    #            if i == 0:
-    #                retActions[i] = ['Forward']
-    #            if i == 1:
-    #                retActions[i] = ['TurnLeft','Forward']
-    #            if i == 2:
-    #                retActions[i] = ['TrunRight','Forward']
-    #            if i == 3:
-    #                retActions[i] = ['TurnLeft','TurnLeft','Forward']
-    #    return (retStates,retActions)
 
     def nextStates(self, curState):
         (x,y) = curState[0]
@@ -80,6 +71,8 @@ class AstarProblem:
         for i,s in enumerate(states):
             if self.isAllowed(s) == True:
                 retStates.insert([s,direct[d][i]])
+        print '* nextStates:'
+        print retStates
         return (retStates)
 
 class AstarSearch:
@@ -100,6 +93,7 @@ class AstarSearch:
         #print "Explored %d nodes" % len(nodes)
 
         if result == False:
+            print '*** Could not find a path'
             return []
 
         retActions = []
@@ -124,6 +118,13 @@ class AstarSearch:
                 retActions = retActions + ['TurnLeft','TurnLeft','Forward']
 
             prevPos = s
+        print '******************************************'
+        print '------------------------------------------'
+        print 'path:'
+        print result
+        print '------------------------------------------'
+        print 'action sequence:'
+        print retActions
         return (retActions)
 
 
@@ -154,10 +155,12 @@ class AstarSearch:
             path = self.frontier.pop()
             s = path[-1]
             explored.add(s[0])
+            print '-------------------4----------------------'
             if self.problem.goalTest(s):
                 return (path,len(explored))
             #(states, actions) = self.problem.nextStates(s)
             #for ind,ns in states.items():
+            print '-------------------1----------------------'
             for ns in self.problem.nextStates(s):
                 if ns[0] not in explored:
                     newPath = path + [ns]
