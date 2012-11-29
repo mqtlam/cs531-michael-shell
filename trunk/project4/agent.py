@@ -85,7 +85,7 @@ class LogicAgent(object):
 			dead = self.environ.isDeadly(x,y)
 
 			if not dead:
-				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y), facing, self.hasArrow)
+				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y), facing, self.hasArrow, haveGold)
 
 				if bump:
 					bump = False
@@ -135,7 +135,7 @@ class LogicAgent(object):
 
 	### Wumpus Hybrid Algorithm ###
 
-	def hybridWumpusAgent(self, percept, current, facing, hasArrow):
+	def hybridWumpusAgent(self, percept, current, facing, hasArrow, haveGold):
 		"""
 		Main logic algorithm.
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
@@ -153,7 +153,7 @@ class LogicAgent(object):
 		print "OK", safe
 
 		unvisited = []
-		if self.KB.ask("Glitter(%d)" % self.timer):
+		if self.KB.ask("Glitter(%d)" % self.timer) and not haveGold:
 			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 
 		if self.plan == []:
