@@ -61,7 +61,7 @@ We wrote out some rules that Prover-9 could use to prove a query. Note that in o
 
 Other than these fundamental rules, the rest are essentially assertions of percepts, actions and derived atemporal facts of the Wumpus world at every time step. These information should be sufficient for the agent to reason about the world and make good decisions.
 
-\subsection{Algorithm}
+\subsection{Hybird Agent}
 
 We implemented the algorithm in the textbook (pg. 270, fig. 7.20). It is mostly the same in terms of the decision-making process. There are a few technical differences regarding the Knowledge Base representation.
 
@@ -108,35 +108,36 @@ One final technical note is that every call to Ask also caches the query if the 
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{A* Search}
+\subsection{Route Planning}
 
-In the Plan-Route function we formulate an A* search problem given the agent's current location, goal locations and allowable squares. The A* algorithm is essentially the same as in the previous assignment with a different heuristic.
+In the Plan-Route function we formulate an search problem given the agent's current location, goal locations and allowable squares. We implement the A* search and RBFS search which are essentially the same as in the previous assignment with a different heuristic. The state space is defined by position and direction, that is a tuple $(x,y,direction)$. Since the agent may have multiple goals, the heuristic is the minimum city block distance from current square to one of goals. When
+the path is found, we simply back track the squares on the path and return a sequence of actions, which will be combined with other actions in hybird agent aforementioned.
 
-\begin{algorithm}[H]
-\caption{A* Search}
-\label{astaralg}
-\begin{algorithmic}
-\STATE exploredSet = $\emptyset$ 
-\STATE frontier = [initialPath]
-\WHILE{number(explored) $<$ NMAX}
-\IF{frontier == $\emptyset$}
-    \RETURN FALSE
-\ENDIF
-\STATE path = frontier.pop()
-\STATE state = path[0]
-\STATE exploredSet.add(state)
-\IF{state == goalState}
-    \RETURN path
-\ENDIF
-\FOR{action in state.validActions()}
-    \FOR{newState in action.results()}
-        \STATE newPath = path + newState
-        \IF{ismember(frontier,newPath) == FALSE}
-            \STATE frontier.push(newPath)
-        \ENDIF
-    \ENDFOR
-\ENDFOR
-\ENDWHILE
-\end{algorithmic}
-\end{algorithm}
+%\begin{algorithm}[H]
+%\caption{A* Search}
+%\label{astaralg}
+%\begin{algorithmic}
+%\STATE exploredSet = $\emptyset$ 
+%\STATE frontier = [initialPath]
+%\WHILE{number(explored) $<$ NMAX}
+%\IF{frontier == $\emptyset$}
+%    \RETURN FALSE
+%\ENDIF
+%\STATE path = frontier.pop()
+%\STATE state = path[0]
+%\STATE exploredSet.add(state)
+%\IF{state == goalState}
+%    \RETURN path
+%\ENDIF
+%\FOR{action in state.validActions()}
+%    \FOR{newState in action.results()}
+%        \STATE newPath = path + newState
+%        \IF{ismember(frontier,newPath) == FALSE}
+%            \STATE frontier.push(newPath)
+%        \ENDIF
+%    \ENDFOR
+%\ENDFOR
+%\ENDWHILE
+%\end{algorithmic}
+%\end{algorithm}
 
