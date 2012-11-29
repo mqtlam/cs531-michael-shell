@@ -1,0 +1,44 @@
+[0] success = 1, gold = 1, kill_wumpus = 0, steps = 241, rewards = 559
+[1] success = 0, gold = 0, kill_wumpus = 0, steps = 12, rewards = 88
+[2] success = 0, gold = 0, kill_wumpus = 1, steps = 14, rewards = -14
+[3] success = 1, gold = 1, kill_wumpus = 1, steps = 251, rewards = 449
+[4] success = 0, gold = 0, kill_wumpus = 0, steps = 329, rewards = -229
+[5] success = 0, gold = 0, kill_wumpus = 0, steps = 315, rewards = -215
+[6] success = 0, gold = 0, kill_wumpus = 0, steps = 230, rewards = -130
+[7] success = 0, gold = 0, kill_wumpus = 1, steps = 60, rewards = -60
+[8] success = 0, gold = 0, kill_wumpus = 0, steps = 175, rewards = -75
+[9] success = 0, gold = 0, kill_wumpus = 0, steps = 192, rewards = -92
+
+
+[11] success = 0, gold = 0, kill_wumpus = 0, steps = 65, rewards = 35
+[12] success = 0, gold = 0, kill_wumpus = 1, steps = 7, rewards = -7
+[13] success = 1, gold = 1, kill_wumpus = 1, steps = 99, rewards = 601
+[14] success = 1, gold = 1, kill_wumpus = 1, steps = 39, rewards = 661
+[15] success = 1, gold = 1, kill_wumpus = 1, steps = 99, rewards = 601
+[16] success = 0, gold = 0, kill_wumpus = 1, steps = 90, rewards = -90
+[17] success = 0, gold = 0, kill_wumpus = 1, steps = 7, rewards = -7
+[18] success = 1, gold = 1, kill_wumpus = 1, steps = 162, rewards = 538
+[19] success = 1, gold = 1, kill_wumpus = 1, steps = 77, rewards = 623
+[20] success = 1, gold = 1, kill_wumpus = 1, steps = 235, rewards = 465
+
+[21] success = 1, gold = 1, kill_wumpus = 1, steps = 99, rewards = 601
+[22] success = 0, gold = 0, kill_wumpus = 1, steps = 7, rewards = -7
+[23] success = 0, gold = 0, kill_wumpus = 1, steps = 7, rewards = -7
+[24] success = 1, gold = 1, kill_wumpus = 1, steps = 175, rewards = 525
+[25] success = 1, gold = 1, kill_wumpus = 1, steps = 122, rewards = 578
+[26] success = 0, gold = 0, kill_wumpus = 0, steps = 19, rewards = 81
+[27] success = 1, gold = 1, kill_wumpus = 0, steps = 271, rewards = 529
+[28] success = 0, gold = 0, kill_wumpus = 1, steps = 67, rewards = -67
+[29] success = 0, gold = 0, kill_wumpus = 1, steps = 7, rewards = -7
+[30] success = 0, gold = 0, kill_wumpus = 0, steps = 206, rewards = -106
+
+[31] success = 1, gold = 1, kill_wumpus = 1, steps = 235, rewards = 465
+[32] success = 1, gold = 1, kill_wumpus = 1, steps = 98, rewards = 602
+[33] success = 0, gold = 0, kill_wumpus = 0, steps = 72, rewards = 28
+[34] success = 0, gold = 0, kill_wumpus = 1, steps = 60, rewards = -60
+[35] success = 0, gold = 0, kill_wumpus = 1, steps = 7, rewards = -7
+[36] success = 0, gold = 0, kill_wumpus = 1, steps = 60, rewards = -60
+[37] success = 1, gold = 1, kill_wumpus = 1, steps = 39, rewards = 661
+[38] success = 1, gold = 1, kill_wumpus = 1, steps = 174, rewards = 526
+[39] success = 1, gold = 1, kill_wumpus = 1, steps = 294, rewards = 406
+[10] success = 0, gold = 0, kill_wumpus = 0, steps = 72, rewards = 28
