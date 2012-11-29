@@ -1,5 +1,5 @@
 \section{Experiments}\label{sec:exp}
-We tested our agent on $40$ randomly generated maps and use A* search and RBFS search respectively. For running time considerations, we only tested with $4 \times 4$ maps. All other condtions are the same including heuristics and the logic engine. We record $5$ targets: returning successfully ("success"), grabbing gold ("gold"), killing wumpus ("kill"), number of steps ("steps") and points of reward ("reward"). For rewards, we set every action to $-1$,  as well as $500$ for grabbing the gold, $100$ for killing the wumpus and $200$ for returning back and climbing out successfully.
+We tested our agent on $40$ randomly generated maps and used A* search and RBFS search respectively. For running time considerations, we only tested with $4 \times 4$ maps. All other condtions are the same including heuristics and the logic engine. We record $5$ targets: returning successfully ("success"), grabbing gold ("gold"), killing wumpus ("kill"), number of steps ("steps") and points of reward ("reward"). For rewards, we set every action to $-1$,  as well as $500$ for grabbing the gold, $100$ for killing the wumpus and $200$ for returning back and climbing out successfully.
 
 The details for each experiment are displayed in table \ref{tab:results}. Note that there are many unsolvable maps. For A* search, the agent finished $17$ games, got $17$ golds and killed the wumpus $27$ times. The average steps and rewards for A* search are $119.75$ and $210.25$. The RBFS search couldn't finish some of searches because we set a relative small number of allowed expanded nodes. It completed $10$ games, got $17$ golds, killed wumpus $27$ times. The average steps for RBFS search is $96.55$, while the average reward is $198.45$. From these we can see that the performances of two search algorithms are similar. A* search is slightly better.
 
@@ -9,69 +9,69 @@ The details for each experiment are displayed in table \ref{tab:results}. Note t
 	    \begin{tabular}{|l|l|c|c|c|c|c|c|c|c|c|c|}
 		\hline
 		A* & Index & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \cline{2-12}
-		 & Solvable & 0 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 1 \\ \cline{2-12}
+		 & Solvable &  1 & 1 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 \\ \cline{2-12}
 		 & Success & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \cline{2-12}
 		 & Gold & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \cline{2-12}
-		 & Kill & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\ \cline{2-12}
+		 & Kill & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\ \cline{2-12}
 		 & Steps & 241 & 12 & 14 & 251 & 329 & 315 & 230 & 60 & 175 & 192 \\ \cline{2-12}
 		 & Reward & 559 & 88 & -14 & 449 & -229 & -215 & -130 & -60 & -75 & -92 \\ \cline{2-12}
 		\hline
 		RBFS & Index & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \cline{2-12}
-		 & Solvable & 0 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 1 \\ \cline{2-12}
+		 & Solvable &  1 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 \\ \cline{2-12}
 		 & Success & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 1 \\ \cline{2-12}
 		 & Gold & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 1 \\ \cline{2-12}
-		 & Kill & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 1 \\ \cline{2-12}
+		 & Kill & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 1 \\ \cline{2-12}
 		 & Steps & 205 & 60 & 67 & 7 & 99 & 98 & 7 & 39 & 211 & 146 \\ \cline{2-12}
 		 & Reward & -105 & -60 & -67 & -7 & 601 & 602 & -7 & 661 & -111 & 554 \\ \cline{2-12}
 		\hline
 		\hline
 		A* & Index & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \cline{2-12}
-		 & Solvable & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 \\ \cline{2-12}
+		 & Solvable & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\ \cline{2-12}
 		 & Success & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 \\ \cline{2-12}
 		 & Gold & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 \\ \cline{2-12}
-		 & Kill & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
+		 & Kill & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
 		 & Steps & 65 & 7 & 99 & 39 & 99 & 90 & 7 & 162 & 77 & 235 \\ \cline{2-12}
 		 & Reward & 35 & -7 & 601 & 661 & 601 & -90 & -7 & 538 & 623 & 465 \\ \cline{2-12}
 		\hline
 		RBFS & Index & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \cline{2-12}
-		 & Solvable & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 0 \\ \cline{2-12}
+		 & Solvable & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\ \cline{2-12}
 		 & Success & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\ \cline{2-12}
 		 & Gold & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1 \\ \cline{2-12}
-		 & Kill & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
+		 & Kill & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\ \cline{2-12}
 		 & Steps & 19 & 168 & 130 & 14 & 174 & 7 & 122 & 60 & 161 & 99 \\ \cline{2-12}
 		 & Reward & 81 & 332 & 570 & -14 & 326 & -7 & 578 & -60 & -61 & 601 \\ \cline{2-12}
 		\hline
 		\hline
 		A* & Index & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 \\ \cline{2-12}
-		 & Solvable & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
+		 & Solvable & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 \\ \cline{2-12}
 		 & Success & 1 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 \\ \cline{2-12}
 		 & Gold & 1 & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 \\ \cline{2-12}
-		 & Kill & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\ \cline{2-12}
+		 & Kill & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \cline{2-12}
 		 & Steps & 99 & 7 & 7 & 175 & 122 & 19 & 271 & 67 & 7 & 206 \\ \cline{2-12}
 		 & Reward & 601 & -7 & -7 & 525 & 578 & 81 & 529 & -67 & -7 & -106 \\ \cline{2-12}
 		\hline
 		RBFS & Index & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 \\ \cline{2-12}
-		 & Solvable & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
+		 & Solvable & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\ \cline{2-12}
 		 & Success & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\ \cline{2-12}
 		 & Gold & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\ \cline{2-12}
-		 & Kill & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 1 \\ \cline{2-12}
+		 & Kill & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1 \\ \cline{2-12}
 		 & Steps & 12 & 159 & 138 & 90 & 39 & 152 & 72 & 7 & 65 & 77 \\ \cline{2-12}
 		 & Reward & 88 & 341 & -38 & -90 & 661 & 348 & 28 & -7 & 35 & 623 \\ \cline{2-12}
 		\hline
 		\hline
 		A* & Index & 31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 \\ \cline{2-12}
-		 & Solvable & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
+		 & Solvable & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\ \cline{2-12}
 		 & Success & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 \\ \cline{2-12}
 		 & Gold & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 \\ \cline{2-12}
-		 & Kill & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\ \cline{2-12}
+		 & Kill & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 \\ \cline{2-12}
 		 & Steps & 235 & 98 & 72 & 60 & 7 & 60 & 39 & 174 & 294 & 72 \\ \cline{2-12}
 		 & Reward & 465 & 602 & 28 & -60 & -7 & -60 & 661 & 526 & 406 & 28 \\ \cline{2-12}
 		\hline
 		RBFS & Index & 31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 \\ \cline{2-12}
-		 & Solvable & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ \cline{2-12}
+		 & Solvable & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\ \cline{2-12}
 		 & Success & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \cline{2-12}
 		 & Gold & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 \\ \cline{2-12}
-		 & Kill & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\ \cline{2-12}
+		 & Kill & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\ \cline{2-12}
 		 & Steps & 260 & 214 & 99 & 7 & 158 & 193 & 60 & 72 & 88 & 7 \\ \cline{2-12}
 		 & Reward & -160 & -114 & 601 & -7 & 342 & 407 & -60 & 28 & 512 & -7 \\ \cline{2-12}
 		\hline
