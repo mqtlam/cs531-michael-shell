@@ -164,7 +164,7 @@ class Environment(object):
 					solvable = False
 					break
 
-		return True
+		return solvable
 		
 	def noLogicalStart(self):	
 		"""
