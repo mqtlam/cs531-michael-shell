@@ -175,6 +175,8 @@ class LogicAgent(object):
             		print '=== Nothing plan, just climb out.'
 			self.plan = self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 
+		print "ACTION PLAN: ", self.plan
+
 		action = self.plan.pop(0)
 
 		self.KB.tell(self.KB.makeActionStatement(action, self.timer))

@@ -76,7 +76,7 @@ class KnowledgeBase(object):
 
 	def tellAssumptionsAtTime(self, percept, time, current, hasArrow):
 		# tell percepts
-		(breeze, stench, glitter, bump, scream) = percept
+		(glitter, stench, breeze, bump, scream) = percept
 		if breeze:
 			self.tell("Breeze(%d)" % time)
 			self.tell("B(%d,%d)" % current)
