@@ -153,6 +153,17 @@ class Environment(object):
 		Returns true if the map is solveable
 		"""
 		#STUB method 
+		solvable = True
+
+		for y in range(0, self.size):
+			for x in range(0, self.size):
+				(pit, wumpus, gold) = (False, False, False)
+				if (x,y) in self.maps:
+					(pit, wumpus, gold) = self.map[(x,y)]
+				if (pit and gold):
+					solvable = False
+					break
+
 		return True
 		
 	def noLogicalStart(self):	
