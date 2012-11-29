@@ -159,7 +159,7 @@ class Environment(object):
 		for y in range(0, self.size):
 			for x in range(0, self.size):
 				(pit, wumpus, gold) = (False, False, False)
-				if (x,y) in self.maps:
+				if (x,y) in self.map:
 					(pit, wumpus, gold) = self.map[(x,y)]
 				if (pit and gold):
 					return False
@@ -171,7 +171,7 @@ class Environment(object):
 			c = toExpand.pop(0)
 			(x,y) = c
 			for n in self.proxy(x,y):
-				if n not in visited and n in self.maps:
+				if n not in visited and n in self.map:
 					(pit, wumpus, gold) = self.map[(x,y)]
 					if gold and not pit:
 						solvable = True 
