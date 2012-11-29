@@ -152,9 +152,6 @@ class Environment(object):
 		"""
 		Returns true if the map is solveable
 		"""
-		#STUB method 
-		solvable = False
-
 		# if gold is in a pit, then not solvable
 		for y in range(0, self.size):
 			for x in range(0, self.size):
@@ -164,22 +161,7 @@ class Environment(object):
 				if (pit and gold):
 					return False
 
-		# if there is a path from start to gold; use BFS
-		visited = []
-		toExpand = [(0,0)]
-		while not solvable and not toExpand:
-			c = toExpand.pop(0)
-			(x,y) = c
-			for n in self.proxy(x,y):
-				if n not in visited and n in self.map:
-					(pit, wumpus, gold) = self.map[(x,y)]
-					if gold and not pit:
-						solvable = True 
-					if not pit:
-						toExpand.append(n)
-			visited.append(c)
-
-		return solvable
+		return True
 		
 	def noLogicalStart(self):	
 		"""

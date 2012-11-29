@@ -45,7 +45,7 @@ The Wumpus world is a 4x4 grid containing pits, one Wumpus and one gold at vario
 
 We used the existing Wumpus environment simulator for Python provided by Walker Orr. We designed an agent that uses first-order logic with a tell-ask interface to assert/query what it knows about the Wumpus world and A* search to plan routes around the Wumpus world. The algorithm is essentially the same as the one provided in the Russell-Norvig textbook (pg. 270, fig. 7.20). For answering logic queries, the program uses the Prover-9 program.
 
-To evaluate our algorithm, we designed some experiments and collected statistics.
+To evaluate our algorithm, we collected statistics on the agent such as if the agent were successful. We ran experiments on 40 randomly generated maps (though some are unsolvable with gold in the same square as a pit). We also evaluated our agent using an RBFS algorithm instead of A* and compared results.
 
 \input{1_Approaches}
 \input{Experiments}
