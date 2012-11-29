@@ -24,6 +24,27 @@ class LogicAgent(object):
 		self.hasArrow = True
 		self.KB = None
 
+	def printMap(self,xa,ya):
+
+		for y in range(self.environ.size-1, -1, -1):
+			for x in range(0, self.environ.size):
+
+				(pit,wumpus,gold) = (False, False, False)
+				agent = False
+
+				if (x,y) in self.environ.map:
+					(pit,wumpus,gold) = self.environ.map[(x,y)]
+
+                		if (x,y) == (xa,ya):
+                    			agent = True
+
+				print ("%s%s%s%s|" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " ", "a" if agent else " " )),
+
+			print ""
+
+			#print a row seperator
+			print "____" * self.environ.size
+
 	def search(self, environment, logicEngine):
 		"""
 		Runs the program loop.
@@ -48,7 +69,7 @@ class LogicAgent(object):
 		bump = False
 
 		while not success and not dead:
-            		self.environ.printMap()
+            		self.printMap(x,y)
 
 			# get percepts
 			(breeze, stench, glitter) = self.environ.sense(x,y)
@@ -65,19 +86,19 @@ class LogicAgent(object):
 
 				if action == "Forward":
 					if facing == NORTH:
-						bump = self.environ.canMove(x, y+1)
+						bump = not self.environ.canMove(x, y+1)
 						if not bump:
 							(x, y) = (x, y+1)
 					if facing == EAST:
-						bump = self.environ.canMove(x+1, y)
+						bump = not self.environ.canMove(x+1, y)
 						if not bump:
 							(x, y) = (x+1, y)
 					if facing == SOUTH:
-						bump = self.environ.canMove(x, y-1)
+						bump = not self.environ.canMove(x, y-1)
 						if not bump:
 							(x, y) = (x, y-1)
 					if facing == WEST:
-						bump = self.environ.canMove(x-1, y)
+						bump = not self.environ.canMove(x-1, y)
 						if not bump:
 							(x, y) = (x-1, y)
 				elif action == "TurnLeft":
