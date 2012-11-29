@@ -143,7 +143,7 @@ class LogicAgent(object):
 		self.KB.tell("%% === time %d ===" % self.timer)
 		self.KB.tell("%% === time %d ===" % self.timer, True)
 		# tell agent the percepts and therefore breezy, smelly
-		self.KB.tellAssumptionsAtTime(percept, self.timer, current, hasArrow)
+		self.KB.tellAssumptionsAtTime(percept, self.timer, current, hasArrow, haveGold)
 
 		# tell agent update of world
 		self.KB.tellUsableAtTime(self.timer, current)
@@ -153,7 +153,7 @@ class LogicAgent(object):
 		print "OK", safe
 
 		unvisited = []
-		if self.KB.ask("Glitter(%d)" % self.timer) and not haveGold:
+		if self.KB.ask("Glitter(%d) & -HaveGold(%d)" % (self.timer, self.timer)):
 			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
 
 		if self.plan == []:
