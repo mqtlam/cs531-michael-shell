@@ -22,7 +22,7 @@ class KnowledgeBase(object):
 		"""
 		Adds Wumpus World logic to the KB. Only used for initialization.
 		"""
-		#self.tell("")
+		self.tell("WumpusAlive(0)")
 
 	def constructProver9Query(self, query):
 		"""
@@ -101,11 +101,14 @@ class KnowledgeBase(object):
 			self.tell("-Bump(%d)" % time)
 		if scream:
 			self.tell("Scream(%d)" % time)
+			self.tell("-WumpusAlive(%d)" % time)
 		else:
 			self.tell("-Scream(%d)" % time)
-
-		# tell if wumpus is alive TODO
-		#self.tell("WumpusAlive(0)")
+			if time != 0:
+				if self.ask("WumpusAlive(%d)" % (time-1)):
+					self.tell("WumpusAlive(%d)" % time)
+				elif self.ask("-WumpusAlive(%d)" % (time-1)):
+					self.tell("-WumpusAlive(%d)" % time)
 
 		# tell current location and safe
 		self.tell("Loc(%d,%d,%d)" % (current[0], current[1], time))
