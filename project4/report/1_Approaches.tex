@@ -1,46 +1,142 @@
 \section{Approaches}\label{sec:approaches}
 
+In this section we describe our implementation of the agent and discuss our design decisions.
+
 \subsection{Simulator}
 
-We used the simulator for Python provided by Walker Orr. While the simulator represented the Wumpus world fairly well as described in the textbook, it was still incomplete. The simulator lacked the notion of facing directions as well as the percepts bump and scream. Therefore, we modified the simulator to add these remaining percepts and fixed the simulator to keep track of facing direction. The modified simulator should represent the Wumpus world as described in the textbook.
+We used the simulator for Python provided by Walker Orr. While the simulator represented the Wumpus world fairly well as described in the textbook, it was still incomplete. First of all, the simulator lacked the notion of facing directions as well as the percepts bump and scream. In addition, the simulator would declare reaching the gold a success, eliminating the need for the agent to travel back and climb at the initial square. This also differs from the textbook's formulation. Therefore, we modified the simulator to add these remaining percepts, fixed the simulator to keep track of facing direction and allowed the agent to return to the initial square to climb. The modified simulator should represent the Wumpus world as described in the textbook.
+
+\subsection{Knowledge Base}
+
+We designed our Knowledge Base as follows:
+\begin{itemize}
+	\item Atemporal
+		\begin{description}
+			\item[B(x,y)] Breezy at location (x,y)
+			\item[P(x,y)] Pit at location (x,y)
+			\item[S(x,y)] Smelly at location (x,y)
+			\item[W(x,y)] Wumpus at location (x,y)
+		\end{description}
+	\item Temporal
+		\begin{description}
+			\item[WumpusAlive(t)] Wumpus is alive at time t
+			\item[HaveGold(t)] Agent has gold at time t
+			\item[HaveArrow(t)] Agent has arrow at time t
+		\end{description}
+	\item Both
+		\begin{description}
+			\item[Loc(x,y,t)] Agent was at location (x,y) at time t
+			\item[OK(x,y,t)] Square (x,y) at time t was safe to visit
+		\end{description}
+	\item Perception
+		\begin{description}
+			\item[Breeze(t)] Breeze perceived at time t
+			\item[Stench(t)] Stench perceived at time t
+			\item[Glitter(t)] Glitter perceived at time t
+			\item[Bump(t)] Bump perceived at time t
+			\item[Scream(t)] Scream perceived at time t
+		\end{description}
+	\item Action
+		\begin{description}
+			\item[Forward(t)] Forward action at time t
+			\item[TurnLeft(t)] TurnLeft action at time t
+			\item[TurnRight(t)] TurnRight action at time t
+			\item[Shoot(t)] Shoot action at time t
+			\item[Grab(t)] Grab action at time t
+			\item[Climb(t)] Climb action at time t
+		\end{description}
+\end{itemize}
+
+We wrote out some rules that Prover-9 could use to prove a query. Note that in our implementation, we explicitly fill for each $x$, $y$ and $t$ instead. We know the size of the world is 4x4 so we are able to enumerate all $x$ and $y$. For each time step, we enumerate all $x$ and $y$ for time $t$. The reason for enumerating out all possibilities instead of using variables is to keep the logic relatively simple and avoid having to implement arithmetic in Prover-9.
+
+\begin{itemize}
+	\item $B(x,y) \Leftrightarrow P(x1,y1) \vee P(x2,y2) \vee P(x3,y3) \vee P(x4,y4)$
+        \item $S(x,y) \Leftrightarrow W(x1,y1) \vee W(x2,y2) \vee W(x3,y3) \vee W(x4,y4)$
+        \item $Loc(x,y,t) \Rightarrow (Breeze(t) \Leftrightarrow B(x,y))$
+        \item $Loc(x,y,t) \Rightarrow \neg P(x,y)$
+        \item $Loc(x,y,t) \Rightarrow (Stench(t) \Leftrightarrow S(x,y))$
+        \item $Loc(x,y,t) \Rightarrow (\neg W(x,y)) \vee (W(x,y) \wedge \neg WumpusAlive(t))$
+        \item $OK(x,y,t) \Leftrightarrow \neg P(x,y) \wedge \neg(W(x,y) \wedge WumpusAlive(t))$
+\end{itemize}
+
+Other than these fundamental rules, the rest are essentially assertions of percepts, actions and derived atemporal facts of the Wumpus world at every time step. These information should be sufficient for the agent to reason about the world and make good decisions.
 
 \subsection{Algorithm}
 
-We implemented the algorithm in the textbook (pg. 270, fig. 7.20).
+We implemented the algorithm in the textbook (pg. 270, fig. 7.20). It is mostly the same in terms of the decision-making process. There are a few technical differences regarding the Knowledge Base representation.
 
-\subsection{Knowledge Base and First-Order Logic}
+We asserted all the facts at the beginning of the algorithm. The Make-World-Logic-Sentences function constructs sentences that assert conditional sentences of the Wumpus world at the current time. This includes sentences relating "OK" to "Pit" and "Wumpus" as well as explicitly writing out the sentences relating adjacent squares such as relating "Breeze" to "Pit." It is important to note that some of these sentences are temporal, so we create them at every new time step. This is to avoid adding arithmetic logic to Prover-9. Another note is that the adjacent squares are written out explicitly. Again this is to avoid using arithmetic as a design choice. 
 
-The knowledge base.
+One final technical note is that every call to Ask also caches the query if the query is proven true. This is to improve performance.
+
+\begin{algorithm}[H]
+\caption{Hybrid-Wumpus-Agent}
+\label{hybridalg}
+\begin{algorithmic}
+\STATE HYBRID-WUMPUS-AGENT(percept)
+\STATE $Inputs: "percept" list$
+\STATE $Persistent: Knowledge Base "KB", time "t", action sequence "plan"$
+\STATE $Returns: single next "action"$
+\STATE Tell(KB, Make-World-Logic-Sentences(t))
+\STATE Tell(KB, Make-Percept-Sentence(percept, t))
+\STATE Tell(KB, Make-Location-Safe-Sentence(current))
+\STATE Tell(KB, Make-Have-Arrow-Sentence())
+\STATE Tell(KB, Make-Have-Gold-Sentence())
+\STATE safe := \{(x,y) : Ask(KB, OK(x,y,t) = TRUE\}
+\IF{Ask(KB, Glitter(t)) = TRUE}
+	\STATE plan := {[}Grab{]} + Plan-Route(current, \{(0,0)\}, safe) + {[}Climb{]}
+\ENDIF
+\IF{plan is empty}
+	\STATE unvisited := \{(x,y) : ASK(KB, Loc(x,y,t')) = FALSE for all t' $<=$ t\}
+	\STATE plan := Plan-Route(current, unvisited $\cap$ safe, safe)
+\ENDIF
+\IF{plan is empty AND Ask(KB, HaveArrow(t)) = TRUE}
+	\STATE possible\_wumpus := \{(x,y) : Ask(KB, -W(x,y)) = FALSE\}
+	\STATE plan := Plan-Shot(current, possible\_wumpus, safe)
+\ENDIF
+\IF{plan is empty}
+	\STATE not\_unsafe := \{(x,y) : Ask(KB, -OK(x,y,t)) = FALSE\}
+	\STATE plan := Plan-Route(current, unvisited $\cap$ not\_unsafe, safe)
+\ENDIF
+\IF{plan is empty}
+	\STATE plan := Plan-Route(current, \{(0,0)\}, safe) + {[}Climb{]}
+\ENDIF
+\STATE action := Pop(plan)
+\STATE Tell(KB, Make-Action-Sentence(action, t))
+\STATE t := t+1
+\RETURN action
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{A* Search}
 
-Approaches here.
+In the Plan-Route function we formulate an A* search problem given the agent's current location, goal locations and allowable squares. The A* algorithm is essentially the same as in the previous assignment with a different heuristic.
 
-%\begin{algorithm}[H]
-%\caption{A* Search}
-%\label{alg1}
-%\begin{algorithmic}
-%\STATE exploredSet = $\emptyset$ 
-%\STATE frontier = [initialPath]
-%\WHILE{number(explored) $<$ NMAX}
-%\IF{frontier == $\emptyset$}
-%    \RETURN FALSE
-%\ENDIF
-%\STATE path = frontier.pop()
-%\STATE state = path[0]
-%\STATE exploredSet.add(state)
-%\IF{state == goalState}
-%    \RETURN path
-%\ENDIF
-%\FOR{action in state.validActions()}
-%    \FOR{newState in action.results()}
-%        \STATE newPath = path + newState
-%        \IF{ismember(frontier,newPath) == FALSE}
-%            \STATE frontier.push(newPath)
-%        \ENDIF
-%    \ENDFOR
-%\ENDFOR
-%\ENDWHILE
-%\end{algorithmic}
-%\end{algorithm}
+\begin{algorithm}[H]
+\caption{A* Search}
+\label{astaralg}
+\begin{algorithmic}
+\STATE exploredSet = $\emptyset$ 
+\STATE frontier = [initialPath]
+\WHILE{number(explored) $<$ NMAX}
+\IF{frontier == $\emptyset$}
+    \RETURN FALSE
+\ENDIF
+\STATE path = frontier.pop()
+\STATE state = path[0]
+\STATE exploredSet.add(state)
+\IF{state == goalState}
+    \RETURN path
+\ENDIF
+\FOR{action in state.validActions()}
+    \FOR{newState in action.results()}
+        \STATE newPath = path + newState
+        \IF{ismember(frontier,newPath) == FALSE}
+            \STATE frontier.push(newPath)
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
 
