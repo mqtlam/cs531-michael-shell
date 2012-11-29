@@ -47,7 +47,7 @@ We designed our Knowledge Base as follows:
 		\end{description}
 \end{itemize}
 
-We wrote out some rules that Prover-9 could use to prove a query. Note that in our implementation, we explicitly fill for each $x$, $y$ and $t$ instead. We know the size of the world is 4x4 so we are able to enumerate all $x$ and $y$. For each time step, we enumerate all $x$ and $y$ for time $t$. The reason for enumerating out all possibilities instead of using variables is to keep the logic relatively simple and avoid having to implement arithmetic in Prover-9.
+We wrote out some rules that Prover-9 could use to prove a query. Note that in our implementation, we explicitly fill for each $x$, $y$ and $t$ instead of leaving it with variables. We know the size of the world is 4x4 so we are able to enumerate all $x$ and $y$. For each time step, we enumerate all $x$ and $y$ for time $t$. The reason for enumerating out all possibilities instead of using variables is to keep the logic relatively simple and avoid having to implement arithmetic in Prover-9.
 
 \begin{itemize}
 	\item $B(x,y) \Leftrightarrow P(x1,y1) \vee P(x2,y2) \vee P(x3,y3) \vee P(x4,y4)$
@@ -59,13 +59,13 @@ We wrote out some rules that Prover-9 could use to prove a query. Note that in o
         \item $OK(x,y,t) \Leftrightarrow \neg P(x,y) \wedge \neg(W(x,y) \wedge WumpusAlive(t))$
 \end{itemize}
 
-Other than these fundamental rules, the rest are essentially assertions of percepts, actions and derived atemporal facts of the Wumpus world at every time step. These information should be sufficient for the agent to reason about the world and make good decisions.
+Other than these fundamental rules, the rest are essentially assertions of percepts, actions and derived atemporal facts of the Wumpus world at every time step. This information should be sufficient for the agent to reason about the world and make good decisions.
 
-\subsection{Hybird Agent}
+\subsection{Hybrid Agent}
 
 We implemented the algorithm in the textbook (pg. 270, fig. 7.20). It is mostly the same in terms of the decision-making process. There are a few technical differences regarding the Knowledge Base representation.
 
-We asserted all the facts at the beginning of the algorithm. The Make-World-Logic-Sentences function constructs sentences that assert conditional sentences of the Wumpus world at the current time. This includes sentences relating "OK" to "Pit" and "Wumpus" as well as explicitly writing out the sentences relating adjacent squares such as relating "Breeze" to "Pit." It is important to note that some of these sentences are temporal, so we create them at every new time step. This is to avoid adding arithmetic logic to Prover-9. Another note is that the adjacent squares are written out explicitly. Again this is to avoid using arithmetic as a design choice. 
+We asserted all the facts at the beginning of the algorithm. The Make-World-Logic-Sentences function constructs sentences that assert conditional sentences of the Wumpus world at the current time. This includes sentences relating "OK" to "Pit" and "Wumpus" as well as explicitly writing out the sentences relating adjacent squares such as relating "Breeze" to "Pit." (Rules listed out in the previous section.)  It is important to note that some of these sentences are temporal so we create explicit rules at every new time step rather than a general rule for all time steps. Again, this is to avoid adding arithmetic logic to Prover-9. Another note is that the adjacent squares are written out explicitly for the same reason.
 
 One final technical note is that every call to Ask also caches the query if the query is proven true. This is to improve performance.
 
@@ -110,8 +110,7 @@ One final technical note is that every call to Ask also caches the query if the 
 
 \subsection{Route Planning}
 
-In the Plan-Route function we formulate an search problem given the agent's current location, goal locations and allowable squares. We implement the A* search and RBFS search which are essentially the same as in the previous assignment with a different heuristic. The state space is defined by position and direction, that is a tuple $(x,y,direction)$. Since the agent may have multiple goals, the heuristic is the minimum city block distance from current square to one of goals. When
-the path is found, we simply back track the squares on the path and return a sequence of actions, which will be combined with other actions in hybird agent aforementioned.
+In the Plan-Route function we formulate a search problem given the agent's current location, goal locations and allowable squares. We decided to use A* as the search algorithm but we also implement RBFS to compare and evaluate the performance of the two algorithms.  We implement the A* search and RBFS searches such that they are essentially the same as in the previous assignment but with a different heuristic. The state space is defined by position and direction, that is a tuple $(x,y,direction)$. Since the agent may have multiple goals, the heuristic is the minimum city block distance from the current square to one of the goals. When the path is found, we simply backtrack the squares on the path and return a sequence of actions, which will be combined with other actions in hybird agent aforementioned.
 
 %\begin{algorithm}[H]
 %\caption{A* Search}
