@@ -8,14 +8,12 @@ from time import *
 
 NMAX = 1000000 # make this value small to control time
 # actions are: f, tl + f, tr + f, tl + tl + f
-neigh = [[(0,-1),(-1,0),(+1,0),(0,+1)], # d = u
-        [(-1,0),(0,+1),(0,-1),(+1,0)], # d = l
-        [(0,+1),(+1,0),(-1,0),(0,-1)], # d = d
-        [(+1,0),(0,-1),(0,+1),(-1,0)]] # d = r
-direct = [[0,1,3,2], # d = u
-        [1,2,0,3], # d = l
-        [2,3,1,0], # d = d
-        [3,0,2,1]] # d = r
+neigh = [
+        [(0,1),(-1,0),(1,0),(0,-1)], # 0 = u
+        [(1,0),(0,1),(0,-1),(-1,0)], # 1 = r
+        [(0,-1),(1,0),(-1,0),(0,1)], # 2 = d
+        [(-1,0),(0,-1),(0,1),(1,0)], # 3 = l
+        ]
 
 class AstarProblem:
     def __init__(self, initialState, goalState, allowed):
@@ -66,7 +64,7 @@ class AstarProblem:
     def nextStates(self, curState):
         (x,y) = curState[0]
         d = curState[1]
-        states = [(x,y+1),(x-1,y),(x,y-1),(x+1,y)] # u-0 l-1 d-2 r-3
+        states = [(x,y+1),(x+1,y),(x,y-1),(x-1,y)] # u-0 r-1 d-2 l-3
         retStates = []
         for i,s in enumerate(states):
             if self.isAllowed(s) == True:
@@ -110,20 +108,24 @@ class AstarSearch:
                 continue
             (x,y) = prevPos[0]
             d = prevPos[1]
-            states = [(x,y+1),(x-1,y),(x,y-1),(x+1,y)] # u-0 l-1 d-2 r-3
-            #print '----------'
-            #print 'curPos:'
-            #print s
-            #print 'prev->nextStates:'
-            #print states
+            states = [(x+neigh[d][0][0],y+neigh[d][0][1]),
+                    (x+neigh[d][1][0],y+neigh[d][1][1]),
+                    (x+neigh[d][2][0],y+neigh[d][2][1]),
+                    (x+neigh[d][3][0],y+neigh[d][3][1])]
+            #states = [(x,y+1),(x-1,y),(x,y-1),(x+1,y)] # u-0 l-1 d-2 r-3
+            print '----------'
+            print 'curPos:'
+            print s
+            print 'prev->nextStates:'
+            print states
             if s[0] == states[0]:
                 retActions = retActions + ['Forward']
             if s[0] == states[1]:
                 retActions = retActions + ['TurnLeft','Forward']
             if s[0] == states[2]:
-                retActions = retActions + ['TurnLeft','TurnLeft','Forward']
-            if s[0] == states[3]:
                 retActions = retActions + ['TurnLeft','Forward']
+            if s[0] == states[3]:
+                retActions = retActions + ['TurnLeft','TurnLeft','Forward']
 
             prevPos = s
         #print '------------------------------------------'
