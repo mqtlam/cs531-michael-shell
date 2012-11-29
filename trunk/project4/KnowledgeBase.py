@@ -74,7 +74,7 @@ class KnowledgeBase(object):
 				self.KBAssumptionsString += "\t" + assertion + ".\n"
 				self.KBAssumptions.append(assertion)
 
-	def tellAssumptionsAtTime(self, percept, time, current, hasArrow):
+	def tellAssumptionsAtTime(self, percept, time, current, hasArrow, hasGold):
 		# tell percepts
 		(glitter, stench, breeze, bump, scream) = percept
 		if breeze:
@@ -119,6 +119,12 @@ class KnowledgeBase(object):
 			self.tell("HaveArrow(%d)" % time)
 		else:
 			self.tell("-HaveArrow(%d)" % time)
+
+		# tell if has gold
+		if hasGold:
+			self.tell("HaveGold(%d)" % time)
+		else:
+			self.tell("-HaveGold(%d)" % time)
 
 	def tellUsableAtTime(self, time, current):
 		# Adjacent logic
