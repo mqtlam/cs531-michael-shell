@@ -153,16 +153,31 @@ class Environment(object):
 		Returns true if the map is solveable
 		"""
 		#STUB method 
-		solvable = True
+		solvable = False
 
+		# if gold is in a pit, then not solvable
 		for y in range(0, self.size):
 			for x in range(0, self.size):
 				(pit, wumpus, gold) = (False, False, False)
 				if (x,y) in self.maps:
 					(pit, wumpus, gold) = self.map[(x,y)]
 				if (pit and gold):
-					solvable = False
-					break
+					return False
+
+		# if there is a path from start to gold; use BFS
+		visited = []
+		toExpand = [(0,0)]
+		while not solvable and not toExpand:
+			c = toExpand.pop(0)
+			(x,y) = c
+			for n in self.proxy(x,y):
+				if n not in visited and n in self.maps:
+					(pit, wumpus, gold) = self.map[(x,y)]
+					if gold and not pit:
+						solvable = True 
+					if not pit:
+						toExpand.append(n)
+			visited.append(c)
 
 		return solvable
 		
