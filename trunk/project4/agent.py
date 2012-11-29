@@ -46,7 +46,7 @@ class LogicAgent(object):
 				if f == 3:
 					f = "W"
 
-				print ("%s%s%s%s|" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " ", "a"+f if agent else " " )),
+				print ("%s%s%s%s |" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " ", "a"+f if agent else " " )),
 
 			print ""
 
@@ -60,6 +60,9 @@ class LogicAgent(object):
 		self.environ = environment
 		self.logic = logicEngine
 		self.hasArrow = True
+		self.rewards = 0
+        	self.steps = 0
+
 		success = False
 		dead = False
 		haveGold = False
@@ -89,6 +92,8 @@ class LogicAgent(object):
 
 			if not dead:
 				action = self.hybridWumpusAgent([glitter, stench, breeze, bump, scream], (x, y), facing, self.hasArrow, haveGold)
+				self.rewards = self.rewards - len(action)
+				self.steps = self.steps + len(action)
 
 				if bump:
 					bump = False
@@ -122,10 +127,12 @@ class LogicAgent(object):
 					self.hasArrow = False
 					if wumpusHit:
 						scream = True
+					self.rewards = self.rewards + 100
 				elif action == "Grab":
 					print "used grab action"
 					if glitter and not haveGold:
 						haveGold = True
+					self.rewards = self.rewards + 500
 				elif action == "Climb":
 					print "used climb action"
 					if (x, y) == (0, 0) and haveGold:
@@ -133,8 +140,9 @@ class LogicAgent(object):
 					else:
 						success = False
 						break
+					self.rewards = self.rewards + 200
 
-		return (success, dead, self.timer, self.hasArrow)
+		return (success, dead, self.timer, self.hasArrow, self.rewards, self.steps, haveGold)
 
 	### Wumpus Hybrid Algorithm ###
 
