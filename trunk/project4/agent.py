@@ -77,6 +77,9 @@ class LogicAgent(object):
 		bump = False
 
 		while not success and not dead:
+            		print '--------------------------------'
+            		print '(x,y):'
+            		print (x,y)
 			self.printMap(x,y,facing)
 
 			# get percepts
@@ -154,26 +157,26 @@ class LogicAgent(object):
 
 		unvisited = []
 		if self.KB.ask("Glitter(%d) & -HaveGold(%d)" % (self.timer, self.timer)):
-			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
+			self.plan = ["Grab"] + self.planRoute(current, facing, [(0,0)], safe, False) + ["Climb"]
 
 		if self.plan == []:
             		print '=== No Glitter, find a safe unvisited square.'
 			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if all([not self.KB.ask("Loc(%d,%d,%d)" % (x,y,t)) for t in range(0,self.timer+1)])]
-			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
+			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe, False)
 
 		if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
             		print '=== No unvisited square, take a possible wumpus square.'
 			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
-			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
+			self.plan = self.planRoute(current, facing, possibleWumpus, safe, True)
 
 		if self.plan == []: # no choice, but to take a risk
             		print '=== No wumpus found, find an unvisited but unsafe one.'
 			notUnsafe = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-OK(%d,%d,%d)" % (x,y,self.timer))]
-			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(notUnsafe))), safe)
+			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(notUnsafe))), safe, False)
 
 		if self.plan == []:
             		print '=== Nothing plan, just climb out.'
-			self.plan = self.planRoute(current, facing, [(0,0)], safe) + ["Climb"]
+			self.plan = self.planRoute(current, facing, [(0,0)], safe, False) + ["Climb"]
 
 		print "ACTION PLAN: ", self.plan
 
@@ -184,22 +187,20 @@ class LogicAgent(object):
 
 		return action
 
-	def planRoute(self, current, facing, goals, allowed):
+	def planRoute(self, current, facing, goals, allowed, shoot):
 		"""
 		Plan a route. Calls A*.
 		current: current location (x,y)
 		goals: 	 list of goal locations [(x1,y1),...,(xn,yn)]
 		allowed: list of squares allowed to go
+        shoot: PlanShoot if True, PlanRoute else
 		"""
 		actionSequence = []
 		allowed = list(set(allowed).union(set(goals)))
-            #print "----------------------------"
-        	#print current
-        	#print goals
 
         	#actionSequence = [random.choice(["Forward", "TurnLeft", "TurnRight", "Shoot", "Grab","Glimb"])]
         	problem = AstarSearch.AstarProblem([current,facing],goals,allowed)
-        	search = AstarSearch.AstarSearch(problem)
+        	search = AstarSearch.AstarSearch(problem,shoot)
         	actionSequence = search.run()
 		return actionSequence
 
