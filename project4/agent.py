@@ -130,10 +130,10 @@ class LogicAgent(object):
 			unvisited = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if all([not self.KB.ask("Loc(%d,%d,%d)" % (x,y,t)) for t in range(0,self.timer+1)])]
 			self.plan = self.planRoute(current, facing, list(set(unvisited).intersection(set(safe))), safe)
 
-		#if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
-            	#	print '=== No unvisited square, take a possible wumpus square.'
-		#	possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
-		#	self.plan = self.planRoute(current, facing, possibleWumpus, safe)
+		if self.plan == [] and self.KB.ask("HaveArrow(%d)" % self.timer):
+            		print '=== No unvisited square, take a possible wumpus square.'
+			possibleWumpus = [(x,y) for x in range(0, self.environ.size) for y in range(0, self.environ.size) if not self.KB.ask("-W(%d,%d)" % (x,y))]
+			self.plan = self.planRoute(current, facing, possibleWumpus, safe)
 
 		if self.plan == []: # no choice, but to take a risk
             		print '=== No wumpus found, find an unvisited but unsafe one.'
