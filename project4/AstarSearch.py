@@ -21,6 +21,7 @@ class AstarProblem:
         self.initialState = initialState
         self.goalState = goalState
         self.map = allowed
+
         print '-------------------------------------'
         print 'allowed:'
         print allowed
@@ -74,12 +75,13 @@ class AstarProblem:
         return (retStates)
 
 class AstarSearch:
-    def __init__(self,problem):
+    def __init__(self,problem,shoot):
         self.numExpandedNodes = 0
         self.problem = problem
         self.frontier = PriorityQueueWithFunction(self.fcost)
         self.timeOnHeuris = 0
         self.timeOnTotal = 0
+        self.shoot = shoot
 
     def run(self):
         "estimate running time of A*"
@@ -113,21 +115,24 @@ class AstarSearch:
                     (x+neigh[d][2][0],y+neigh[d][2][1]),
                     (x+neigh[d][3][0],y+neigh[d][3][1])]
             #states = [(x,y+1),(x-1,y),(x,y-1),(x+1,y)] # u-0 l-1 d-2 r-3
-            print '----------'
-            print 'curPos:'
-            print s
-            print 'prev->nextStates:'
-            print states
+            #print '----------'
+            #print 'curPos:'
+            #print s
+            #print 'prev->nextStates:'
+            #print states
             if s[0] == states[0]:
                 retActions = retActions + ['Forward']
             if s[0] == states[1]:
                 retActions = retActions + ['TurnLeft','Forward']
             if s[0] == states[2]:
-                retActions = retActions + ['TurnLeft','Forward']
+                retActions = retActions + ['TurnRight','Forward']
             if s[0] == states[3]:
                 retActions = retActions + ['TurnLeft','TurnLeft','Forward']
-
             prevPos = s
+
+        if self.shoot == True:
+            retActions.insert(-2,'Shoot')
+
         #print '------------------------------------------'
         print 'path:'
         print result
