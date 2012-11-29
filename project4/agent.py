@@ -24,7 +24,7 @@ class LogicAgent(object):
 		self.hasArrow = True
 		self.KB = None
 
-	def printMap(self,xa,ya):
+	def printMap(self,xa,ya,f):
 
 		for y in range(self.environ.size-1, -1, -1):
 			for x in range(0, self.environ.size):
@@ -37,13 +37,21 @@ class LogicAgent(object):
 
                 		if (x,y) == (xa,ya):
                     			agent = True
+				if f == 0:
+					f = "N"
+				if f == 1:
+					f = "E"
+				if f == 2:
+					f = "S"
+				if f == 3:
+					f = "W"
 
-				print ("%s%s%s%s|" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " ", "a" if agent else " " )),
+				print ("%s%s%s%s|" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " ", "a"+f if agent else " " )),
 
 			print ""
 
 			#print a row seperator
-			print "____" * self.environ.size
+			print "_____ " * self.environ.size
 
 	def search(self, environment, logicEngine):
 		"""
@@ -69,7 +77,7 @@ class LogicAgent(object):
 		bump = False
 
 		while not success and not dead:
-            		self.printMap(x,y)
+            		self.printMap(x,y,facing)
 
 			# get percepts
 			(breeze, stench, glitter) = self.environ.sense(x,y)
