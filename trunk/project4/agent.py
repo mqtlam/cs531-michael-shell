@@ -210,6 +210,9 @@ class LogicAgent(object):
         	problem = AstarSearch.AstarProblem([current,facing],goals,allowed)
         	search = AstarSearch.AstarSearch(problem,shoot)
         	actionSequence = search.run()
+                #problem = RBFSSearch.RBFSProblem([current,facing],goals,allowed)
+                #search = RBFSSearch.RBFSSearch(problem,shoot)
+            #actionSequence = search.run()
 		return actionSequence
 
 	### End Wumpus Hybrid Algorithm ###
