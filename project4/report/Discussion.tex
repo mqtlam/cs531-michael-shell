@@ -1,3 +1,11 @@
 \section{Discussion}\label{sec:dis}
 
-Discussion here.
+From the results, it appears that in some circumstances the agent is able to climb back out without grabbing any gold. This is good because the net reward in the end could be positive rather than negative. However, we still count success as retrieving gold and climbing back out so coming out without gold is still not ideal.
+
+On the other hand, the agent still fails at some maps even if they are solvable. That is probably because the agent had to take a risk step to explore as indicated in one if-branch of the algorithm. Therefore we cannot design a perfect agent unless the environment is fully observable and the agent can know everything in the beginning.
+
+We initially implemented first-order logic sentences such that a sentence contains many quantified variables. While this one sentence captures everything, it is also ridiculously slow during execution time because Prover-9 had to convert the sentence into a form suitable for proving. The other problem with using quantified temporal variables is the need for arithmetic. Since Prover-9 does not recognize arithmetic out of the box, we would have to implement our own predicates for arithmetic. To circumvent these issues, we enumerated sentences over all possible quantified variable values. It turns out that switching to this methodology dramatically increased performance.
+
+Another performance issue with Prover-9 is the need to convert percepts to nonfluent facts as soon as possible. Initially we told the knowledge base sentences that would derive nonfluent facts from fluent facts. In fact almost all the "calculation rules" were asserted into the knowledge base. Again, this was extremely slow. Therefore we decided to "compute" these facts before asserting facts into the knowledge base. By only asserting facts into the knowledge base for these, our performance improved dramatically once again.
+
+In future experiments when we would have more time, we would try out for world sizes other than $4x4$. It would be interesting to see at what point the algorithm wold slow down so much as to make the problem intractable. In fact, our algorithm gradually slows down as the knowledge base gets larger. Another interesting experiment would be to isolate out map classes, such as maps that are unsolvable because there is no path to the gold. Would the agent make exploration risk moves and die, or climb out without gold?
