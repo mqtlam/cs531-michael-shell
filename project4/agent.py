@@ -77,7 +77,7 @@ class LogicAgent(object):
 		bump = False
 
 		while not success and not dead:
-            		self.printMap(x,y,facing)
+			self.printMap(x,y,facing)
 
 			# get percepts
 			(breeze, stench, glitter) = self.environ.sense(x,y)
@@ -110,9 +110,9 @@ class LogicAgent(object):
 						if not bump:
 							(x, y) = (x-1, y)
 				elif action == "TurnLeft":
-					facing = facing - 1 % 4
+					facing = (facing - 1) % 4
 				elif action == "TurnRight":
-					facing = facing + 1 % 4
+					facing = (facing + 1) % 4
 				elif action == "Shoot" and self.hasArrow:
 					print "used shoot action"
 					wumpusHit = self.environ.shootArrow(x, y, facing)
@@ -140,6 +140,8 @@ class LogicAgent(object):
 		Main logic algorithm.
 		percept is a list of True/False: [glitter, stench, breeze, bump, scream]
 		"""
+		self.KB.tell("%% === time %d ===" % self.timer)
+		self.KB.tell("%% === time %d ===" % self.timer, True)
 		# tell agent the percepts and therefore breezy, smelly
 		self.KB.tellAssumptionsAtTime(percept, self.timer, current, hasArrow)
 

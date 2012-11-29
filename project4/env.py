@@ -179,7 +179,7 @@ class Environment(object):
 				if (x,y) in self.map:
 					(pit,wumpus,gold) = self.map[(x,y)]
 				
-				print ("%s%s%s|" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " " )),
+				print ("%s%s%s%d%d|" % ( "p" if pit else " ", "w" if wumpus else " ", "g" if gold else " ", x, y )),
 			
 			print ""
 			

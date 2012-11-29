@@ -35,13 +35,17 @@
 \maketitle
 
 \begin{abstract}
-Abstract here.
+In this assignment we design, implement and evaluate an algorithm that uses first-order logic and A* search for an agent in order to solve Wumpus puzzles.
 \end{abstract}
 
 % -------------------------------------------------
 \section{Introduction}
 
-Introduction here
+The Wumpus world is a 4x4 grid containing pits, one Wumpus and one gold at various locations. The objective of the agent is to retrieve the gold without dying from the Wumpus or falling into a pit. Furthermore the agent can perceive its environment and infer the location of pits and the Wumpus due to the rules of constructing a Wumpus world. Therefore it makes sense to implement an algorithm involving logic and search to make intelligent decisions.
+
+We used the existing Wumpus environment simulator for Python provided by Walker Orr. We designed an agent that uses first-order logic with a tell-ask interface to assert/query what it knows about the Wumpus world and A* search to plan routes around the Wumpus world. The algorithm is essentially the same as the one provided in the Russell-Norvig textbook (pg. 270, fig. 7.20). For answering logic queries, the program uses the Prover-9 program.
+
+To evaluate our algorithm, we designed some experiments and collected statistics.
 
 \input{1_Approaches}
 \input{Experiments}

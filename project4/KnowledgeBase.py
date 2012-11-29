@@ -126,12 +126,12 @@ class KnowledgeBase(object):
 		Pstring = ' | '.join(["P(%d,%d)" % c for c in adjacentCells])
 		Wstring = ' | '.join(["W(%d,%d)" % c for c in adjacentCells])
 		self.tell(("B(%d,%d) <-> " % current) + Pstring, True)
-		self.tell(("S(%d,%d) <-> " % current) + Pstring, True)
+		self.tell(("S(%d,%d) <-> " % current) + Wstring, True)
 
 		# Location logic
 		self.tell("Loc(%d,%d,%d) -> (Breeze(%d) <-> B(%d,%d))" % (current[0], current[1], time, time, current[0], current[1]), True)
 		self.tell("Loc(%d,%d,%d) -> -P(%d,%d)" % (current[0], current[1], time, current[0], current[1]), True)
-		self.tell("Loc(%d,%d,%d) -> (Stench(%d) <-> W(%d,%d))" % (current[0], current[1], time, time, current[0], current[1]), True)
+		self.tell("Loc(%d,%d,%d) -> (Stench(%d) <-> S(%d,%d))" % (current[0], current[1], time, time, current[0], current[1]), True)
 		self.tell("Loc(%d,%d,%d) ->(-W(%d,%d)) | (W(%d,%d) & -WumpusAlive(%d))" % (current[0], current[1], time, current[0], current[1], current[0], current[1], time), True)
 		self.tell("Loc(%d,%d,%d) & G(%d,%d) -> Grab(%d)" % (current[0], current[1], time, current[0], current[1], time))
 		
